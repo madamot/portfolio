@@ -1,0 +1,45 @@
+.DS_Store
+
+# Local files
+node_modules/
+.serverless/
+secret/
+
+# Development
+yarn-error.log
+
+# Production
+build/
+.build/
+
+# Certs
+*.p12
+
+# Temporary files
+process.md
+test.js
+tmp/
+
+.idea
+.vscode
+
+# Test files
+coverage
+
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.testing.example
+!.env.development
+
+.docker-sync
+
+# Use yarn instead of npm 
+package-lock.json
+lambdas/ipages-generator/src/styles/dist
+lambdas/ipages-generator/tests/output
+lambdas/ipages-generator/tests/input/ipages-test-environment
+lambdas/ipages-generator/notes.md
+lambdas/ipages-generator/tests/input/ipages-using-the-bbc
+lambdas/ipages-generator/src/styles/dist

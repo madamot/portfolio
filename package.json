@@ -1,0 +1,12 @@
+{
+  "name": "@madamot/portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio Monorepo",
+  "repository": "https://github.com/madamot/portfolio.git",
+  "author": "Adam Horne <adam.horne@bbc.co.uk>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}
