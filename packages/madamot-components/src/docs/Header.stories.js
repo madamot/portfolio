@@ -13,10 +13,15 @@ export default {
 
 export const LoggedIn = {
   args: {
+    title: 'Madamot',
     user: {
       name: 'Jane Doe',
     },
   },
 }
 
-export const LoggedOut = {}
+export const LoggedOut = {
+  args: {
+    title: 'Madamot',
+  },
+}
