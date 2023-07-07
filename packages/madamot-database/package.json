@@ -1,0 +1,11 @@
+{
+  "name": "@adam/madamot-database",
+  "version": "1.0.0",
+  "description": "Retrieve database credentials and connect to the database",
+  "main": "./src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.363.0",
+    "serverless-mysql": "^1.5.5"
+  }
+}
