@@ -4,6 +4,7 @@
 node_modules/
 .serverless/
 secret/
+.aws-sam/
 
 # Development
 yarn-error.log

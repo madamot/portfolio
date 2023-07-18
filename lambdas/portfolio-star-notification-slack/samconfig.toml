@@ -1,0 +1,12 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "portfolio-notification-slack"
+resolve_s3 = true
+s3_prefix = "portfolio-notification-slack"
+region = "eu-west-1"
+profile = "madamotadam-adminaccess"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "slackUrl=\"https://hooks.slack.com/services/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\""
+image_repositories = []
+disable_rollback = true
