@@ -1,0 +1,31 @@
+## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+## SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: GraphQL Lambda
+
+Resources:
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
+  webhookHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: GraphQL server
+      CodeUri: src/
+      Handler: index.graphqlHandler
+      Runtime: nodejs16.x
+      Timeout: 10
+      Events:
+        HttpApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: POST
+      Events:
+        HttpApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: GET
