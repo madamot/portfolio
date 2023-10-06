@@ -1,4 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+const Mustache = require('mustache')
+const path = require('path')
 
 /**
  *
@@ -13,22 +15,28 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   let response: APIGatewayProxyResult
 
-  console.log('logging event', event)
+  console.log(event)
+  console.time('Overall')
 
-  try {
-    response = {
-      statusCode: 200,
-      body: JSON.stringify(event),
-    }
-  } catch (err: unknown) {
-    console.error(err)
-    response = {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: err instanceof Error ? err.message : 'some error happened',
-      }),
-    }
+  const template = path.join(__dirname, 'templates', 'page-standard')
+
+  console.log('template', template)
+
+  console.time('Render Page')
+  const output = Mustache.render(template, JSON.parse(event?.body!))
+  console.log('output', output)
+
+  console.timeEnd('Render Page')
+
+  console.time('Put page in S3')
+  // response = await savePage.put(event, json, output)
+  console.timeEnd('Put page in S3')
+
+  console.timeEnd('Overall')
+
+  response = {
+    statusCode: 200,
+    body: JSON.stringify(event),
   }
-
   return response
 }
