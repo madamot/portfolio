@@ -9,5 +9,5 @@ export const put = async (event: any, page: File) => {
 }
 
 const destinationPath = (event: any) => {
-  return event.entity.attributes.slug + '/index.html'
+  return event.entity.attributes.slug + (event.entity.attributes.slug ? '/' : '') + 'index.html'
 }
