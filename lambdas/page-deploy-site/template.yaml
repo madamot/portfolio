@@ -16,6 +16,9 @@ Resources:
       CodeUri: src/
       Handler: app.handler
       Runtime: nodejs16.x
+      Policies:
+        - S3FullAccessPolicy:
+            BucketName: pages-madamot-live # bucket name without arn
       Timeout: 3
       Events:
         HttpApiEvent:
