@@ -1,0 +1,36 @@
+## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+## SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Build pages from DatoCMS and store in S3
+
+Resources:
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
+  webhookHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: A DatoCMS webhook handler
+      CodeUri: dist/
+      Handler: app.handler
+      Runtime: nodejs16.x
+      Policies:
+        - S3FullAccessPolicy:
+            BucketName: pages-madamot-live # bucket name without arn
+      Timeout: 10
+      Events:
+        HttpApiEvent:
+          Type: HttpApi
+          Properties:
+            Path: /
+            Method: POST
+
+##########################################################################
+#   Stack outputs                                                        #
+##########################################################################
+Outputs:
+  DatoCmsEndpoint:
+    Description: 'The build invocation URl to provide to DatoCMS webhook'
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
