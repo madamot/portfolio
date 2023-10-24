@@ -13,8 +13,16 @@ const loadTemplate = (template: string) => {
   return require(path.join(templatesFolder, template, template + '.js'))
 }
 
+export const loadComponent = (template: string) => {
+  return require(path.join(componentsFolder, template, template + '.js'))
+}
+
 const openTemplate = (template: string) => {
   return fs.readFileSync(path.join(templatesFolder, template, template + '.html'), 'UTF-8')
+}
+
+const openComponent = (template: string) => {
+  return fs.readFileSync(path.join(componentsFolder, template, template + '.html'), 'UTF-8')
 }
 
 export const renderTemplate = (data: any) => {
@@ -22,5 +30,5 @@ export const renderTemplate = (data: any) => {
 }
 
 export const renderComponent = (data: any) => {
-  return Mustache.render(openTemplate('page-standard'), data)
+  return Mustache.render(openComponent('nav'), data)
 }

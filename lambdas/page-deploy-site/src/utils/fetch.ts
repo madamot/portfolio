@@ -42,6 +42,7 @@ const graphqlRequest = async (id: number, key: string) => {
             navigation {
               id
               title
+              _modelApiKey
               menu {
                 id
                 displayText
@@ -59,7 +60,7 @@ const graphqlRequest = async (id: number, key: string) => {
               }
             }
             content {
-              __typename
+              _modelApiKey
               id
               title
             }
@@ -69,14 +70,14 @@ const graphqlRequest = async (id: number, key: string) => {
   }
 
   try {
-    const response = axios({
+    const response = await axios({
       url: endpoint,
       method: 'post',
       data: graphqlQuery,
       headers: headers,
     })
 
-    return response.data
+    return response.data.data
   } catch (err) {
     console.log('error', err)
 

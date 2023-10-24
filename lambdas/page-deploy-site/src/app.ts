@@ -28,7 +28,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Render Page')
   // const output = Mustache.render(template, JSON.parse(event?.body!))
-  const output = await generator.render(JSON.parse(event?.body!))
+  const output = await generator.render(page)
   // console.log('output', output)
 
   console.timeEnd('Render Page')

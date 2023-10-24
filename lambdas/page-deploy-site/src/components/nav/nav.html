@@ -1,3 +1,17 @@
 <header>
-  <div>This is a nav bar</div>
+  <div>
+    <a href="/"> Home </a>
+  </div>
+  <br />
+  <ul>
+    {{#project.navigation.menu}}
+    <li>
+      {{#linkType}}
+      <a href="/{{{link.slug}}}" target="{{{target}}}"> {{displayText}} </a>
+      {{/linkType}} {{^linkType}}
+      <a href="{{{href}}}" target="{{{target}}}"> {{displayText}} </a>
+      {{/linkType}}
+    </li>
+    {{/project.navigation.menu}}
+  </ul>
 </header>

@@ -1,7 +1,7 @@
 const generator = require('../../utils/generator')
 
-export const render = async (data: any) => {
-  console.log('data at build time', data)
+export const render = (data: any) => {
+  data.renderedNavbar = generator.loadComponent('nav').render(data)
 
   return generator.renderTemplate(data)
 }
