@@ -19,7 +19,12 @@ Resources:
       Policies:
         - S3FullAccessPolicy:
             BucketName: pages-madamot-live # bucket name without arn
-      Timeout: 10
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
+      Timeout: 20
+      Environment:
+        Variables:
+          someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
       Events:
         HttpApiEvent:
           Type: HttpApi
