@@ -3,31 +3,28 @@
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Introduction to serverless for developers:part1 GitHub to Slack
-  
-##########################################################################
-#  Parameters & Globals                                                  #
-##########################################################################
-Parameters:
-  slackUrl:
-    Type: String
-    Description: your Slack Webhook Url.
-    Default: ""
+Description: The webhook DatoCMS hits on publish in order to make a request back to DatoCMS order to get the page data and save it as a json file in s3
+
 Resources:
-##########################################################################
-#   Lambda Function                                                      #
-##########################################################################
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
-      Description: A github webhook handler
-      CodeUri: src/
+      Description: A DatoCMS webhook handler
+      CodeUri: dist/
       Handler: app.handler
-      Runtime: nodejs12.x
-      Timeout: 3
+      Runtime: nodejs16.x
+      Policies:
+        - S3FullAccessPolicy:
+            BucketName: pages-madamot-live-cache # bucket name without arn
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
+      Timeout: 10
       Environment:
         Variables:
-          slackEndpoint: !Ref slackUrl
+          someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
       Events:
         HttpApiEvent:
           Type: HttpApi
@@ -35,14 +32,10 @@ Resources:
             Path: /
             Method: POST
 
-
 ##########################################################################
 #   Stack outputs                                                        #
 ##########################################################################
 Outputs:
   GitHubEndpoint:
-    Description: "The star invocation URl to provide to github webhook"
-    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
-
-
-
+    Description: 'The build invocation URl to provide to DatoCMS webhook'
+    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'

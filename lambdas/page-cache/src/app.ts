@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { S3 } from '@aws-sdk/client-s3'
 const fetch = require('./utils/fetch')
 
 /**
@@ -18,12 +19,20 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Get page')
   const parsePayload = JSON.parse(event?.body!)
-  const page = await fetch.page(parsePayload.entity.attributes.slug ? null : parsePayload.entity.id)
-
+  const page = await fetch.page(parsePayload.entity.attributes.slug ? parsePayload.entity.id : null)
   console.timeEnd('Get page')
 
   console.time('Put json in S3 cache')
-
+  const params = {
+    Bucket: 'pages-madamot-live-cache',
+    Key: parsePayload.entity.attributes.slug
+      ? `${parsePayload.entity.attributes.slug}/${parsePayload.entity.attributes.slug}.json`
+      : `homepage/homepage.json`,
+    Body: JSON.stringify(page),
+    ContentType: 'application/json',
+  }
+  const s3 = new S3()
+  await s3.putObject(params)
   console.timeEnd('Put json in S3 cache')
 
   console.timeEnd('Overall')

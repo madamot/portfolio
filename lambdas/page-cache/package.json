@@ -4,6 +4,11 @@
   "description": "Create a JSON file with the page data",
   "main": "app.js",
   "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn tsc && yarn run copy-packages",
+    "copy-packages": "cp package.json dist/package.json"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.438.0",
     "@aws-sdk/client-secrets-manager": "^3.438.0",
