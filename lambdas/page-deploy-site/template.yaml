@@ -18,9 +18,16 @@ Resources:
       Runtime: nodejs16.x
       Policies:
         - S3FullAccessPolicy:
-            BucketName: pages-madamot-live # bucket name without arn
+            BucketName: page-madamot-live # bucket name without arn
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
+        - SNSPublishMessagePolicy:
+            TopicName: !ImportValue SNSTopicName
+        - Statement:
+            - Effect: Allow
+              Action:
+                - sns:Publish
+              Resource: '*'
       Timeout: 20
       Environment:
         Variables:
@@ -39,3 +46,9 @@ Outputs:
   DatoCmsEndpoint:
     Description: 'The build invocation URl to provide to DatoCMS webhook'
     Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+  webhookHandler:
+    Description: The subnet ID to use for public web servers
+    Export:
+      Name: webhookHandlerARN
+    Value:
+      Fn::GetAtt: webhookHandler.Arn

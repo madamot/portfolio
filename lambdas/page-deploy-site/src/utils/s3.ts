@@ -11,3 +11,13 @@ export const putFile = async (bucket: string, key: string, content: File) => {
   const s3 = new S3()
   return await s3.putObject(params)
 }
+
+export const getFile = async (bucket: string, key: string) => {
+  var params = {
+    Bucket: bucket,
+    Key: key,
+  }
+  const s3 = new S3()
+  const data = await s3.getObject(params)
+  return data.Body!.toString()
+}

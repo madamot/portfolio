@@ -1,7 +1,8 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { APIGatewayProxyEvent, APIGatewayProxyResult, SNSEvent } from 'aws-lambda'
 const savePage = require('./utils/savePage')
 const generator = require('./utils/generator')
 const fetch = require('./utils/fetch')
+const cache = require('./utils/cache')
 const path = require('path')
 
 /**
@@ -14,27 +15,27 @@ const path = require('path')
  *
  */
 
-export const handler = async (event: APIGatewayProxyEvent) => {
+export const handler = async (event: SNSEvent) => {
   let response: APIGatewayProxyResult
 
   console.log('event', event)
   console.time('Overall')
 
   console.time('Get page')
-  const page = await fetch.page(JSON.parse(event?.body!).entity.id)
+  console.log('sns payload', event.Records[0].Sns)
+  const page = await cache.get(JSON.parse(event.Records[0].Sns.Message))
+  // const page = await fetch.page(JSON.parse(event?.body!).entity.id)
   console.log('page', page)
 
   console.timeEnd('Get page')
 
   console.time('Render Page')
-  // const output = Mustache.render(template, JSON.parse(event?.body!))
-  const output = await generator.render(page)
-  // console.log('output', output)
+  // const output = await generator.render(page)
 
   console.timeEnd('Render Page')
 
   console.time('Put page in S3')
-  response = await savePage.put(JSON.parse(event?.body!), output)
+  // response = await savePage.put(JSON.parse(event?.body!), output)
   console.timeEnd('Put page in S3')
 
   console.timeEnd('Overall')

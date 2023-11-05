@@ -24,7 +24,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Put json in S3 cache')
   const params = {
-    Bucket: 'pages-madamot-live-cache',
+    Bucket: 'page-madamot-live-cache',
     Key: parsePayload.entity.attributes.slug
       ? `${parsePayload.entity.attributes.slug}/${parsePayload.entity.attributes.slug}.json`
       : `homepage/homepage.json`,

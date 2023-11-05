@@ -5,7 +5,7 @@ export const put = async (event: any, page: File) => {
 
   console.log('Saving file: ' + key)
 
-  return s3.putFile('pages-madamot-live', key, page)
+  return s3.putFile('page-madamot-live', key, page)
 }
 
 const destinationPath = (event: any) => {
