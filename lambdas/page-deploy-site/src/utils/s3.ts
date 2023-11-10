@@ -19,5 +19,6 @@ export const getFile = async (bucket: string, key: string) => {
   }
   const s3 = new S3()
   const data = await s3.getObject(params)
-  return data.Body!.toString()
+
+  return data.Body?.transformToString()
 }

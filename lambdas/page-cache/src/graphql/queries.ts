@@ -2,7 +2,8 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
     project(filter: {id: {eq: $id}}) {
       _modelApiKey
       id
-      slug
+      location
+      name
       title
       seo {
         description
@@ -18,7 +19,7 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
       parent {
         id
         title
-        slug
+        location
       }
       navigation {
         id
@@ -34,7 +35,7 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
             __typename
             ... on ProjectRecord {
               id
-              slug
+              location
               title
             }
           }
@@ -51,10 +52,11 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
 
 export const GET_HOMEPAGE = `
 query fetchHomepage {
-    homepage {
+    project: homepage {
       _modelApiKey
       id
-      slug
+      location
+      name
       title
       seo {
         description
@@ -81,7 +83,7 @@ query fetchHomepage {
             __typename
             ... on ProjectRecord {
               id
-              slug
+              location
               title
             }
           }

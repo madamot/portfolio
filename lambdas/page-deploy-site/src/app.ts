@@ -22,20 +22,20 @@ export const handler = async (event: SNSEvent) => {
   console.time('Overall')
 
   console.time('Get page')
-  console.log('sns payload', event.Records[0].Sns)
-  const page = await cache.get(JSON.parse(event.Records[0].Sns.Message))
-  // const page = await fetch.page(JSON.parse(event?.body!).entity.id)
+
+  const page = await cache.get(JSON.parse(event.Records[0].Sns.Message).Records[0].s3.object.key)
+
   console.log('page', page)
 
   console.timeEnd('Get page')
 
   console.time('Render Page')
-  // const output = await generator.render(page)
+  const output = await generator.render(page)
 
   console.timeEnd('Render Page')
 
   console.time('Put page in S3')
-  // response = await savePage.put(JSON.parse(event?.body!), output)
+  response = await savePage.put(page, output)
   console.timeEnd('Put page in S3')
 
   console.timeEnd('Overall')

@@ -19,6 +19,8 @@ Resources:
       Policies:
         - S3FullAccessPolicy:
             BucketName: page-madamot-live # bucket name without arn
+        - S3FullAccessPolicy:
+            BucketName: page-madamot-live-cache # bucket name without arn
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
         - SNSPublishMessagePolicy:

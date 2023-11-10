@@ -15,19 +15,21 @@ const fetch = require('./utils/fetch')
 export const handler = async (event: APIGatewayProxyEvent) => {
   let response: APIGatewayProxyResult
 
+  console.log('event', event)
+
   console.time('Overall')
 
   console.time('Get page')
   const parsePayload = JSON.parse(event?.body!)
-  const page = await fetch.page(parsePayload.entity.attributes.slug ? parsePayload.entity.id : null)
+  const page = await fetch.page(
+    parsePayload.entity.attributes.location ? parsePayload.entity.id : null
+  )
   console.timeEnd('Get page')
 
   console.time('Put json in S3 cache')
   const params = {
     Bucket: 'page-madamot-live-cache',
-    Key: parsePayload.entity.attributes.slug
-      ? `${parsePayload.entity.attributes.slug}/${parsePayload.entity.attributes.slug}.json`
-      : `homepage/homepage.json`,
+    Key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     Body: JSON.stringify(page),
     ContentType: 'application/json',
   }

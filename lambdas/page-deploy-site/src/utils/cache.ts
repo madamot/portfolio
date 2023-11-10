@@ -1,10 +1,12 @@
-import { SNSEvent } from 'aws-lambda'
 const s3 = require('./s3')
 
-export const get = async (event: SNSEvent) => {
-  console.log('About to get: ', event)
-}
+export const get = async (page: string) => {
+  console.log('About to get: ', page)
 
-const getPage = (event: any) => {
-  return event.entity.attributes.slug + (event.entity.attributes.slug ? '/' : '') + 'index.html'
+  try {
+    const pageContents = await s3.getFile('page-madamot-live-cache', page)
+    return JSON.parse(pageContents)
+  } catch (error) {
+    return console.log("The page doesn't exist in the cache", error)
+  }
 }
