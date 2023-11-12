@@ -3,7 +3,7 @@
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Build pages from DatoCMS and store in S3
+Description: The webhook DatoCMS hits on publish in order to make a request back to DatoCMS order to get the page data and save it as a json file in s3
 
 Resources:
   ##########################################################################
@@ -18,19 +18,10 @@ Resources:
       Runtime: nodejs16.x
       Policies:
         - S3FullAccessPolicy:
-            BucketName: page-madamot-live # bucket name without arn
-        - S3FullAccessPolicy:
             BucketName: page-madamot-live-cache # bucket name without arn
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
-        - SNSPublishMessagePolicy:
-            TopicName: !ImportValue SNSTopicName
-        - Statement:
-            - Effect: Allow
-              Action:
-                - sns:Publish
-              Resource: '*'
-      Timeout: 20
+      Timeout: 10
       Environment:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
@@ -45,12 +36,6 @@ Resources:
 #   Stack outputs                                                        #
 ##########################################################################
 Outputs:
-  DatoCmsEndpoint:
+  GitHubEndpoint:
     Description: 'The build invocation URl to provide to DatoCMS webhook'
     Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
-  webhookHandler:
-    Description: The subnet ID to use for public web servers
-    Export:
-      Name: webhookHandlerARN
-    Value:
-      Fn::GetAtt: webhookHandler.Arn

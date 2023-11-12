@@ -1,13 +1,12 @@
 <header>
-  <div>
-    <a href="/"> Home </a>
-  </div>
-  <br />
   <ul>
+    <li>
+      <a href="/"> Home </a>
+    </li>
     {{#project.navigation.menu}}
     <li>
       {{#linkType}}
-      <a href="/{{{link.slug}}}" target="{{{target}}}"> {{displayText}} </a>
+      <a href="/{{{link.location}}}" target="{{{target}}}"> {{displayText}} </a>
       {{/linkType}} {{^linkType}}
       <a href="{{{href}}}" target="{{{target}}}"> {{displayText}} </a>
       {{/linkType}}
