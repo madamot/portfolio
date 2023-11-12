@@ -30,5 +30,5 @@ export const renderTemplate = (data: any) => {
 }
 
 export const renderComponent = (data: any) => {
-  return Mustache.render(openComponent('nav'), data)
+  return Mustache.render(openComponent(data._modelApiKey), data)
 }
