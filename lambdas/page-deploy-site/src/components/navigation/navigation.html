@@ -3,7 +3,7 @@
     <li>
       <a href="/"> Home </a>
     </li>
-    {{#project.navigation.menu}}
+    {{#menu}}
     <li>
       {{#linkType}}
       <a href="/{{{link.location}}}" target="{{{target}}}"> {{displayText}} </a>
@@ -11,6 +11,6 @@
       <a href="{{{href}}}" target="{{{target}}}"> {{displayText}} </a>
       {{/linkType}}
     </li>
-    {{/project.navigation.menu}}
+    {{/menu}}
   </ul>
 </header>

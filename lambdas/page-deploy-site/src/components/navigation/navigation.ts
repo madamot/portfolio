@@ -1,7 +1,10 @@
 const generator = require('../../utils/generator')
 
 export const render = (data: any) => {
-  console.log('data at build time', data)
+  if (!data)
+    return generator.renderComponent({
+      _modelApiKey: 'navigation',
+    })
 
   return generator.renderComponent(data)
 }
