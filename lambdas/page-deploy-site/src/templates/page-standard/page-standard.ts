@@ -1,9 +1,9 @@
-const generator = require('../../utils/generator')
-const components = require('../../utils/components')
+import { loadComponent, loadComponents, renderTemplate } from '../../utils/generator'
 
 export const render = async (data: any) => {
-  data.renderedNavbar = generator.loadComponent('navigation').render(data.project.navigation)
-  data.renderedComponents = await components.render(data)
+  data.renderedNavbar = loadComponent('navigation').render(data.project.navigation)
 
-  return generator.renderTemplate(data)
+  data.renderedComponents = loadComponents(data.project.content)
+
+  return renderTemplate(data)
 }
