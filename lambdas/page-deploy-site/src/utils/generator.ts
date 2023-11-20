@@ -1,3 +1,5 @@
+import { ProjectModelContentField } from '../generated/graphql'
+
 const fs = require('fs')
 const path = require('path')
 const Mustache = require('mustache')
@@ -17,6 +19,12 @@ export const loadComponent = (template: string) => {
   return require(path.join(componentsFolder, template, template + '.js'))
 }
 
+export const loadComponents = (components: ProjectModelContentField[]) => {
+  return components
+    .map(component => loadComponent(component._modelApiKey).render(component))
+    .join('')
+}
+
 const openTemplate = (template: string) => {
   return fs.readFileSync(path.join(templatesFolder, template, template + '.html'), 'UTF-8')
 }
@@ -30,5 +38,5 @@ export const renderTemplate = (data: any) => {
 }
 
 export const renderComponent = (data: any) => {
-  return Mustache.render(openComponent('nav'), data)
+  return Mustache.render(openComponent(data._modelApiKey), data)
 }

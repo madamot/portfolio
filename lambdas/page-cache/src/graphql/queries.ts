@@ -42,9 +42,30 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
         }
       }
       content {
-        _modelApiKey
-        id
-        title
+        ... on TextRecord {
+          _modelApiKey
+          id
+          text
+        }
+        ... on ButtonGroupRecord {
+          _modelApiKey
+          id
+          buttons {
+            id
+            displayText
+            href
+            target
+            linkType
+            link {
+              __typename
+              ... on ProjectRecord {
+                id
+                location
+                title
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -90,10 +111,30 @@ query fetchHomepage {
         }
       }
       content {
-        __typename
-        id
-        title
-        _modelApiKey
+        ... on TextRecord {
+          _modelApiKey
+          id
+          text
+        }
+        ... on ButtonGroupRecord {
+          _modelApiKey
+          id
+          buttons {
+            id
+            displayText
+            href
+            target
+            linkType
+            link {
+              __typename
+              ... on ProjectRecord {
+                id
+                location
+                title
+              }
+            }
+          }
+        }
       }
     }
   }
