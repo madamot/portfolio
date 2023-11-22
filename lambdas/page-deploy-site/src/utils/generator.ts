@@ -12,11 +12,11 @@ export const render = async (data: any) => {
 }
 
 const loadTemplate = (template: string) => {
-  return require(path.join(templatesFolder, template, template + '.js'))
+  return require(path.join(templatesFolder, template, template))
 }
 
 export const loadComponent = (template: string) => {
-  return require(path.join(componentsFolder, template, template + '.js'))
+  return require(path.join(componentsFolder, template, template))
 }
 
 export const loadComponents = (components: ProjectModelContentField[]) => {

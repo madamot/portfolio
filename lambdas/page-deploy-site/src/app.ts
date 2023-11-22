@@ -1,9 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, SNSEvent } from 'aws-lambda'
 const savePage = require('./utils/savePage')
 const generator = require('./utils/generator')
-const fetch = require('./utils/fetch')
 const cache = require('./utils/cache')
-const path = require('path')
 
 /**
  *

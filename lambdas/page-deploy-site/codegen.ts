@@ -17,7 +17,7 @@ const config: CodegenConfig = {
     'src/generated/graphql.ts': {
       plugins: ['typescript'],
     },
-    './graphql.schema.json': {
+    'src/generated/graphql.schema.json': {
       plugins: ['introspection'],
     },
   },

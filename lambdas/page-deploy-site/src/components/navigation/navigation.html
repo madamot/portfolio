@@ -1,14 +1,14 @@
 <header>
   <ul>
     <li>
-      <a href="/"> Home </a>
+      <a href="/"> Home</a>
     </li>
     {{#menu}}
     <li>
       {{#linkType}}
-      <a href="/{{{link.location}}}" target="{{{target}}}"> {{displayText}} </a>
+      <a href="/{{{link.location}}}" target="{{{target}}}"> {{displayText}}</a>
       {{/linkType}} {{^linkType}}
-      <a href="{{{href}}}" target="{{{target}}}"> {{displayText}} </a>
+      <a href="{{{href}}}" target="{{{target}}}"> {{displayText}}</a>
       {{/linkType}}
     </li>
     {{/menu}}
