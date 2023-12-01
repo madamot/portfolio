@@ -5,13 +5,13 @@
   "main": "app.js",
   "scripts": {
     "build-html": "ts-node src/utils/local/build.ts",
-    "build-html:watch": "nodemon src/utils/local/build.ts --watch src/ -e ts,html",
+    "build-html:watch": "nodemon src/utils/local/build.ts --watch src/ -e ts,html,css",
     "test:watch": "yarn run test --watch",
     "test": "jest --coverage",
     "build": "yarn tsc && yarn run copy-packages && yarn run copy-files",
     "copy-packages": "cp package.json dist/package.json",
     "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
-    "serve": "http-server -c-1 local-dist/",
+    "serve": "live-server local-dist",
     "start": "yarn run serve & yarn run build-html:watch",
     "download": "aws s3 sync s3://page-madamot-live-cache/ local-data",
     "generate": "graphql-codegen --config codegen.ts"
@@ -42,6 +42,7 @@
     "http-server": "^14.1.1",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.7.0",
+    "live-server": "1.2.1",
     "nodemon": "^3.0.1",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.4.0",

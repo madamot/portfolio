@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-import { render } from '../generator'
+import { render, generateMasterCSSFile } from '../generator'
 
 const localCacheDirectory = path.join(__dirname, '..', '/..', '/..', 'local-data')
 const localOutputDirectory = path.join(__dirname, '..', '/..', '/..', 'local-dist')
@@ -14,19 +14,30 @@ const generatePage = async (pageName: string) => {
 
     const page = await render(data)
 
-    saveFile(pageName, page, data)
+    saveFile(page, data)
   } catch (error) {
     console.log(error)
   }
 }
 
-const saveFile = (filename: string, renderedPage: any, data: any) => {
+const saveFile = (renderedPage: any, data: any) => {
   const baseURL = data.project.location
   const directoryPath = localOutputDirectory + '/' + baseURL
 
   fs.mkdirSync(directoryPath, { recursive: true })
   fs.writeFileSync(path.join(directoryPath, 'index.html'), renderedPage)
 }
+
+const saveStyles = (css: any) => {
+  const directoryPath = localOutputDirectory + '/styles'
+
+  fs.mkdirSync(directoryPath, { recursive: true })
+  fs.writeFileSync(path.join(directoryPath, 'index.css'), css)
+}
+
+console.time('Generate styles')
+saveStyles(generateMasterCSSFile())
+console.timeEnd('Generate styles')
 
 console.time('Generate Test sites')
 fs.readdirSync(localCacheDirectory).forEach((page: string) => generatePage(page))
