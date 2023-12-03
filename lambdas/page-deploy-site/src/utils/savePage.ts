@@ -1,11 +1,11 @@
-const s3 = require('./s3')
+import { putFile } from './s3'
 
-export const put = async (cache: any, page: File) => {
+export const savePage = async (cache: any, page: File) => {
   const key = destinationPath(cache)
 
   console.log('Saving file: ' + key)
 
-  return s3.putFile('page-madamot-live', key, page)
+  return putFile('page-madamot-live', key, page, 'text/html')
 }
 
 const destinationPath = (cache: any) => {

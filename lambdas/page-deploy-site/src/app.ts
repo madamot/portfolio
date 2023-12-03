@@ -1,7 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult, SNSEvent } from 'aws-lambda'
-const savePage = require('./utils/savePage')
-const generator = require('./utils/generator')
-const cache = require('./utils/cache')
+import { savePage } from './utils/savePage'
+import { render, generateMasterCSSFile } from './utils/generator'
+import { getCache } from './utils/cache'
+import { putFile } from './utils/s3'
 
 /**
  *
@@ -17,23 +18,29 @@ export const handler = async (event: SNSEvent) => {
   let response: APIGatewayProxyResult
 
   console.log('event', event)
+
   console.time('Overall')
 
   console.time('Get page')
-
-  const page = await cache.get(JSON.parse(event.Records[0].Sns.Message).Records[0].s3.object.key)
+  const page = await getCache(JSON.parse(event.Records[0].Sns.Message).Records[0].s3.object.key)
 
   console.log('page', page)
-
   console.timeEnd('Get page')
 
   console.time('Render Page')
-  const output = await generator.render(page)
-
+  const output = await render(page)
   console.timeEnd('Render Page')
 
+  console.time('Generate Styles')
+  const styleSheet = generateMasterCSSFile()
+  console.timeEnd('Generate Styles')
+
+  console.time('Put stylesheet in S3')
+  await putFile('page-madamot-live', 'index.css', styleSheet, 'text/css')
+  console.timeEnd('Put page in S3')
+
   console.time('Put page in S3')
-  response = await savePage.put(page, output)
+  await savePage(page, output)
   console.timeEnd('Put page in S3')
 
   console.timeEnd('Overall')

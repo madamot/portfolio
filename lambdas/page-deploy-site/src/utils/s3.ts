@@ -1,11 +1,16 @@
 import { S3 } from '@aws-sdk/client-s3'
 
-export const putFile = async (bucket: string, key: string, content: File) => {
+export const putFile = async (
+  bucket: string,
+  key: string,
+  content: File | string,
+  contentType: 'text/html' | 'application/json' | 'text/css'
+) => {
   const params = {
     Bucket: bucket,
     Key: key,
     Body: content,
-    ContentType: 'text/html',
+    ContentType: contentType,
     CacheControl: 'public, max-age=10, stale-while-revalidate=60, stale-if-error=600',
   }
   const s3 = new S3()

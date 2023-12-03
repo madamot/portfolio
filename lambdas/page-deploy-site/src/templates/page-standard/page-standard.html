@@ -3,12 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/index.css" />
+    <link rel="stylesheet" href="/index.css" />
     <title>{{project.title}}</title>
   </head>
   <body>
-    {{{renderedNavbar}}}
-    <h1>{{project.title}}</h1>
-    {{{renderedComponents}}}
+    <div class="container">
+      {{{renderedNavbar}}}
+      <h1>{{project.title}}</h1>
+      {{{renderedComponents}}}
+    </div>
   </body>
 </html>
