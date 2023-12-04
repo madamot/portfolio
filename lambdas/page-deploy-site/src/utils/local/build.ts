@@ -29,7 +29,7 @@ const saveFile = (renderedPage: any, data: any) => {
 }
 
 const saveStyles = (css: any) => {
-  const directoryPath = localOutputDirectory + '/styles'
+  const directoryPath = localOutputDirectory
 
   fs.mkdirSync(directoryPath, { recursive: true })
   fs.writeFileSync(path.join(directoryPath, 'index.css'), css)
