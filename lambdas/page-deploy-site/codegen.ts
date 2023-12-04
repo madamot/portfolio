@@ -1,4 +1,6 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
+import 'dotenv/config'
+
 const { DATOCMS_API_KEY } = process.env
 
 const config: CodegenConfig = {
@@ -7,7 +9,7 @@ const config: CodegenConfig = {
     {
       'https://graphql.datocms.com': {
         headers: {
-          Authorization: 'Bearer ade3d32b08d067f90eb42e0a0ae316',
+          Authorization: `Bearer ${DATOCMS_API_KEY}`,
           'content-type': 'application/json',
         },
       },
@@ -17,7 +19,7 @@ const config: CodegenConfig = {
     'src/generated/graphql.ts': {
       plugins: ['typescript'],
     },
-    './graphql.schema.json': {
+    'src/generated/graphql.schema.json': {
       plugins: ['introspection'],
     },
   },

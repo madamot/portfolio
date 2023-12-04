@@ -1,16 +1,22 @@
-<header>
-  <ul>
-    <li>
-      <a href="/"> Home </a>
-    </li>
-    {{#menu}}
-    <li>
-      {{#linkType}}
-      <a href="/{{{link.location}}}" target="{{{target}}}"> {{displayText}} </a>
-      {{/linkType}} {{^linkType}}
-      <a href="{{{href}}}" target="{{{target}}}"> {{displayText}} </a>
-      {{/linkType}}
-    </li>
-    {{/menu}}
-  </ul>
+<header role="banner">
+  <div id="navBar" class="navigation">
+    <a href="/"> Home</a>
+
+    {{#menu}} {{#linkType}}
+    <a href="/{{{link.location}}}" target="{{{target}}}"> {{displayText}}</a>
+    {{/linkType}} {{^linkType}}
+    <a href="{{{href}}}" target="{{{target}}}"> {{displayText}}</a>
+    {{/linkType}} {{/menu}}
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()"> &equiv; </a>
+  </div>
 </header>
+<script>
+  function myFunction() {
+    var x = document.getElementById('navBar')
+    if (x.className === 'navigation') {
+      x.className += ' responsive'
+    } else {
+      x.className = 'navigation'
+    }
+  }
+</script>
