@@ -1,5 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { S3 } from '@aws-sdk/client-s3'
+import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
 const fetch = require('./utils/fetch')
 
 /**
@@ -36,6 +37,16 @@ export const handler = async (event: APIGatewayProxyEvent) => {
   const s3 = new S3()
   await s3.putObject(params)
   console.timeEnd('Put json in S3 cache')
+
+  const snsClient = new SNSClient({})
+  await snsClient.send(
+    new PublishCommand({
+      Message: JSON.stringify({
+        key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
+      }),
+      TopicArn: process.env.TOPIC_NAME,
+    })
+  )
 
   console.timeEnd('Overall')
 }

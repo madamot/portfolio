@@ -10,10 +10,6 @@ Resources:
       - SNSTopicPolicy
     Properties:
       BucketName: page-madamot-live-cache
-      NotificationConfiguration:
-        TopicConfigurations:
-          - Event: s3:ObjectCreated:*
-            Topic: !Ref SNSTopic
 
   SNSTopic:
     Type: AWS::SNS::Topic
@@ -50,8 +46,13 @@ Resources:
       Principal: sns.amazonaws.com
 
 Outputs:
-  SNSTopic:
+  SNSTopicArn:
+    Description: The arn of the page-deploy-site sns topic
+    Export:
+      Name: SNSTopicArn
+    Value: !Ref SNSTopic
+  SNSTopicName:
     Description: The arn of the page-deploy-site sns topic
     Export:
       Name: SNSTopicName
-    Value: !Ref SNSTopic
+    Value: !GetAtt SNSTopic.TopicName

@@ -19,12 +19,15 @@ Resources:
       Policies:
         - S3FullAccessPolicy:
             BucketName: page-madamot-live-cache # bucket name without arn
+        - SNSPublishMessagePolicy:
+            TopicName: !ImportValue SNSTopicName
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
       Timeout: 10
       Environment:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
+          TOPIC_NAME: !ImportValue SNSTopicArn
       Events:
         HttpApiEvent:
           Type: HttpApi
@@ -39,3 +42,9 @@ Outputs:
   GitHubEndpoint:
     Description: 'The build invocation URl to provide to DatoCMS webhook'
     Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+  webhookHandler:
+    Description: The subnet ID to use for public web servers
+    Export:
+      Name: pageCacheHandlerARN
+    Value:
+      Fn::GetAtt: webhookHandler.Arn

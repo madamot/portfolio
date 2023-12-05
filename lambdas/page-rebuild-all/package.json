@@ -1,14 +1,15 @@
 {
-  "name": "page-cache",
+  "name": "page-rebuild-all",
   "version": "1.0.0",
-  "description": "Create a JSON file with the page data",
+  "description": "The webhook DatoCMS hits on the build trigger to rebuild the whole site",
   "main": "app.js",
-  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "yarn tsc && yarn run copy-packages",
     "copy-packages": "cp package.json dist/package.json"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.438.0",
     "@aws-sdk/client-secrets-manager": "^3.438.0",
