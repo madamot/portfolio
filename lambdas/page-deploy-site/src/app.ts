@@ -22,7 +22,7 @@ export const handler = async (event: SNSEvent) => {
   console.time('Overall')
 
   console.time('Get page')
-  const page = await getCache(JSON.parse(event.Records[0].Sns.Message).Records[0].s3.object.key)
+  const page = await getCache(JSON.parse(event.Records[0].Sns.Message).key)
 
   console.log('page', page)
   console.timeEnd('Get page')
