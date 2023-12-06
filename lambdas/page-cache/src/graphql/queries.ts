@@ -53,6 +53,7 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
           buttons {
             id
             displayText
+            role
             href
             target
             linkType
