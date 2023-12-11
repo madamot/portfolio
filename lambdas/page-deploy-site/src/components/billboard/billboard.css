@@ -1,0 +1,32 @@
+.billboard {
+  background-color: teal;
+  color: white;
+  padding: 4em;
+  margin: 1em 0;
+  box-sizing: border-box;
+  min-height: 405px;
+  display: flex;
+  justify-content: center;
+}
+
+.billboard:hover {
+  cursor: pointer;
+}
+
+.billboard:hover h1 {
+  text-decoration: underline;
+}
+
+.billboardContent {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.billboardText {
+  flex: 1;
+}
+
+.billboardImage {
+  flex: 1;
+}
