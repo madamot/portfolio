@@ -67,6 +67,27 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
             }
           }
         }
+        ... on BillboardRecord {
+          _modelApiKey
+          id
+          title
+          subtitle
+          excerpt
+          linkType
+          link {
+            id
+            location
+            title
+          }
+          colour
+          backgroundColour {
+            hex
+          }
+          textColour
+          image {
+            url
+          }
+        }
       }
     }
   }
@@ -134,6 +155,28 @@ query fetchHomepage {
                 title
               }
             }
+          }
+        }
+        ... on BillboardRecord {
+          _modelApiKey
+          id
+          title
+          subtitle
+          excerpt
+          linkType
+          link {
+            id
+            location
+            title
+          }
+          href
+          automaticColour
+          backgroundColour {
+            hex
+          }
+          textColour
+          image {
+            url
           }
         }
       }
