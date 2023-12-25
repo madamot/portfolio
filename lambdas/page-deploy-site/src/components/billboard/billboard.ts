@@ -1,5 +1,6 @@
-const generator = require('../../utils/generator')
+import { renderComponent } from '../../utils/generator'
+import { BillboardRecord } from '../../generated/graphql'
 
-export const render = (data: any) => {
-  return generator.renderComponent(data)
+export const render = (data: BillboardRecord): string => {
+  return renderComponent(data)
 }

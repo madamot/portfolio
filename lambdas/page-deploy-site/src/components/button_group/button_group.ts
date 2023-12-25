@@ -1,5 +1,6 @@
-const generator = require('../../utils/generator')
+import { ButtonGroupRecord } from '../../generated/graphql'
+import { renderComponent } from '../../utils/generator'
 
-export const render = (data: any) => {
-  return generator.renderComponent(data)
+export const render = (data: ButtonGroupRecord): string => {
+  return renderComponent(data)
 }

@@ -1,4 +1,4 @@
-import { ProjectModelContentField } from '../generated/graphql'
+import { HomepageRecord, ProjectModelContentField, ProjectRecord } from '../generated/graphql'
 
 const fs = require('fs')
 const path = require('path')
@@ -7,7 +7,7 @@ const Mustache = require('mustache')
 const templatesFolder = path.join(__dirname, '..', 'templates')
 const componentsFolder = path.join(__dirname, '..', 'components')
 
-export const render = async (data: any) => {
+export const render = async (data: ProjectRecord | HomepageRecord): Promise<File> => {
   return loadTemplate('page-standard').render(data)
 }
 
@@ -37,7 +37,7 @@ export const renderTemplate = (data: any) => {
   return Mustache.render(openTemplate('page-standard'), data)
 }
 
-export const renderComponent = (data: any) => {
+export const renderComponent = (data: ProjectModelContentField): string => {
   return Mustache.render(openComponent(data._modelApiKey), data)
 }
 

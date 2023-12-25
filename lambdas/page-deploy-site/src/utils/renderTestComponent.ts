@@ -1,3 +1,8 @@
-export const renderTestComponent = (component: { render: (arg0: any) => string }, data: any) => {
-  document.body.innerHTML = component.render(data)
+import { ProjectModelContentField } from '../generated/graphql'
+
+export const renderTestComponent = <ComponentData extends ProjectModelContentField>(
+  component: (data: ComponentData) => string,
+  data: ComponentData
+) => {
+  document.body.innerHTML = component(data)
 }

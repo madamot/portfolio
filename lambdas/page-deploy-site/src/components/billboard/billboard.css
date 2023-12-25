@@ -6,6 +6,8 @@
   min-height: 405px;
   display: flex;
   justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .billboardLink {
@@ -66,7 +68,7 @@
     rgba(255, 255, 255, 0) 100%
   );
   mask-size: 100% 100%;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 250px;
