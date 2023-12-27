@@ -17,7 +17,22 @@ const config: CodegenConfig = {
   ],
   generates: {
     'src/generated/graphql.ts': {
-      plugins: ['typescript'],
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
+      config: {
+        strictScalars: true,
+        scalars: {
+          BooleanType: 'boolean',
+          CustomData: 'Record<string, unknown>',
+          Date: 'string',
+          DateTime: 'string',
+          FloatType: 'number',
+          IntType: 'number',
+          ItemId: 'string',
+          JsonField: 'unknown',
+          MetaTagAttributes: 'Record<string, string>',
+          UploadId: 'string',
+        },
+      },
     },
     'src/generated/graphql.schema.json': {
       plugins: ['introspection'],

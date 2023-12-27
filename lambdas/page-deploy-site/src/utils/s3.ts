@@ -17,7 +17,7 @@ export const putFile = async (
   return await s3.putObject(params)
 }
 
-export const getFile = async (bucket: string, key: string) => {
+export const getFile = async (bucket: string, key: string): Promise<string | undefined> => {
   var params = {
     Bucket: bucket,
     Key: key,

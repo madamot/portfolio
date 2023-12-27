@@ -28,7 +28,7 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Get page')
 
   console.time('Render Page')
-  const output = await render(page)
+  const output = page && (await render(page))
   console.timeEnd('Render Page')
 
   console.time('Generate Styles')
@@ -40,7 +40,11 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Put page in S3')
 
   console.time('Put page in S3')
-  await savePage(page, output)
+  if (output) {
+    await savePage(page, output)
+  } else {
+    console.error('The file was saved in s3 due to no output')
+  }
   console.timeEnd('Put page in S3')
 
   console.timeEnd('Overall')

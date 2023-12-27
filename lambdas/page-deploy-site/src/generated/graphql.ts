@@ -12,19 +12,19 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  BooleanType: { input: any; output: any; }
-  CustomData: { input: any; output: any; }
-  DateTime: { input: any; output: any; }
-  FloatType: { input: any; output: any; }
-  IntType: { input: any; output: any; }
-  ItemId: { input: any; output: any; }
-  MetaTagAttributes: { input: any; output: any; }
-  UploadId: { input: any; output: any; }
+  BooleanType: { input: boolean; output: boolean; }
+  CustomData: { input: Record<string, unknown>; output: Record<string, unknown>; }
+  DateTime: { input: string; output: string; }
+  FloatType: { input: number; output: number; }
+  IntType: { input: number; output: number; }
+  ItemId: { input: string; output: string; }
+  MetaTagAttributes: { input: Record<string, string>; output: Record<string, string>; }
+  UploadId: { input: string; output: string; }
 };
 
-/** Block of type Banner (banner) */
-export type BannerRecord = RecordInterface & {
-  __typename?: 'BannerRecord';
+/** Block of type Billboard (billboard) */
+export type BillboardRecord = RecordInterface & {
+  __typename?: 'BillboardRecord';
   _createdAt: Scalars['DateTime']['output'];
   /** Editing URL */
   _editingUrl?: Maybe<Scalars['String']['output']>;
@@ -38,14 +38,29 @@ export type BannerRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
+  automaticColour?: Maybe<Scalars['BooleanType']['output']>;
+  backgroundColour?: Maybe<ColorField>;
+  excerpt?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
+  image?: Maybe<FileField>;
+  link?: Maybe<ProjectRecord>;
+  linkType?: Maybe<Scalars['BooleanType']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  textColour?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
 
-/** Block of type Banner (banner) */
-export type BannerRecord_SeoMetaTagsArgs = {
+/** Block of type Billboard (billboard) */
+export type BillboardRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Billboard (billboard) */
+export type BillboardRecordExcerptArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Specifies how to filter Boolean fields */
@@ -103,6 +118,7 @@ export type ButtonRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   link?: Maybe<ButtonModelLinkField>;
   linkType?: Maybe<Scalars['BooleanType']['output']>;
+  role?: Maybe<Scalars['String']['output']>;
   target?: Maybe<Scalars['String']['output']>;
 };
 
@@ -332,7 +348,7 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomepageModelContentField = BannerRecord | ButtonGroupRecord | TextRecord;
+export type HomepageModelContentField = BillboardRecord | ButtonGroupRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -1952,7 +1968,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = BannerRecord | ButtonGroupRecord | TextRecord;
+export type ProjectModelContentField = BillboardRecord | ButtonGroupRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
@@ -2234,6 +2250,7 @@ export type SeoField = {
   __typename?: 'SeoField';
   description?: Maybe<Scalars['String']['output']>;
   image?: Maybe<FileField>;
+  noIndex?: Maybe<Scalars['BooleanType']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   twitterCard?: Maybe<Scalars['String']['output']>;
 };
@@ -2250,6 +2267,7 @@ export type Site = {
   faviconMetaTags: Array<Tag>;
   globalSeo?: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
+  noIndex?: Maybe<Scalars['BooleanType']['output']>;
 };
 
 
