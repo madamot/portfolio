@@ -1,0 +1,26 @@
+<div class="promoCardContainer">
+  {{#title}}
+  <a
+    href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
+    class="promoCardSectionLink"
+  >
+    <h2 class="promoCardListingTitle">{{{title}}}</h2>
+    <span class="promoCardDivider"></span>
+  </a>
+  {{/title}} {{{description}}}
+  <div class="promoCardCardGrid">
+    {{#cards}}
+    <a
+      class="promoCardLink"
+      href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
+    >
+      <div class="promoCard" style="background-image: url({{image.url}});"></div>
+      <div class="promoCardCopy">
+        <span class="promoCardTitle"> {{{title}}} </span>
+        <br />
+        <span class="promoCardDescription"> {{{excerpt}}} </span>
+      </div>
+    </a>
+    {{/cards}}
+  </div>
+</div>

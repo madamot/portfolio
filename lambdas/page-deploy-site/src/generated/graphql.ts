@@ -128,6 +128,46 @@ export type ButtonRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+/** Block of type Card (card) */
+export type CardRecord = RecordInterface & {
+  __typename?: 'CardRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  automaticColour?: Maybe<Scalars['BooleanType']['output']>;
+  backgroundColour?: Maybe<ColorField>;
+  excerpt?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  image?: Maybe<FileField>;
+  link?: Maybe<ProjectRecord>;
+  linkType?: Maybe<Scalars['BooleanType']['output']>;
+  textColour?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Card (card) */
+export type CardRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Card (card) */
+export type CardRecordExcerptArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CollectionMetadata = {
   __typename?: 'CollectionMetadata';
   count: Scalars['IntType']['output'];
@@ -348,7 +388,7 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomepageModelContentField = BillboardRecord | ButtonGroupRecord | TextRecord;
+export type HomepageModelContentField = BillboardRecord | ButtonGroupRecord | PromoCardRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -1968,7 +2008,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = BillboardRecord | ButtonGroupRecord | TextRecord;
+export type ProjectModelContentField = BillboardRecord | ButtonGroupRecord | PromoCardRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
@@ -2048,6 +2088,43 @@ export type ProjectRecord = RecordInterface & {
 /** Record of type Project (project) */
 export type ProjectRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Promo cards (promo_card) */
+export type PromoCardRecord = RecordInterface & {
+  __typename?: 'PromoCardRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  cards: Array<CardRecord>;
+  description?: Maybe<Scalars['String']['output']>;
+  href?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  link?: Maybe<ProjectRecord>;
+  linkType?: Maybe<Scalars['BooleanType']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Promo cards (promo_card) */
+export type PromoCardRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Promo cards (promo_card) */
+export type PromoCardRecordDescriptionArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Specifies how to filter by publication datetime */

@@ -1,0 +1,75 @@
+.promoCardContainer {
+}
+
+.promoCardSectionLink {
+  line-height: 24px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.promoCardDivider {
+  width: 90%;
+  margin: 1em;
+  height: 1px;
+  background-color: black;
+}
+
+.promoCardLink {
+  font-size: 21px;
+  line-height: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.promoCardCopy {
+  padding-top: 1em;
+}
+
+.promoCardDescription {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.promoCardSectionLink:hover {
+  text-decoration: underline;
+}
+
+.promoCardLink:hover .promoCardTitle {
+  text-decoration: underline;
+}
+
+.promoCardDescription p {
+  text-decoration: none;
+}
+
+.promoCardCardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+@media (max-width: 550px) {
+  .promoCardCardGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .promoCardCardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.promoCard {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: green;
+  min-height: 200px;
+  padding: 1em;
+  border-radius: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

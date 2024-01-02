@@ -154,6 +154,42 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
           _updatedAt
           text
         }
+        ... on PromoCardRecord {
+          id
+          _modelApiKey
+          title
+          description
+          linkType
+          href
+          link {
+            id
+            location
+            title
+            name
+          }
+          cards {
+            id
+            title
+            excerpt
+            image {
+              url
+            }
+            linkType
+            link {
+              id
+              location
+              title
+              name
+            }
+          }
+          _createdAt
+          _isValid
+          _seoMetaTags {
+            tag
+          }
+          _status
+          _updatedAt
+        }
       }
     }
   }
@@ -315,6 +351,42 @@ query fetchHomepage {
         _status
         _updatedAt
         text
+      }
+      ... on PromoCardRecord {
+        id
+        _modelApiKey
+        title
+        description
+        linkType
+        href
+        link {
+          id
+          location
+          title
+          name
+        }
+        cards {
+          id
+          title
+          excerpt
+          image {
+            url
+          }
+          linkType
+          link {
+            id
+            location
+            title
+            name
+          }
+        }
+        _createdAt
+        _isValid
+        _seoMetaTags {
+          tag
+        }
+        _status
+        _updatedAt
       }
     }
   }
