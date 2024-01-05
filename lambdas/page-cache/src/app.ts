@@ -1,7 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { S3 } from '@aws-sdk/client-s3'
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
-const fetch = require('./utils/fetch')
+import { getPageData } from './utils/fetch'
 
 /**
  *
@@ -22,14 +22,18 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Get page')
   const parsePayload = JSON.parse(event?.body!)
-  const page = await fetch.page(
+  const preview = parsePayload.event_type !== 'publish'
+  const page = await getPageData(
+    preview,
     parsePayload.entity.attributes.location ? parsePayload.entity.id : null
   )
   console.timeEnd('Get page')
 
   console.time('Put json in S3 cache')
+  console.log(`Bucket ${preview ? 'page-madamot-live-preview-cache' : 'page-madamot-live-cache'}`)
+
   const params = {
-    Bucket: 'page-madamot-live-cache',
+    Bucket: preview ? 'page-madamot-live-preview-cache' : 'page-madamot-live-cache',
     Key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     Body: JSON.stringify(page),
     ContentType: 'application/json',
@@ -43,6 +47,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
     new PublishCommand({
       Message: JSON.stringify({
         key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
+        preview: preview,
       }),
       TopicArn: process.env.TOPIC_NAME,
     })

@@ -21,8 +21,13 @@ export const handler = async (event: SNSEvent) => {
 
   console.time('Overall')
 
+  const snsMessage = JSON.parse(event.Records[0].Sns.Message)
+
+  const isPreview = snsMessage.preview
+  const bucket = snsMessage.preview ? 'page-madamot-live-preview' : 'page-madamot-live'
+
   console.time('Get page')
-  const page = await getCache(JSON.parse(event.Records[0].Sns.Message).key)
+  const page = await getCache(snsMessage.key, isPreview)
 
   console.log('page', page)
   console.timeEnd('Get page')
@@ -36,14 +41,14 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Generate Styles')
 
   console.time('Put stylesheet in S3')
-  await putFile('page-madamot-live', 'index.css', styleSheet, 'text/css')
-  console.timeEnd('Put page in S3')
+  await putFile(bucket, 'index.css', styleSheet, 'text/css')
+  console.timeEnd('Put stylesheet in S3')
 
   console.time('Put page in S3')
   if (output) {
-    await savePage(page, output)
+    await savePage(isPreview, page, output)
   } else {
-    console.error('The file was saved in s3 due to no output')
+    console.error('The file failed to save to s3 due to nothing being rendered')
   }
   console.timeEnd('Put page in S3')
 
