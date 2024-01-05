@@ -154,6 +154,72 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
           _updatedAt
           text
         }
+        ... on PromoCardRecord {
+          id
+          _modelApiKey
+          title
+          description
+          linkType
+          href
+          link {
+            id
+            location
+            title
+            name
+          }
+          cards {
+            id
+            title
+            excerpt
+            image {
+              url
+              _createdAt
+              _updatedAt
+              basename
+              colors {
+                alpha
+                blue
+                cssRgb
+                green
+                hex
+                red
+              }
+              customData
+              exifInfo
+              filename
+              format
+              md5
+              mimeType
+              size
+              smartTags
+              tags
+              id
+            }
+            linkType
+            href
+            link {
+              id
+              location
+              title
+              name
+            }
+            _createdAt
+            _isValid
+            _modelApiKey
+            _seoMetaTags {
+              tag
+            }
+            _status
+            _updatedAt
+          }
+          _createdAt
+          _isValid
+          _seoMetaTags {
+            tag
+          }
+          _status
+          _updatedAt
+        }
       }
     }
   }
@@ -315,6 +381,72 @@ query fetchHomepage {
         _status
         _updatedAt
         text
+      }
+      ... on PromoCardRecord {
+        id
+        _modelApiKey
+        title
+        description
+        linkType
+        href
+        link {
+          id
+          location
+          title
+          name
+        }
+        cards {
+          id
+          title
+          excerpt
+          image {
+            url
+            _createdAt
+            _updatedAt
+            basename
+            colors {
+              alpha
+              blue
+              cssRgb
+              green
+              hex
+              red
+            }
+            customData
+            exifInfo
+            filename
+            format
+            md5
+            mimeType
+            size
+            smartTags
+            tags
+            id
+          }
+          linkType
+          href
+          link {
+            id
+            location
+            title
+            name
+          }
+          _createdAt
+          _isValid
+          _modelApiKey
+          _seoMetaTags {
+            tag
+          }
+          _status
+          _updatedAt
+        }
+        _createdAt
+        _isValid
+        _seoMetaTags {
+          tag
+        }
+        _status
+        _updatedAt
       }
     }
   }
