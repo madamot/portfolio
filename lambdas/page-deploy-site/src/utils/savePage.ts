@@ -1,13 +1,19 @@
 import { putFile } from './s3'
 
-export const savePage = async (cache: any, page: File) => {
-  const key = destinationPath(cache)
+export const savePage = async (isPreview: boolean, cache: any, page: File) => {
+  const key = destinationPath(cache, isPreview)
+  const bucket = isPreview ? 'page-madamot-live-preview' : 'page-madamot-live'
 
-  console.log('Saving file: ' + key)
+  console.log(`Saving file to bucket ${bucket}`)
 
-  return putFile('page-madamot-live', key, page, 'text/html')
+  return putFile(bucket, key, page, 'text/html')
 }
 
-const destinationPath = (cache: any) => {
-  return cache.project.location + (cache.project.location ? '/' : '') + 'index.html'
+const destinationPath = (cache: any, isPreview: boolean) => {
+  return (
+    (isPreview ? 'preview/' : '') +
+    cache.project.location +
+    (cache.project.location ? '/' : '') +
+    'index.html'
+  )
 }

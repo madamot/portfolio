@@ -2,12 +2,15 @@ import { HomepageRecord, ProjectRecord } from '../generated/graphql'
 import { getFile } from './s3'
 
 export const getCache = async (
-  page: string
+  page: string,
+  isPreview: boolean
 ): Promise<ProjectRecord | HomepageRecord | undefined> => {
-  console.log('About to get: ', page)
+  const bucket = isPreview ? 'page-madamot-live-preview-cache' : 'page-madamot-live-cache'
+
+  console.log(`About to get page ${page} from bucket ${bucket}`)
 
   try {
-    const pageContents = await getFile('page-madamot-live-cache', page)
+    const pageContents = await getFile(bucket, page)
     return JSON.parse(pageContents ?? '')
   } catch (error) {
     console.error("The page doesn't exist in the cache", error)
