@@ -1,4 +1,4 @@
-<div class="promoCardContainer">
+<div class="promoCardContainer" data-testid="promoCardComponent">
   {{#title}}
   <a
     href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
@@ -11,6 +11,7 @@
   <div class="promoCardCardGrid">
     {{#cards}}
     <a
+      data-testid="promoCard"
       class="promoCardLink"
       href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
     >
