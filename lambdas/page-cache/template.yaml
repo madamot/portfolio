@@ -19,6 +19,8 @@ Resources:
       Policies:
         - S3FullAccessPolicy:
             BucketName: page-madamot-live-cache # bucket name without arn
+        - S3FullAccessPolicy:
+            BucketName: page-madamot-live-preview-cache
         - SNSPublishMessagePolicy:
             TopicName: !ImportValue SNSTopicName
         - AWSSecretsManagerGetSecretValuePolicy:

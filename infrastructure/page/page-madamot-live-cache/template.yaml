@@ -11,6 +11,13 @@ Resources:
     Properties:
       BucketName: page-madamot-live-cache
 
+  PreviewSourceBucket:
+    Type: AWS::S3::Bucket
+    DependsOn:
+      - SNSTopicPolicy
+    Properties:
+      BucketName: page-madamot-live-preview-cache
+
   SNSTopic:
     Type: AWS::SNS::Topic
     Properties:
@@ -32,6 +39,7 @@ Resources:
             Condition:
               ArnEquals:
                 aws:SourceArn: !Join ['', ['arn:aws:s3:::', page-madamot-live-cache]]
+                aws:SourceArn: !Join ['', ['arn:aws:s3:::', page-madamot-live-preview-cache]]
               StringEquals:
                 aws:SourceAccount: !Ref 'AWS::AccountId'
       Topics:
@@ -52,7 +60,7 @@ Outputs:
       Name: SNSTopicArn
     Value: !Ref SNSTopic
   SNSTopicName:
-    Description: The arn of the page-deploy-site sns topic
+    Description: The name of the page-deploy-site sns topic
     Export:
       Name: SNSTopicName
     Value: !GetAtt SNSTopic.TopicName

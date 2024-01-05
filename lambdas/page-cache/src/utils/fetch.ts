@@ -2,18 +2,19 @@ const axios = require('axios')
 const cmsKey = require('./cmsKey')
 const queries = require('../graphql/queries')
 
-export const page = async (id?: number) => {
+export const getPageData = async (preview: boolean, id?: number) => {
   const key = await cmsKey.get()
-  const pageData = await graphqlRequest(key, id)
+  const pageData = await graphqlRequest(preview, key, id)
 
   return pageData
 }
 
-const graphqlRequest = async (key: string, id?: number) => {
+const graphqlRequest = async (preview: boolean, key: string, id?: number) => {
   const endpoint = 'https://graphql.datocms.com'
   const headers = {
     'content-type': 'application/json',
     Authorization: `Bearer ${key}`,
+    ...(preview && { 'X-Include-Drafts': true }),
   }
 
   let graphqlQuery
