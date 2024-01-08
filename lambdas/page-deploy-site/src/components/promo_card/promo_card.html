@@ -15,7 +15,17 @@
       class="promoCardLink"
       href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
     >
-      <div class="promoCard" style="background-image: url({{image.url}});"></div>
+      {{#image}}
+      <div class="promoCard">
+        <img
+          srcset="{{image.responsiveImage.webpSrcSet}}"
+          src="{{image.responsiveImage.src}}"
+          loading="lazy"
+          alt="{{image.responsiveImage.alt}}"
+          class="imageComponentImage"
+        />
+      </div>
+      {{/image}}
       <div class="promoCardCopy">
         <span class="promoCardTitle"> {{{title}}} </span>
         <br />

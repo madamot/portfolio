@@ -64,11 +64,13 @@
 }
 
 .promoCard {
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
   box-sizing: border-box;
   width: 100%;
   background-color: green;
-  min-height: 200px;
-  padding: 1em;
+  max-height: 200px;
   border-radius: 10px;
   background-position: center;
   background-repeat: no-repeat;
