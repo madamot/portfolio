@@ -8,7 +8,7 @@
     <span class="promoCardDivider"></span>
   </a>
   {{/title}} {{{description}}}
-  <div class="promoCardCardGrid">
+  <div class="promoCardCardGrid" id="cardContainer{{id}}">
     {{#cards}}
     <a
       data-testid="promoCard"
@@ -16,8 +16,13 @@
       href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
     >
       {{#image}}
-      <div class="promoCard">
+      <div
+        class="promoCard blurred-img"
+        id="card{{{id}}}"
+        style="background-image: url({{blurUpThumb}});"
+      >
         <img
+          id="{{image.id}}"
           srcset="{{image.responsiveImage.webpSrcSet}}"
           src="{{image.responsiveImage.src}}"
           loading="lazy"
@@ -35,3 +40,44 @@
     {{/cards}}
   </div>
 </div>
+
+<script type="text/javascript">
+
+
+  const cardContainer{{id}} = document.querySelectorAll('div#cardContainer{{id}} img')
+  console.log('cards', cardContainer{{id}})
+  function loaded(img) {
+
+    // const cardWrapper = document.getElementById(cardId)
+
+    // if (cardWrapper) {
+
+    //   console.log("cardWrapper", cardWrapper);
+
+    //   cardWrapper.classList.add('loaded')
+    // }
+
+    // parentDiv = card.parentNode;
+
+
+      console.log("img", img);
+
+      img.parentNode.classList.add('loaded')
+
+
+
+
+  }
+
+  cardContainer{{id}}.forEach(img => {
+
+    if (img.complete) {
+      loaded(img)
+    } else {
+      console.log('loading');
+      img.addEventListener('load', loaded(img))
+    }
+
+
+  })
+</script>
