@@ -15,9 +15,9 @@
       class="promoCardLink"
       href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
     >
-      {{#image}}
+      {{#image.responsiveImage.webpSrcSet}}
       <div
-        class="promoCard blurred-img"
+        class="promoCard promoCard-blurred-img"
         id="card{{{id}}}"
         style="background-image: url({{blurUpThumb}});"
       >
@@ -27,10 +27,10 @@
           src="{{image.responsiveImage.src}}"
           loading="lazy"
           alt="{{image.responsiveImage.alt}}"
-          class="imageComponentImage"
+          class="promoCardImage"
         />
       </div>
-      {{/image}}
+      {{/image.responsiveImage.webpSrcSet}}
       <div class="promoCardCopy">
         <span class="promoCardTitle"> {{{title}}} </span>
         <br />
@@ -45,7 +45,6 @@
 
 
   const cardContainer{{id}} = document.querySelectorAll('div#cardContainer{{id}} img')
-  console.log('cards', cardContainer{{id}})
   function loaded(img) {
 
     // const cardWrapper = document.getElementById(cardId)
@@ -60,8 +59,6 @@
     // parentDiv = card.parentNode;
 
 
-      console.log("img", img);
-
       img.parentNode.classList.add('loaded')
 
 
@@ -74,7 +71,7 @@
     if (img.complete) {
       loaded(img)
     } else {
-      console.log('loading');
+
       img.addEventListener('load', loaded(img))
     }
 
