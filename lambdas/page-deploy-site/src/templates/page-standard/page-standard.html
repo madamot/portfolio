@@ -9,7 +9,13 @@
   <body>
     <div class="container">
       {{{renderedNavbar}}}
-      <section>{{{renderedComponents}}}</section>
+      <div class="content">
+        {{#renderedSidebar}}
+        <section>{{{renderedSidebar}}}</section>
+        {{/renderedSidebar}}
+
+        <section>{{{renderedComponents}}}</section>
+      </div>
     </div>
   </body>
 </html>

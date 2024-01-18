@@ -4,8 +4,12 @@ body {
 }
 
 .container {
-  width: 1000px;
+  width: 1140px;
   margin: 20px auto;
   max-width: calc(100% - 20px);
   padding: 10px;
+}
+
+.content {
+  display: flex;
 }
