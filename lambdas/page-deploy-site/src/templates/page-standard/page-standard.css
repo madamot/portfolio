@@ -12,4 +12,9 @@ body {
 
 .content {
   display: flex;
+  gap: 1em;
+}
+
+.content > section {
+  flex-grow: 1;
 }
