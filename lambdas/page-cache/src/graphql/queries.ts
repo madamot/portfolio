@@ -135,6 +135,7 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
             id
             displayText
             role
+            size
             href
             target
             linkType
@@ -409,6 +410,7 @@ query fetchHomepage {
           id
           displayText
           role
+          size
           href
           target
           linkType
