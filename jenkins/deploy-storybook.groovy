@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'build'
+        label 'Built-In Node'
     }
 
     parameters {
