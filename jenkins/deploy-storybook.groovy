@@ -41,10 +41,6 @@ pipeline {
                         cd ${FILES_PATH}
                         rm -rf dist www
                         yarn build
-                        cd dist
-                        rm index.html
-                        mv assets/index*.js index.js
-                        mv assets/index*.js.map .
                     """
                 }
             }
@@ -55,8 +51,9 @@ pipeline {
                 script {
                     sh """
                         cd ${FILES_PATH}
-                        yarn release ${ENVIRONMENT}
+                        aws s3 cp ./storybook-static s3://app-madamot-storybook --recursive
                     """
+                    echo "App successfully deployed to https://storybook.adamhorne.co.uk"
                 }
             }
         }
