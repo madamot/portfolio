@@ -24,7 +24,7 @@ pipeline {
     }
 
     tools {
-        nodejs "nodejs-20.11.0"
+        node "nodejs-20.11.0"
     }
 
     stages {
