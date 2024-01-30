@@ -23,6 +23,10 @@ pipeline {
         buildDiscarder(logRotator(daysToKeepStr: '5'))
     }
 
+    tools {
+        nodejs "nodejs-20.11.0"
+    }
+
     stages {
         stage('Test') {
             steps {
