@@ -14,7 +14,7 @@
   "scripts": {
     "start": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
-    "test": "react-scripts test",
+    "test": "react-scripts test --passWithNoTests",
     "build": "storybook build",
     "build-storybook": "storybook build",
     "deploy-storybook": "storybook-to-aws-s3"

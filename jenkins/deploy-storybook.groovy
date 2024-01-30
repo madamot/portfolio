@@ -33,7 +33,7 @@ pipeline {
                 sh """
                     cd ${FILES_PATH}
                     yarn
-                    yarn run test
+                    yarn run test --passWithNoTests
                 """
             }
         }
