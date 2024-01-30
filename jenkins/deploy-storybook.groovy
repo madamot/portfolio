@@ -24,7 +24,7 @@ pipeline {
     }
 
     tools {
-        nodejs "nodejs-21.6.1"
+        nodejs "nodejs"
     }
 
     stages {
