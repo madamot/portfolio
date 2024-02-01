@@ -48,7 +48,7 @@
 .promoCardCardGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1em;
+  gap: 2.5em 1em;
 }
 
 @media (max-width: 550px) {

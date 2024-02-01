@@ -46,7 +46,9 @@
 
   const cardContainer{{id}} = document.querySelectorAll('div#cardContainer{{id}} img')
   function loaded(img) {
+    setTimeout(function(){
       img.parentNode.classList.add('loaded')
+    }, 500);
   }
 
   cardContainer{{id}}.forEach(img => {
