@@ -199,8 +199,8 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
               tags
               id
               alt
-              blurUpThumb(imgixParams: {w: "323", h: "200", fit: crop})
-              responsiveImage(imgixParams: {w: "323", h: "200", fit: crop}) {
+              blurUpThumb(imgixParams: {w: "323", h: "200", fit: clip})
+              responsiveImage(imgixParams: {w: "323", h: "200", fit: clip}) {
                 title
                 alt
                 webpSrcSet
@@ -473,8 +473,8 @@ query fetchHomepage {
             tags
             id
             alt
-            blurUpThumb(imgixParams: {w: "323", h: "200", fit: crop})
-            responsiveImage(imgixParams: {w: "323", h: "200", fit: crop}) {
+            blurUpThumb(imgixParams: {w: "323", h: "200", fit: clip})
+            responsiveImage(imgixParams: {w: "323", h: "200", fit: clip}) {
               title
               alt
               webpSrcSet
