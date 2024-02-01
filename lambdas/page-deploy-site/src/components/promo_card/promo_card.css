@@ -48,7 +48,7 @@
 .promoCardCardGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1em;
+  gap: 2.5em 1em;
 }
 
 @media (max-width: 550px) {
@@ -64,13 +64,62 @@
 }
 
 .promoCard {
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
   box-sizing: border-box;
-  width: 100%;
-  background-color: green;
-  min-height: 200px;
-  padding: 1em;
   border-radius: 10px;
+}
+
+.promoCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.promoCard-blurred-img {
+  /* background-repeat: no-repeat;
+  background-size: cover;
+  width: fit-content;
+  height: fit-content; */
+  width: auto;
+  height: 200px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.promoCard-blurred-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: pulse 2.5s infinite;
+  background-color: var(--text-color);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.promoCard-blurred-img.loaded::before {
+  animation: none;
+  content: none;
+}
+
+.promoCard-blurred-img img {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.promoCard-blurred-img.loaded img {
+  opacity: 1;
 }

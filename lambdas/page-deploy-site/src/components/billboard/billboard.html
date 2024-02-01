@@ -13,22 +13,25 @@
         <p>{{excerpt}}</p>
       </div>
       <div class="billboardImageContainer">
-        <div class="billboardImage" style="background-image: url({{image.url}});"></div>
+        <div
+          class="billboardImage"
+          style="background-image: image-set('{{image.responsiveImage.webpSrcSet}}');"
+        ></div>
       </div>
     </div>
   </div>
 </a>
 <script type="text/javascript">
-    	function setDominantColour{{id}}() {
-   	const image = new Image()
-   	image.onload = () => {
-       const dominantColour = calculateDominantColour(image)
-       console.log("dom col", dominantColour);
-   		document.getElementById('billboardComponent{{id}}').style.backgroundColor = `rgba(${dominantColour})`
-   		setTextColour{{id}}(dominantColour)
-   	}
-     image.crossOrigin = "Anonymous"
-     image.src = '{{{image.url}}}'
+    function setDominantColour{{id}}() {
+      const image = new Image()
+      image.onload = () => {
+        const dominantColour = calculateDominantColour(image)
+        console.log("dom col", dominantColour);
+        document.getElementById('billboardComponent{{id}}').style.backgroundColor = `rgba(${dominantColour})`
+        setTextColour{{id}}(dominantColour)
+      }
+      image.crossOrigin = "Anonymous"
+      image.src = '{{{image.responsiveImage.webpSrcSet}}}'
    }
 
    function calculateDominantColour(image) {
