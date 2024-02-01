@@ -19,7 +19,7 @@
       <div
         class="promoCard promoCard-blurred-img"
         id="card{{{id}}}"
-        style="background-image: url({{blurUpThumb}});"
+        style="background-image: url({{image.blurUpThumb}});"
       >
         <img
           id="{{image.id}}"
@@ -47,7 +47,7 @@
   const cardContainer{{id}} = document.querySelectorAll('div#cardContainer{{id}} img')
   function loaded(img) {
 
-    // const cardWrapper = document.getElementById(cardId)
+    // const cardWrapper = document.getElementById('card{{{id}}}')
 
     // if (cardWrapper) {
 
