@@ -5,7 +5,7 @@ interface RenderButtonRecord extends ButtonRecord {
   _blank?: boolean
 }
 
-export interface RenderButtonGroupRecord extends ButtonGroupRecord {
+interface RenderButtonGroupRecord extends ButtonGroupRecord {
   buttons: RenderButtonRecord[]
 }
 

@@ -46,35 +46,15 @@
 
   const cardContainer{{id}} = document.querySelectorAll('div#cardContainer{{id}} img')
   function loaded(img) {
-
-    // const cardWrapper = document.getElementById('card{{{id}}}')
-
-    // if (cardWrapper) {
-
-    //   console.log("cardWrapper", cardWrapper);
-
-    //   cardWrapper.classList.add('loaded')
-    // }
-
-    // parentDiv = card.parentNode;
-
-
       img.parentNode.classList.add('loaded')
-
-
-
-
   }
 
   cardContainer{{id}}.forEach(img => {
-
     if (img.complete) {
       loaded(img)
     } else {
 
       img.addEventListener('load', loaded(img))
     }
-
-
   })
 </script>
