@@ -2,10 +2,10 @@ import { ButtonGroupRecord, ButtonRecord } from '../../generated/graphql'
 import { renderComponent } from '../../utils/generator'
 
 interface RenderButtonRecord extends ButtonRecord {
-  _blank: boolean
+  _blank?: boolean
 }
 
-interface RenderButtonGroupRecord extends ButtonGroupRecord {
+export interface RenderButtonGroupRecord extends ButtonGroupRecord {
   buttons: RenderButtonRecord[]
 }
 
