@@ -15,3 +15,7 @@ create page-madamot-live-cache bucket with sns
 - ~~Image component~~
 - Make images in listing component and billboard component fade in like the image component
 - Create accordian component
+- Side bar conponent
+- open search for all recipes
+- CI/CD. Jenkins?
+- dynamoDB 

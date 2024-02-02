@@ -75,10 +75,8 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
           }
           textColour
           image {
-            url
             _createdAt
             _updatedAt
-            basename
             colors {
               alpha
               blue
@@ -97,6 +95,14 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
             smartTags
             tags
             id
+            alt
+            blurUpThumb
+            responsiveImage {
+              title
+              alt
+              webpSrcSet
+              src
+            }
           }
           href
           _createdAt
@@ -172,10 +178,8 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
             title
             excerpt
             image {
-              url
               _createdAt
               _updatedAt
-              basename
               colors {
                 alpha
                 blue
@@ -194,6 +198,14 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
               smartTags
               tags
               id
+              alt
+              blurUpThumb(imgixParams: {w: "323", h: "200", fit: clip})
+              responsiveImage(imgixParams: {w: "323", h: "200", fit: clip}) {
+                title
+                alt
+                webpSrcSet
+                src
+              }
             }
             linkType
             href
@@ -219,6 +231,40 @@ export const GET_PAGE = `query fetchPage($id: ItemId) {
           }
           _status
           _updatedAt
+        }
+        ... on ImageRecord {
+          id
+          _modelApiKey
+          image {
+            _createdAt
+            _updatedAt
+            colors {
+              alpha
+              blue
+              cssRgb
+              green
+              hex
+              red
+            }
+            customData
+            exifInfo
+            filename
+            format
+            md5
+            mimeType
+            size
+            smartTags
+            tags
+            id
+            alt
+            blurUpThumb
+            responsiveImage {
+              title
+              alt
+              webpSrcSet
+              src
+            }
+          }
         }
       }
     }
@@ -303,10 +349,8 @@ query fetchHomepage {
         }
         textColour
         image {
-          url
           _createdAt
           _updatedAt
-          basename
           colors {
             alpha
             blue
@@ -325,6 +369,14 @@ query fetchHomepage {
           smartTags
           tags
           id
+          alt
+          blurUpThumb
+          responsiveImage {
+            title
+            alt
+            webpSrcSet
+            src
+          }
         }
         href
         _createdAt
@@ -400,10 +452,8 @@ query fetchHomepage {
           title
           excerpt
           image {
-            url
             _createdAt
             _updatedAt
-            basename
             colors {
               alpha
               blue
@@ -422,6 +472,14 @@ query fetchHomepage {
             smartTags
             tags
             id
+            alt
+            blurUpThumb(imgixParams: {w: "323", h: "200", fit: clip})
+            responsiveImage(imgixParams: {w: "323", h: "200", fit: clip}) {
+              title
+              alt
+              webpSrcSet
+              src
+            }
           }
           linkType
           href
@@ -447,6 +505,40 @@ query fetchHomepage {
         }
         _status
         _updatedAt
+      }
+      ... on ImageRecord {
+        id
+        _modelApiKey
+        image {
+          _createdAt
+          _updatedAt
+          colors {
+            alpha
+            blue
+            cssRgb
+            green
+            hex
+            red
+          }
+          customData
+          exifInfo
+          filename
+          format
+          md5
+          mimeType
+          size
+          smartTags
+          tags
+          id
+          alt
+          blurUpThumb
+          responsiveImage {
+            title
+            alt
+            webpSrcSet
+            src
+          }
+        }
       }
     }
   }
