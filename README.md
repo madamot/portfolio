@@ -17,5 +17,6 @@ create page-madamot-live-cache bucket with sns
 - Create accordian component
 - Side bar conponent
 - open search for all recipes
-- CI/CD. Jenkins?
-- dynamoDB 
+- ~~CI/CD. Jenkins?~~
+- dynamoDB
+- Add autoscaling group to jenkins slave
