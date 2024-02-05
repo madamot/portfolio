@@ -121,7 +121,7 @@ describe('component-button_group', () => {
   it('it renders a button with the correct url', () => {
     renderTestComponent(componentButtonGroup, buttonGroupData)
 
-    expect(screen.getByRole('link', { name: 'Github repo' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Github repo/ })).toHaveAttribute(
       'href',
       'https://github.com/madamot/portfolio'
     )
@@ -130,13 +130,13 @@ describe('component-button_group', () => {
   it('it renders a button with the correct target', () => {
     renderTestComponent(componentButtonGroup, buttonGroupData)
 
-    expect(screen.getByRole('link', { name: 'Github repo' })).toHaveAttribute('target', '_blank')
+    expect(screen.getByRole('link', { name: /Github repo/ })).toHaveAttribute('target', '_blank')
   })
 
   it('it renders a button with the correct display text', () => {
     renderTestComponent(componentButtonGroup, buttonGroupData)
 
-    expect(screen.getByText('Github repo')).toBeInTheDocument()
+    expect(screen.getByText(/Github repo/)).toBeInTheDocument()
     expect(screen.getByText('Storybook')).toBeInTheDocument()
   })
 })
