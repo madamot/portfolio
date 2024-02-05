@@ -1,10 +1,20 @@
 version = 0.1
-[default.deploy.parameters]
+[live.deploy.parameters]
 stack_name = "page-deploy-site"
 resolve_s3 = true
 s3_prefix = "page-deploy-site"
 region = "eu-west-1"
-confirm_changeset = true
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+disable_rollback = false
+image_repositories = []
+
+[stage.deploy.parameters]
+stack_name = "stage-page-deploy-site"
+resolve_s3 = true
+s3_prefix = "stage-page-deploy-site"
+region = "eu-west-1"
+confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 disable_rollback = false
 image_repositories = []
