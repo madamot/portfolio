@@ -15,6 +15,10 @@ body {
   gap: 1em;
 }
 
+.content--inverse {
+  flex-direction: row-reverse;
+}
+
 @media screen and (max-width: 725px) {
   .content {
     flex-direction: column;

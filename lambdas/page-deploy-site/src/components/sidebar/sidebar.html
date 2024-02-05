@@ -1,1 +1,8 @@
-<div class="sidebar {{#sticky}}sticky{{/sticky}}">{{{renderedComponents}}}</div>
+<div data-testid="sidebarComponent" class="sidebar {{#sticky}}sticky{{/sticky}}">
+  <section class="sidebarContent">
+    {{#title}}
+    <h2 class="sidebarTitle">{{title}}</h2>
+    {{/title}}
+    <div>{{{renderedComponents}}}</div>
+  </section>
+</div>
