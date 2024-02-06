@@ -4,6 +4,8 @@ pipeline {
     }
 
     parameters {
+        string(name: 'LAMBDA_NAME', defaultValue: '', description: 'Name of the lambda to build')
+        choice(name: 'ENVIRONMENT', choices: ['stage', 'live'], description: 'AWS environment to deploy to')
         gitParameter(
             name: 'BRANCH',
             type: 'PT_BRANCH',
@@ -16,7 +18,7 @@ pipeline {
 
     environment {
         DATE = sh(returnStdout: true, script: 'date +%Y-%m-%d_%H.%M.%S').trim()
-        FILES_PATH = "packages/madamot-components"
+        LAMBDA_PATH = "${"lambdas/" + env.LAMBDA_NAME}"
     }
 
     options {
@@ -31,7 +33,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
-                    cd ${FILES_PATH}
+                    cd ${LAMBDA_PATH}
                     yarn
                     yarn run test --passWithNoTests
                 """
@@ -42,24 +44,10 @@ pipeline {
             steps {
                 script {
                     sh """
-                        cd ${FILES_PATH}
-                        rm -rf dist www
+                        cd ${LAMBDA_PATH}
                         yarn build
+                        sam build
                     """
-                }
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                script {
-                    withCredentials([aws(credentialsId: "9190845d-626f-4330-88a2-da3508581995")]) {
-                        sh """
-                            cd ${FILES_PATH}
-                            aws s3 cp ./storybook-static s3://app-madamot-storybook --recursive
-                        """
-                    }
-                    echo "App successfully deployed to https://storybook.adamhorne.co.uk"
                 }
             }
         }
