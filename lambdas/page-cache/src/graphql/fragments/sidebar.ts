@@ -11,6 +11,7 @@ export const SIDEBAR_FRAGMENT = `
         _updatedAt
         title
         sticky
+        display_on_right
         content {
             ...Text
             ...ButtonGroup
