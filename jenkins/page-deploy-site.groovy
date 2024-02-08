@@ -67,7 +67,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                        /home/ec2-user/workspace/page-deploy-site/venv/bin/sam deploy
+                        /home/ec2-user/workspace/page-deploy-site/venv/bin/sam deploy --${ENVIRONMENT}
                     """
                 }
             }
