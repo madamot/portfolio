@@ -30,12 +30,21 @@ pipeline {
     }
 
     stages {
+        stage('Prepare Build Environment') {
+            steps {
+                sh """
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install aws-sam-cli
+                    which sam
+                """
+            }
+        }
 
         stage('Test') {
             steps {
                 sh """
                     cd ${LAMBDA_PATH}
-                    which sam
                     yarn
                     yarn run test --passWithNoTests
                 """
@@ -48,7 +57,7 @@ pipeline {
                     sh """
                         cd ${LAMBDA_PATH}
                         yarn build
-                        sudo sam build
+                        sam build
                     """
                 }
             }
