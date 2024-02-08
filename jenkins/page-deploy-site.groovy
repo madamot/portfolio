@@ -35,6 +35,7 @@ pipeline {
             steps {
                 sh """
                     cd ${LAMBDA_PATH}
+                    which sam
                     yarn
                     yarn run test --passWithNoTests
                 """
@@ -47,7 +48,6 @@ pipeline {
                     sh """
                         cd ${LAMBDA_PATH}
                         yarn build
-                        where sam
                         sudo sam build
                     """
                 }
