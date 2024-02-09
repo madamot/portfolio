@@ -1,6 +1,6 @@
 version = 0.1
 [live.deploy.parameters]
-stack_name = "live-page-deploy-site"
+stack_name = "page-deploy-site"
 resolve_s3 = true
 s3_prefix = "live-page-deploy-site"
 region = "eu-west-1"
