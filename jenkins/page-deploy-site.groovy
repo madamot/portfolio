@@ -68,7 +68,7 @@ pipeline {
                 script {
                     sh """
                         cd ${LAMBDA_PATH}
-                        /home/ec2-user/workspace/page-deploy-site/venv/bin/sam deploy --stack-name ${ENVIRONMENT}-${LAMBDA_NAME}
+                        /home/ec2-user/workspace/page-deploy-site/venv/bin/sam deploy --config-env ${ENVIRONMENT}
                     """
                 }
             }
