@@ -4,7 +4,7 @@ Description: Store live website
 
 Resources:
   ## S3 bucket
-  SourceBucket:
+  LiveSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: page-madamot-live
@@ -17,7 +17,7 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: 404.html
 
-  PreviewSourceBucket:
+  LivePreviewSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: page-madamot-live-preview
@@ -29,8 +29,8 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: 404.html
-        
-  SourceBucket:
+
+  StageSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: page-madamot-stage
@@ -43,7 +43,7 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: 404.html
 
-  PreviewSourceBucket:
+  StagePreviewSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: page-madamot-stage-preview

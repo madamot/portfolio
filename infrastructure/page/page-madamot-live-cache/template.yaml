@@ -22,8 +22,12 @@ Resources:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-        - Protocol: lambda
-          Endpoint: !ImportValue webhookHandlerARN
+        - Endpoint: !ImportValue live-page-deploy-site
+          Protocol: lambda
+        - Endpoint: !ImportValue stage-page-deploy-site
+          Protocol: lambda
+          
+          
 
   SNSTopicPolicy:
     Type: AWS::SNS::TopicPolicy
@@ -46,11 +50,19 @@ Resources:
         - !Ref SNSTopic
 
   # Provide permission for SNS to invoke the Lambda function
-  TopicConsumerPageDeploySitePermission:
+  TopicConsumerLivePageDeploySitePermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
       Action: 'lambda:InvokeFunction'
-      FunctionName: !ImportValue webhookHandlerARN
+      FunctionName: !ImportValue live-page-deploy-site
+      Principal: sns.amazonaws.com
+
+  # Provide permission for SNS to invoke the Lambda function
+  TopicConsumerStagePageDeploySitePermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: !ImportValue stage-page-deploy-site
       Principal: sns.amazonaws.com
 
 Outputs:
