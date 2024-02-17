@@ -14,10 +14,6 @@ Parameters:
       - live
     Default: stage
 
-Environment:
-  Variables:
-    AWS_ENV: !Ref Environment
-
 Resources:
   ##########################################################################
   #   Lambda Function                                                      #
@@ -54,6 +50,7 @@ Resources:
       Environment:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
+          AWS_ENV: !Ref Environment
       Events:
         HttpApiEvent:
           Type: HttpApi
