@@ -27,6 +27,8 @@ export const handler = async (event: APIGatewayProxyEvent) => {
     preview,
     parsePayload.entity.attributes.location ? parsePayload.entity.id : null
   )
+
+  console.log('Page data', JSON.stringify(page))
   console.timeEnd('Get page')
 
   console.time('Put json in S3 cache')

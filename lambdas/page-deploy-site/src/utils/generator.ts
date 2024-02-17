@@ -37,7 +37,7 @@ export const renderTemplate = (data: any) => {
   return Mustache.render(openTemplate('page-standard'), data)
 }
 
-export const renderComponent = (data: ProjectModelContentField): string => {
+export const renderComponent = <T extends ProjectModelContentField>(data: T): string => {
   return Mustache.render(openComponent(data._modelApiKey), data)
 }
 
