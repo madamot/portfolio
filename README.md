@@ -19,5 +19,5 @@ create page-madamot-live-cache bucket with sns
 - open search for all recipes
 - ~~CI/CD. Jenkins?~~
 - dynamoDB
-- Add autoscaling group to jenkins slave
-- Create stage env
+- ~~Add autoscaling group to jenkins slave~~
+- ~~Create stage env~~
