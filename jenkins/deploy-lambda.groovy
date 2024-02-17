@@ -57,7 +57,7 @@ pipeline {
                     sh """
                         cd ${LAMBDA_PATH}
                         yarn build
-                        /home/ec2-user/workspace/page-deploy-site/venv/bin/sam build
+                        /home/ec2-user/workspace/deploy-lambda/venv/bin/sam build
                     """
                 }
             }
@@ -69,7 +69,7 @@ pipeline {
                     withCredentials([aws(credentialsId: "9190845d-626f-4330-88a2-da3508581995")]) {
                         sh """
                             cd ${LAMBDA_PATH}
-                            /home/ec2-user/workspace/page-deploy-site/venv/bin/sam deploy --config-env ${ENVIRONMENT} --parameter-overrides ParameterKey=Environment,ParameterValue=${ENVIRONMENT}
+                            /home/ec2-user/workspace/deploy-lambda/venv/bin/sam deploy --config-env ${ENVIRONMENT} --parameter-overrides ParameterKey=Environment,ParameterValue=${ENVIRONMENT}
                         """
                     }
                     echo "Lambda successfully deployed"
