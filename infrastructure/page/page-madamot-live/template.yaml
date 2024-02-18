@@ -4,7 +4,7 @@ Description: Store live website
 
 Resources:
   ## S3 bucket
-  SourceBucket:
+  LiveSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: page-madamot-live
@@ -17,10 +17,36 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: 404.html
 
-  PreviewSourceBucket:
+  LivePreviewSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: page-madamot-live-preview
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+
+  StageSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-madamot-stage
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+
+  StagePreviewSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-madamot-stage-preview
       PublicAccessBlockConfiguration:
         BlockPublicAcls: false
       OwnershipControls:

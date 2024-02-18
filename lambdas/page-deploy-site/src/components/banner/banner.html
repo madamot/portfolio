@@ -1,0 +1,16 @@
+<div
+  id="bannerComponent"
+  data-testid="bannerComponent"
+  class="banner {{#displayType}}banner--{{displayType}}{{/displayType}}"
+>
+  <div class="bannerMessage">
+    <span class="bannerIcon" data-testid="{{displayType}}-bannerIcon">{{{icon}}}</span>
+    <div>
+      {{#title}}
+      <h3 class="bannerTitle">{{title}}</h3>
+      {{/title}}
+
+      <div class="bannerText">{{{text}}}</div>
+    </div>
+  </div>
+</div>

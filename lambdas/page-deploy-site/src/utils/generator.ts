@@ -7,8 +7,11 @@ const Mustache = require('mustache')
 const templatesFolder = path.join(__dirname, '..', 'templates')
 const componentsFolder = path.join(__dirname, '..', 'components')
 
-export const render = async (data: ProjectRecord | HomepageRecord): Promise<File> => {
-  return loadTemplate('page-standard').render(data)
+export const render = async (
+  data: ProjectRecord | HomepageRecord,
+  isPreview: boolean
+): Promise<File> => {
+  return loadTemplate('page-standard').render(data, isPreview)
 }
 
 const loadTemplate = (template: string) => {
@@ -16,12 +19,16 @@ const loadTemplate = (template: string) => {
 }
 
 export const loadComponent = (template: string) => {
-  return require(path.join(componentsFolder, template, template))
+  try {
+    return require(path.join(componentsFolder, template, template))
+  } catch (error) {
+    console.log('loadComponent error', error)
+  }
 }
 
 export const loadComponents = (components: ProjectModelContentField[]) => {
   return components
-    .map(component => loadComponent(component._modelApiKey).render(component))
+    .map(component => loadComponent(component._modelApiKey)?.render(component))
     .join('')
 }
 
@@ -37,7 +44,7 @@ export const renderTemplate = (data: any) => {
   return Mustache.render(openTemplate('page-standard'), data)
 }
 
-export const renderComponent = (data: ProjectModelContentField): string => {
+export const renderComponent = <T extends ProjectModelContentField>(data: T): string => {
   return Mustache.render(openComponent(data._modelApiKey), data)
 }
 

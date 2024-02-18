@@ -14,6 +14,8 @@ import { putFile } from './utils/s3'
  *
  */
 
+const { AWS_ENV } = process.env
+
 export const handler = async (event: SNSEvent) => {
   let response: APIGatewayProxyResult
 
@@ -23,17 +25,17 @@ export const handler = async (event: SNSEvent) => {
 
   const snsMessage = JSON.parse(event.Records[0].Sns.Message)
 
-  const isPreview = snsMessage.preview
-  const bucket = snsMessage.preview ? 'page-madamot-live-preview' : 'page-madamot-live'
+  const isPreview: boolean = snsMessage.preview
+  const bucket = snsMessage.preview ? `page-madamot-${AWS_ENV}-preview` : `page-madamot-${AWS_ENV}`
 
-  console.time('Get page')
-  const page = await getCache(snsMessage.key, isPreview)
+  console.time('Get page cache')
+  const pageCache = await getCache(snsMessage.key, isPreview)
 
-  console.log('page', page)
-  console.timeEnd('Get page')
+  console.log('page cache', pageCache)
+  console.timeEnd('Get page cache')
 
   console.time('Render Page')
-  const output = page && (await render(page))
+  const renderedPage = pageCache && (await render(pageCache, isPreview))
   console.timeEnd('Render Page')
 
   console.time('Generate Styles')
@@ -41,12 +43,12 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Generate Styles')
 
   console.time('Put stylesheet in S3')
-  await putFile(bucket, 'index.css', styleSheet, 'text/css')
+  await putFile(bucket, `${isPreview ? `preview/index.css` : 'index.css'}`, styleSheet, 'text/css')
   console.timeEnd('Put stylesheet in S3')
 
   console.time('Put page in S3')
-  if (output) {
-    await savePage(isPreview, page, output)
+  if (renderedPage) {
+    await savePage(isPreview, pageCache, renderedPage)
   } else {
     console.error('The file failed to save to s3 due to nothing being rendered')
   }

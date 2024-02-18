@@ -19,7 +19,7 @@
       <div
         class="promoCard promoCard--tall promoCard-blurred-img"
         id="card{{{id}}}"
-        style="background-image: url({{blurUpThumb}});"
+        style="background-image: url({{image.blurUpThumb}});"
       >
         <img
           id="{{image.id}}"
@@ -46,35 +46,17 @@
 
   const cardContainer{{id}} = document.querySelectorAll('div#cardContainer{{id}} img')
   function loaded(img) {
-
-    // const cardWrapper = document.getElementById(cardId)
-
-    // if (cardWrapper) {
-
-    //   console.log("cardWrapper", cardWrapper);
-
-    //   cardWrapper.classList.add('loaded')
-    // }
-
-    // parentDiv = card.parentNode;
-
-
+    setTimeout(function(){
       img.parentNode.classList.add('loaded')
-
-
-
-
+    }, 500);
   }
 
   cardContainer{{id}}.forEach(img => {
-
     if (img.complete) {
       loaded(img)
     } else {
 
       img.addEventListener('load', loaded(img))
     }
-
-
   })
 </script>

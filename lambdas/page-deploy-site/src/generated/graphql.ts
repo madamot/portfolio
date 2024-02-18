@@ -22,6 +22,40 @@ export type Scalars = {
   UploadId: { input: string; output: string; }
 };
 
+/** Block of type Banner (banner) */
+export type BannerRecord = RecordInterface & {
+  __typename?: 'BannerRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  displayType?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  text?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Banner (banner) */
+export type BannerRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Banner (banner) */
+export type BannerRecordTextArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** Block of type Billboard (billboard) */
 export type BillboardRecord = RecordInterface & {
   __typename?: 'BillboardRecord';
@@ -119,6 +153,7 @@ export type ButtonRecord = RecordInterface & {
   link?: Maybe<ButtonModelLinkField>;
   linkType?: Maybe<Scalars['BooleanType']['output']>;
   role?: Maybe<Scalars['String']['output']>;
+  size?: Maybe<Scalars['String']['output']>;
   target?: Maybe<Scalars['String']['output']>;
 };
 
@@ -385,7 +420,7 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomepageModelContentField = BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type HomepageModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -409,6 +444,7 @@ export type HomepageRecord = RecordInterface & {
   name?: Maybe<Scalars['String']['output']>;
   navigation?: Maybe<NavigationRecord>;
   seo?: Maybe<SeoField>;
+  sidebar?: Maybe<SidebarRecord>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2031,7 +2067,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type ProjectModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
@@ -2104,6 +2140,7 @@ export type ProjectRecord = RecordInterface & {
   parent?: Maybe<ProjectRecord>;
   position?: Maybe<Scalars['IntType']['output']>;
   seo?: Maybe<SeoField>;
+  sidebar?: Maybe<SidebarRecord>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2135,6 +2172,7 @@ export type PromoCardRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   link?: Maybe<ProjectRecord>;
   linkType?: Maybe<Scalars['BooleanType']['output']>;
+  style?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2359,6 +2397,37 @@ export type SeoField = {
 export type SeoFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
+export type SidebarModelContentField = ButtonGroupRecord | TextRecord;
+
+/** Block of type Sidebar (sidebar) */
+export type SidebarRecord = RecordInterface & {
+  __typename?: 'SidebarRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  content: Array<SidebarModelContentField>;
+  displayOnRight?: Maybe<Scalars['BooleanType']['output']>;
+  id: Scalars['ItemId']['output'];
+  sticky?: Maybe<Scalars['BooleanType']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Sidebar (sidebar) */
+export type SidebarRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 export type Site = {

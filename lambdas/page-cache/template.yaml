@@ -5,6 +5,15 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: The webhook DatoCMS hits on publish in order to make a request back to DatoCMS order to get the page data and save it as a json file in s3
 
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
 Resources:
   ##########################################################################
   #   Lambda Function                                                      #
@@ -46,7 +55,5 @@ Outputs:
     Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
   webhookHandler:
     Description: The subnet ID to use for public web servers
-    Export:
-      Name: pageCacheHandlerARN
     Value:
       Fn::GetAtt: webhookHandler.Arn
