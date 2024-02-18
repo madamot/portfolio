@@ -22,6 +22,40 @@ export type Scalars = {
   UploadId: { input: string; output: string; }
 };
 
+/** Block of type Banner (banner) */
+export type BannerRecord = RecordInterface & {
+  __typename?: 'BannerRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  displayType?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  text?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Banner (banner) */
+export type BannerRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Banner (banner) */
+export type BannerRecordTextArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** Block of type Billboard (billboard) */
 export type BillboardRecord = RecordInterface & {
   __typename?: 'BillboardRecord';
@@ -386,7 +420,7 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomepageModelContentField = BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type HomepageModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -2033,7 +2067,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type ProjectModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
