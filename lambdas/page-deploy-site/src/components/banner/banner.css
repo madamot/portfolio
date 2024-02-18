@@ -52,7 +52,7 @@
   margin-top: 0;
 }
 
-.bannerText {
+.bannerText > p {
   display: inline;
   margin: 0;
   line-height: 22px;
