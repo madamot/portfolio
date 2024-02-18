@@ -4,7 +4,7 @@
   class="banner {{#displayType}}banner--{{displayType}}{{/displayType}}"
 >
   <div class="bannerMessage">
-    <span class="bannerIcon">{{{icon}}}</span>
+    <span class="bannerIcon" data-testid="{{displayType}}-bannerIcon">{{{icon}}}</span>
     <div>
       {{#title}}
       <h3 class="bannerTitle">{{title}}</h3>
