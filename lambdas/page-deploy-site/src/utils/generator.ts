@@ -7,8 +7,11 @@ const Mustache = require('mustache')
 const templatesFolder = path.join(__dirname, '..', 'templates')
 const componentsFolder = path.join(__dirname, '..', 'components')
 
-export const render = async (data: ProjectRecord | HomepageRecord): Promise<File> => {
-  return loadTemplate('page-standard').render(data)
+export const render = async (
+  data: ProjectRecord | HomepageRecord,
+  isPreview: boolean
+): Promise<File> => {
+  return loadTemplate('page-standard').render(data, isPreview)
 }
 
 const loadTemplate = (template: string) => {

@@ -12,7 +12,7 @@ const generatePage = async (pageName: string) => {
       fs.readFileSync(path.join(localCacheDirectory, pageName, pageName + '.json'), 'UTF-8')
     )
 
-    const page = await render(data)
+    const page = await render(data, false)
 
     saveFile(page, data)
   } catch (error) {

@@ -1,9 +1,20 @@
 version = 0.1
-[default.deploy.parameters]
-stack_name = "page-cache"
+[live.deploy.parameters]
+stack_name = "live-page-cache"
 resolve_s3 = true
-s3_prefix = "page-cache"
+s3_prefix = "live-page-cache"
 region = "eu-west-1"
-confirm_changeset = true
+confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
+disable_rollback = false
+image_repositories = []
+
+[stage.deploy.parameters]
+stack_name = "stage-page-cache"
+resolve_s3 = true
+s3_prefix = "stage-page-cache"
+region = "eu-west-1"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+disable_rollback = false
 image_repositories = []

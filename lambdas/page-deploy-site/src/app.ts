@@ -35,7 +35,7 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Get page cache')
 
   console.time('Render Page')
-  const renderedPage = pageCache && (await render(pageCache))
+  const renderedPage = pageCache && (await render(pageCache, isPreview))
   console.timeEnd('Render Page')
 
   console.time('Generate Styles')
@@ -43,7 +43,7 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Generate Styles')
 
   console.time('Put stylesheet in S3')
-  await putFile(bucket, 'index.css', styleSheet, 'text/css')
+  await putFile(bucket, `${isPreview ? `preview/index.css` : 'index.css'}`, styleSheet, 'text/css')
   console.timeEnd('Put stylesheet in S3')
 
   console.time('Put page in S3')
