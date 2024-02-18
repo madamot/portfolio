@@ -23,16 +23,6 @@
   text-decoration: none;
 }
 
-.promoCardCopy {
-  padding-top: 1em;
-}
-
-.promoCardDescription {
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 400;
-}
-
 .promoCardSectionLink:hover {
   text-decoration: underline;
 }
@@ -68,7 +58,34 @@
   justify-content: center;
   display: flex;
   box-sizing: border-box;
+}
+
+.promoCard--standard {
   border-radius: 10px;
+}
+
+.promoCard--standard {
+  border-radius: 10px;
+}
+
+.promoCard--tall {
+  border-radius: 0px;
+}
+
+.promoCardCopy {
+  padding-top: 1em;
+}
+
+.promoCardCopy--tall {
+  padding: 1em;
+  min-height: 200px;
+  box-sizing: border-box;
+}
+
+.promoCardDescription {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
 }
 
 .promoCardImage {
