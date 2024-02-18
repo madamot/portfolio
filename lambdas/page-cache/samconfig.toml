@@ -4,7 +4,7 @@ stack_name = "live-page-cache"
 resolve_s3 = true
 s3_prefix = "live-page-cache"
 region = "eu-west-1"
-confirm_changeset = true
+confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
 
@@ -13,6 +13,6 @@ stack_name = "stage-page-cache"
 resolve_s3 = true
 s3_prefix = "stage-page-cache"
 region = "eu-west-1"
-confirm_changeset = true
+confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
