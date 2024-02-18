@@ -16,12 +16,16 @@ const loadTemplate = (template: string) => {
 }
 
 export const loadComponent = (template: string) => {
-  return require(path.join(componentsFolder, template, template))
+  try {
+    return require(path.join(componentsFolder, template, template))
+  } catch (error) {
+    console.log('loadComponent error', error)
+  }
 }
 
 export const loadComponents = (components: ProjectModelContentField[]) => {
   return components
-    .map(component => loadComponent(component._modelApiKey).render(component))
+    .map(component => loadComponent(component._modelApiKey)?.render(component))
     .join('')
 }
 
