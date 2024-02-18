@@ -21,7 +21,7 @@ export const loadComponent = (template: string) => {
 
 export const loadComponents = (components: ProjectModelContentField[]) => {
   return components
-    .map(component => loadComponent(component._modelApiKey).render(component))
+    .map(component => loadComponent(component._modelApiKey)?.render(component))
     .join('')
 }
 
