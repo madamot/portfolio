@@ -8,6 +8,14 @@
   padding: 16px;
 }
 
+.sidebar .promoCardCardGrid {
+  grid-template-columns: 1fr;
+}
+
+.sidebar .promoCardDivider {
+  display: none;
+}
+
 @media screen and (max-width: 725px) {
   .sidebar {
     width: 100%;

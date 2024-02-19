@@ -5,7 +5,7 @@ export const render = async (data: any, isPreview: boolean) => {
   data.renderedNavbar = loadComponent('navigation').render(data.project?.navigation)
 
   if (data?.project?.sidebarLeft) {
-    data.renderedSidebar = loadComponent('sidebar').render(data.project.sidebarLeft)
+    data.renderedSidebarLeft = loadComponent('sidebar').render(data.project.sidebarLeft)
   }
 
   if (data?.project?.sidebarRight) {
