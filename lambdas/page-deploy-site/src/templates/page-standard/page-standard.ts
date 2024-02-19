@@ -6,7 +6,10 @@ export const render = async (data: any, isPreview: boolean) => {
 
   if (data?.project?.sidebar) {
     data.renderedSidebar = loadComponent('sidebar').render(data.project.sidebar)
-    data.displaySidebarOnRight = data.project.sidebar.displayOnRight
+  }
+
+  if (data?.project?.sidebarRight) {
+    data.renderedSidebarRight = loadComponent('sidebar').render(data.project.sidebarRight)
   }
   data.renderedComponents = loadComponents(data.project.content)
 

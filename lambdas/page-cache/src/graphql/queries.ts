@@ -73,6 +73,9 @@ export const GET_PAGE = `
       sidebar {
         ...Sidebar
       }
+      sidebarRight {
+        ...Sidebar
+      }
     }
   }
 `
