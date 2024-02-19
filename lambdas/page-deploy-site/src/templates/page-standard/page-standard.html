@@ -9,12 +9,16 @@
   <body>
     <div class="container">
       {{{renderedNavbar}}}
-      <div class="content {{#displaySidebarOnRight}}content--inverse{{/displaySidebarOnRight}}">
-        {{#renderedSidebar}}
-        <aside>{{{renderedSidebar}}}</aside>
-        {{/renderedSidebar}}
+      <div class="content">
+        {{#renderedSidebarLeft}}
+        <aside>{{{renderedSidebarLeft}}}</aside>
+        {{/renderedSidebarLeft}}
 
         <section>{{{renderedComponents}}}</section>
+
+        {{#renderedSidebarRight}}
+        <aside>{{{renderedSidebarRight}}}</aside>
+        {{/renderedSidebarRight}}
       </div>
     </div>
   </body>
