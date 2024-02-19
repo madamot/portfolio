@@ -70,7 +70,7 @@ export const GET_PAGE = `
         ...PromoCard
         ...Image
       }
-      sidebar {
+      sidebarLeft {
         ...Sidebar
       }
       sidebarRight {
@@ -142,7 +142,10 @@ export const GET_HOMEPAGE = `
         ...PromoCard
         ...Image
       }
-      sidebar {
+      sidebarLeft {
+        ...Sidebar
+      }
+      sidebarRight {
         ...Sidebar
       }
     }

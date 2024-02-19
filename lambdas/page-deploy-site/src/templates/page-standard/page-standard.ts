@@ -4,8 +4,8 @@ export const render = async (data: any, isPreview: boolean) => {
   data.isPreview = isPreview
   data.renderedNavbar = loadComponent('navigation').render(data.project?.navigation)
 
-  if (data?.project?.sidebar) {
-    data.renderedSidebar = loadComponent('sidebar').render(data.project.sidebar)
+  if (data?.project?.sidebarLeft) {
+    data.renderedSidebar = loadComponent('sidebar').render(data.project.sidebarLeft)
   }
 
   if (data?.project?.sidebarRight) {

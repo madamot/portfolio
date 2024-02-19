@@ -11,10 +11,10 @@ export const SIDEBAR_FRAGMENT = `
         _updatedAt
         title
         sticky
-        displayOnRight
         content {
             ...Text
             ...ButtonGroup
+            ...PromoCard
         }
     }
 `
