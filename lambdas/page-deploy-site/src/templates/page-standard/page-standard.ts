@@ -11,6 +11,11 @@ export const render = async (data: any, isPreview: boolean) => {
   if (data?.project?.sidebarRight) {
     data.renderedSidebarRight = loadComponent('sidebar').render(data.project.sidebarRight)
   }
+
+  if (data?.project?.header) {
+    data.renderedHeader = loadComponent('header').render(data.project.header)
+  }
+
   data.renderedComponents = loadComponents(data.project.content)
 
   return renderTemplate(data)
