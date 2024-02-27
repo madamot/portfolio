@@ -6,6 +6,7 @@ import {
   PROMOCARD_FRAGMENT,
   IMAGE_FRAGMENT,
   SIDEBAR_FRAGMENT,
+  HEADER_FRAGMENT,
 } from './fragments'
 
 export const GET_PAGE = `
@@ -16,6 +17,7 @@ export const GET_PAGE = `
   ${PROMOCARD_FRAGMENT}
   ${IMAGE_FRAGMENT}
   ${SIDEBAR_FRAGMENT}
+  ${HEADER_FRAGMENT}
 
   query fetchPage($id: ItemId) {
     project(filter: {id: {eq: $id}}) {
@@ -62,6 +64,9 @@ export const GET_PAGE = `
           }
         }
       }
+      header {
+        ...Header
+      }
       content {
         ...Banner
         ...BillBoard
@@ -88,6 +93,7 @@ export const GET_HOMEPAGE = `
   ${PROMOCARD_FRAGMENT}
   ${IMAGE_FRAGMENT}
   ${SIDEBAR_FRAGMENT}
+  ${HEADER_FRAGMENT}
 
   query fetchHomepage {
     project: homepage {
@@ -133,6 +139,9 @@ export const GET_HOMEPAGE = `
             }
           }
         }
+      }
+      header {
+        ...Header
       }
       content {
         ...Banner
