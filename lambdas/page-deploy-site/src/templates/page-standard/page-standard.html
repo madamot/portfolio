@@ -8,13 +8,14 @@
   </head>
   <body>
     <div class="container">
-      {{{renderedNavbar}}}
+      {{{renderedNavbar}}} {{#renderedHeader}}
+      <div>{{{renderedHeader}}}</div>
+      {{/renderedHeader}}
+
       <div class="content">
         {{#renderedSidebarLeft}}
         <aside>{{{renderedSidebarLeft}}}</aside>
-        {{/renderedSidebarLeft}} {{#renderedHeader}}
-        <div>{{{renderedHeader}}}</div>
-        {{/renderedHeader}}
+        {{/renderedSidebarLeft}}
 
         <main>{{{renderedComponents}}}</main>
 
