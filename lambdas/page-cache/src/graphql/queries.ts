@@ -1,4 +1,5 @@
 import {
+  ACCORDIONGROUP_FRAGMENT,
   BANNER_FRAGMENT,
   BILLBOARD_FRAGMENT,
   BUTTONGROUP_FRAGMENT,
@@ -10,6 +11,7 @@ import {
 } from './fragments'
 
 export const GET_PAGE = `
+  ${ACCORDIONGROUP_FRAGMENT}
   ${BANNER_FRAGMENT}
   ${BILLBOARD_FRAGMENT}
   ${BUTTONGROUP_FRAGMENT}
@@ -68,6 +70,7 @@ export const GET_PAGE = `
         ...Header
       }
       content {
+        ...AccordionGroup
         ...Banner
         ...BillBoard
         ...ButtonGroup
@@ -86,6 +89,7 @@ export const GET_PAGE = `
 `
 
 export const GET_HOMEPAGE = `
+  ${ACCORDIONGROUP_FRAGMENT}
   ${BANNER_FRAGMENT}
   ${BILLBOARD_FRAGMENT}
   ${BUTTONGROUP_FRAGMENT}
@@ -144,6 +148,7 @@ export const GET_HOMEPAGE = `
         ...Header
       }
       content {
+        ...AccordionGroup
         ...Banner
         ...BillBoard
         ...ButtonGroup
