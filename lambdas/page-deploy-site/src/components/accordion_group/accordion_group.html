@@ -1,11 +1,10 @@
-<details>
-  <summary>Section 1</summary>
-  <main>
-    <p>
-      Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus
-      nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit
-      eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante
-      scelerisque vulputate.
-    </p>
-  </main>
-</details>
+<div data-testid="accordionGroupComponent" class="accordionGroup">
+  {{#accordions}}
+  <details class="accordion__details" {{#displayAllAsOpen}}open{{/displayAllAsOpen}}>
+    <summary class="accordion__summary">{{summary}}</summary>
+    <main class="accordion__main">
+      <p>{{{content}}}</p>
+    </main>
+  </details>
+  {{/accordions}}
+</div>
