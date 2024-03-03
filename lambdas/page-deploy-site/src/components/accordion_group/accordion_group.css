@@ -7,7 +7,7 @@
   border-radius: 3px;
 }
 
-.accordion__details .accordion_summary {
+.accordion_summary {
   display: block;
   cursor: pointer;
   position: relative;
