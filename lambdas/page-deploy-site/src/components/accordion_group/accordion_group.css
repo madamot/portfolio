@@ -32,3 +32,8 @@
 .accordion__details .accordion__main {
   padding: 1em 2.2em;
 }
+
+.accordion__controls {
+  display: flex;
+  justify-content: flex-end;
+}

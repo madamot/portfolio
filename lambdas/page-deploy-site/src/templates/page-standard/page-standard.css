@@ -15,6 +15,10 @@ body {
   gap: 1em;
 }
 
+.main-content {
+  width: 100%;
+}
+
 .content--inverse {
   flex-direction: row-reverse;
 }
