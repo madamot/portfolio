@@ -8,7 +8,7 @@
       </button>
   </div>
   {{#accordions}}
-  <details class="accordion__details" {{#displayAllAsOpen}}open{{/displayAllAsOpen}}>
+  <details data-testid="accordionComponent" class="accordion__details" {{#displayAllAsOpen}}open{{/displayAllAsOpen}}>
     <summary class="accordion__summary">{{summary}}</summary>
     <main class="accordion__main">
       <p>{{{content}}}</p>

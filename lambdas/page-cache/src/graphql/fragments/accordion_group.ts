@@ -13,6 +13,15 @@ export const ACCORDIONGROUP_FRAGMENT = `
       displayAllAsOpen
       openInitial
       accordions {
+        id
+        _createdAt
+        _isValid
+        _modelApiKey
+        _seoMetaTags {
+          tag
+        }
+        _status
+        _updatedAt
         summary
         content
       }
