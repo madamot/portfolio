@@ -22,6 +22,67 @@ export type Scalars = {
   UploadId: { input: string; output: string; }
 };
 
+/** Block of type Accordions (accordion_group) */
+export type AccordionGroupRecord = RecordInterface & {
+  __typename?: 'AccordionGroupRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  accordions: Array<AccordionRecord>;
+  displayAllAsOpen?: Maybe<Scalars['BooleanType']['output']>;
+  id: Scalars['ItemId']['output'];
+  openInitial?: Maybe<Scalars['BooleanType']['output']>;
+};
+
+
+/** Block of type Accordions (accordion_group) */
+export type AccordionGroupRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Accordion (accordion) */
+export type AccordionRecord = RecordInterface & {
+  __typename?: 'AccordionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  content?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  summary?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Accordion (accordion) */
+export type AccordionRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Accordion (accordion) */
+export type AccordionRecordContentArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** Block of type Banner (banner) */
 export type BannerRecord = RecordInterface & {
   __typename?: 'BannerRecord';
@@ -453,7 +514,7 @@ export type HeaderRecordDescriptionArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type HomepageModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type HomepageModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -2102,7 +2163,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type ProjectModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
