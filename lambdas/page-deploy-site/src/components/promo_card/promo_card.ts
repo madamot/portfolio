@@ -1,10 +1,9 @@
-import { renderComponent } from '../../utils/generator'
+import { loadComponents, renderComponent } from '../../utils/generator'
 import { PromoCardRecord } from '../../generated/graphql'
 
-export const render = (data: PromoCardRecord): string => {
-  data.id = data.id.replace('-', '')
-  data.cards.forEach(card => {
-    card.id = card.id.replace('-', '')
-  })
+export const render = (data: any): string => {
+  data.id = data.id.replace(/-/g, '')
+  data.renderedCards = loadComponents(data.cards)
+
   return renderComponent(data)
 }
