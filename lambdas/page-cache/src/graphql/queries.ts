@@ -10,6 +10,70 @@ import {
   HEADER_FRAGMENT,
 } from './fragments'
 
+const page = `
+  _createdAt
+  _isValid
+  _modelApiKey
+  _seoMetaTags {
+    tag
+  }
+  _status
+  _updatedAt
+  id
+  location
+  name
+  title
+  seo {
+    description
+    image {
+      id
+      width
+      height
+      title
+    }
+    title
+    twitterCard
+  }
+  navigation {
+    id
+    title
+    _modelApiKey
+    menu {
+      id
+      displayText
+      href
+      target
+      linkType
+      link {
+        __typename
+        ... on ProjectRecord {
+          id
+          location
+          title
+        }
+      }
+    }
+  }
+  header {
+    ...Header
+  }
+  content {
+    ...AccordionGroup
+    ...Banner
+    ...BillBoard
+    ...ButtonGroup
+    ...Text
+    ...PromoCard
+    ...Image
+  }
+  sidebarLeft {
+    ...Sidebar
+  }
+  sidebarRight {
+    ...Sidebar
+  }
+`
+
 export const GET_PAGE = `
   ${ACCORDIONGROUP_FRAGMENT}
   ${BANNER_FRAGMENT}
@@ -23,67 +87,7 @@ export const GET_PAGE = `
 
   query fetchPage($id: ItemId) {
     project(filter: {id: {eq: $id}}) {
-      _createdAt
-      _isValid
-      _modelApiKey
-      _seoMetaTags {
-        tag
-      }
-      _status
-      _updatedAt
-      id
-      location
-      name
-      title
-      seo {
-        description
-        image {
-          id
-          width
-          height
-          title
-        }
-        title
-        twitterCard
-      }
-      navigation {
-        id
-        title
-        _modelApiKey
-        menu {
-          id
-          displayText
-          href
-          target
-          linkType
-          link {
-            __typename
-            ... on ProjectRecord {
-              id
-              location
-              title
-            }
-          }
-        }
-      }
-      header {
-        ...Header
-      }
-      content {
-        ...AccordionGroup
-        ...Banner
-        ...BillBoard
-        ...ButtonGroup
-        ...Text
-        ...PromoCard
-        ...Image
-      }
-      sidebarLeft {
-        ...Sidebar
-      }
-      sidebarRight {
-        ...Sidebar
-      }
+      ${page}
     }
   }
 `
@@ -101,67 +105,7 @@ export const GET_HOMEPAGE = `
 
   query fetchHomepage {
     project: homepage {
-      _createdAt
-      _isValid
-      _modelApiKey
-      _seoMetaTags {
-        tag
-      }
-      _status
-      _updatedAt
-      id
-      location
-      name
-      title
-      seo {
-        description
-        image {
-          id
-          width
-          height
-          title
-        }
-        title
-        twitterCard
-      }
-      navigation {
-        id
-        title
-        _modelApiKey
-        menu {
-          id
-          displayText
-          href
-          target
-          linkType
-          link {
-            __typename
-            ... on ProjectRecord {
-              id
-              location
-              title
-            }
-          }
-        }
-      }
-      header {
-        ...Header
-      }
-      content {
-        ...AccordionGroup
-        ...Banner
-        ...BillBoard
-        ...ButtonGroup
-        ...Text
-        ...PromoCard
-        ...Image
-      }
-      sidebarLeft {
-        ...Sidebar
-      }
-      sidebarRight {
-        ...Sidebar
-      }
+      ${page}
     }
   }
 `
