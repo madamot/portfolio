@@ -1,7 +1,9 @@
 import { loadComponent, loadComponents, renderTemplate } from '../../utils/generator'
 
-export const render = async (data: any, isPreview: boolean) => {
+export const render = async (data: any, isPreview: boolean, env: string) => {
   data.isPreview = isPreview
+  data.noIndex = env !== 'live' || isPreview || data?.project?.seo?.noIndex
+
   data.renderedNavbar = loadComponent('navigation').render(data.project?.navigation)
 
   if (data?.project?.sidebarLeft) {

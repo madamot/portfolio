@@ -35,7 +35,7 @@ export const handler = async (event: SNSEvent) => {
   console.timeEnd('Get page cache')
 
   console.time('Render Page')
-  const renderedPage = pageCache && (await render(pageCache, isPreview))
+  const renderedPage = pageCache && (await render(pageCache, isPreview, AWS_ENV))
   console.timeEnd('Render Page')
 
   console.time('Generate Styles')
