@@ -24,15 +24,18 @@ const page = `
   name
   title
   seo {
-    description
-    image {
-      id
-      width
-      height
-      title
-    }
     title
     twitterCard
+    noIndex
+    image {
+      responsiveImage(imgixParams: {w: "1200", h: "630", fit: crop, ar: "1.91:1"}) {
+        width
+        height
+        webpSrcSet
+        src
+      }
+    }
+    description
   }
   navigation {
     id

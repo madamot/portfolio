@@ -1,5 +1,6 @@
+import { Maybe } from 'graphql/jsutils/Maybe'
 import { HomepageRecord, ProjectRecord } from '../generated/graphql'
-import { Component, Components } from '../types/components'
+import { Component, Components, Env } from '../types/components'
 
 const fs = require('fs')
 const path = require('path')
@@ -10,9 +11,10 @@ const componentsFolder = path.join(__dirname, '..', 'components')
 
 export const render = async (
   data: ProjectRecord | HomepageRecord,
-  isPreview: boolean
+  isPreview: boolean,
+  env: Maybe<string>
 ): Promise<File> => {
-  return loadTemplate('page-standard').render(data, isPreview)
+  return loadTemplate('page-standard').render(data, isPreview, env)
 }
 
 const loadTemplate = (template: string) => {

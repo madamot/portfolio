@@ -3,6 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{#isLive}}
+    <meta property="og:title" content="{{project.seo.title}}" />
+    <meta name="description" content="{{project.seo.description}}" />
+    <meta property="og:description" content="{{project.seo.description}}" />
+
+    <meta property="og:image" content="{{project.seo.description}}" />
+    <meta name="image" content="{{project.seo.image.responsiveImage.src}}" />
+    <meta property="og:image:width" content="{{project.seo.image.responsiveImage.width}}" />
+    <meta property="og:image:height" content="{{project.seo.image.responsiveImage.height}}" />
+    <meta name="twitter:title" content="{{project.seo.title}}" />
+    <meta name="twitter:image" content="{{project.seo.image.responsiveImage.src}}" />
+    <meta name="twitter:description" content="{{project.seo.description}}" />
+    <meta property="twitter:image:width" content="{{project.seo.image.responsiveImage.width}}" />
+    <meta property="twitter:image:height" content="{{project.seo.image.responsiveImage.height}}" />
+    {{/isLive}} {{#noIndex}}
+    <meta name="robots" content="noindex, nofollow" />
+    {{/noIndex}}
+
     <link rel="stylesheet" href="/{{#isPreview}}preview/{{/isPreview}}index.css" />
     <title>{{project.title}}</title>
   </head>
