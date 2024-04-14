@@ -60,8 +60,8 @@ pipeline {
                     withCredentials([aws(credentialsId: "9190845d-626f-4330-88a2-da3508581995")]) {
                         sh """
                             cd ${FILES_PATH}
-                            cd dist
-                            aws s3 cp ./assets/index.js s3://global-navigation-${ENVIRONMENT} --recursive
+                            cd dist/assets/
+                            aws s3 cp ./index.js s3://global-navigation-${ENVIRONMENT} --recursive
                         """
                     }
                     echo "Global navigation successfully deployed."
