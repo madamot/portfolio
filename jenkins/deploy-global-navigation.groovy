@@ -60,7 +60,7 @@ pipeline {
                     withCredentials([aws(credentialsId: "9190845d-626f-4330-88a2-da3508581995")]) {
                         sh """
                             cd ${FILES_PATH}
-                            cd dist/assets/
+                            cd dist
                             ls
                             aws s3 cp ./index.js s3://global-navigation-${ENVIRONMENT} --recursive
                         """
