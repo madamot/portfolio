@@ -29,6 +29,10 @@ pipeline {
     }
 
     stages {
+        stage('Prepare') {
+            sh "npm install -g yarn"
+        }
+
         stage('Test') {
             steps {
                 sh """
