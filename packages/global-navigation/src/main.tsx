@@ -1,10 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import Header from './components/organisms/Header'
+import Footer from './components/organisms/Footer'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('global-navigation')!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <Header />
+  </React.StrictMode>
+)
+
+ReactDOM.createRoot(document.getElementById('global-footer')!).render(
+  <React.StrictMode>
+    <Footer />
+  </React.StrictMode>
 )

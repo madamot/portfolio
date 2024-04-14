@@ -1,0 +1,15 @@
+.global-header {
+  display: block;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: whitesmoke;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: coral;
+
+  .container {
+    width: 1280px;
+    padding: 1em 0;
+  }
+}

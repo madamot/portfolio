@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Store live website
+
+Resources:
+  ## S3 bucket
+  LiveSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: global-navigation-live
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+
+  StageSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: global-navigation-stage
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
