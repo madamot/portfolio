@@ -27,10 +27,16 @@
     <meta name="robots" content="noindex, nofollow" />
     {{/noIndex}}
 
+    <link
+      rel="preload"
+      href="https://{{#isLive}}stage.{{/isLive}}adamhorne.co.uk/internal/assets/index.js"
+      as="script"
+    />
     <link rel="stylesheet" href="/{{#isPreview}}preview/{{/isPreview}}index.css" />
     <title>{{project.title}}</title>
   </head>
   <body>
+    <div id="global-navigation"></div>
     <div class="container">
       {{{renderedNavbar}}} {{#renderedHeader}}
       <div>{{{renderedHeader}}}</div>
@@ -48,5 +54,6 @@
         {{/renderedSidebarRight}}
       </div>
     </div>
+    <div id="global-footer"></div>
   </body>
 </html>

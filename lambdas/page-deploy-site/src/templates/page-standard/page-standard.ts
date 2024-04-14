@@ -3,6 +3,7 @@ import { loadComponent, loadComponents, renderTemplate } from '../../utils/gener
 export const render = async (data: any, isPreview: boolean, env: string) => {
   data.isPreview = isPreview
   data.noIndex = env !== 'live' || isPreview || data?.project?.seo?.noIndex
+  data.isLive = env === 'live'
 
   data.renderedNavbar = loadComponent('navigation').render(data.project?.navigation)
 
