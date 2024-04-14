@@ -29,12 +29,6 @@ pipeline {
     }
 
     stages {
-        stage('Prepare') {
-            steps {
-                sh "npm install -g yarn"
-            }
-        }
-
         stage('Test') {
             steps {
                 sh """
@@ -67,7 +61,7 @@ pipeline {
                         sh """
                             cd ${FILES_PATH}
                             cd dist
-                            aws s3 cp ./index.js s3://global-navigation-${ENVIRONMENT} --recursive
+                            aws s3 cp ./assets/index.js s3://global-navigation-${ENVIRONMENT} --recursive
                         """
                     }
                     echo "Global navigation successfully deployed."
