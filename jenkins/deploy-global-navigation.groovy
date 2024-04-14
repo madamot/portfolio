@@ -61,6 +61,7 @@ pipeline {
                         sh """
                             cd ${FILES_PATH}
                             cd dist/assets/
+                            ls
                             aws s3 cp ./index.js s3://global-navigation-${ENVIRONMENT} --recursive
                         """
                     }
