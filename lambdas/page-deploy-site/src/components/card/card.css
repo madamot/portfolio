@@ -3,7 +3,14 @@
   justify-content: center;
   display: flex;
   box-sizing: border-box;
+}
+
+.card--standard {
   border-radius: 10px;
+}
+
+.card--square {
+  border-radius: 0px;
 }
 
 .cardLink {
@@ -13,8 +20,13 @@
   text-decoration: none;
 }
 
-.cardCopy {
+.cardCopy--standard {
   padding-top: 1em;
+}
+
+.cardCopy--square {
+  background-color: #f6f6f6;
+  padding: 1em;
 }
 
 .cardDescription {

@@ -6,7 +6,7 @@
   >
     {{#image.responsiveImage.webpSrcSet}}
     <div
-      class="card card-blurred-img"
+      class="card card--{{style}} card-blurred-img"
       id="card{{{id}}}"
       style="background-image: url({{image.blurUpThumb}});"
     >
@@ -20,7 +20,7 @@
       />
     </div>
     {{/image.responsiveImage.webpSrcSet}}
-    <div class="cardCopy">
+    <div class="cardCopy cardCopy--{{style}}">
       <span class="cardTitle"> {{{title}}} </span>
       <br />
       <span class="cardDescription"> {{{excerpt}}} </span>
