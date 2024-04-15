@@ -5,7 +5,7 @@ import './Header.css'
 const Header: React.FC = () => {
   return (
     <div className="global-header">
-      <header className="container">
+      <header className="global-header-container">
         <Logo />
       </header>
     </div>
