@@ -62,7 +62,7 @@ pipeline {
                             cd ${FILES_PATH}
                             cd dist
                             ls
-                            aws s3 cp index.js s3://global-navigation-${ENVIRONMENT}/internal/assets
+                            aws s3 cp index.js s3://global-navigation-${ENVIRONMENT}/internal/assets/index.js
                         """
                     }
                     echo "Global navigation successfully deployed."
