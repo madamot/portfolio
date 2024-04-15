@@ -22,6 +22,67 @@ export type Scalars = {
   UploadId: { input: string; output: string; }
 };
 
+/** Block of type Accordions (accordion_group) */
+export type AccordionGroupRecord = RecordInterface & {
+  __typename?: 'AccordionGroupRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  accordions: Array<AccordionRecord>;
+  displayAllAsOpen?: Maybe<Scalars['BooleanType']['output']>;
+  id: Scalars['ItemId']['output'];
+  openInitial?: Maybe<Scalars['BooleanType']['output']>;
+};
+
+
+/** Block of type Accordions (accordion_group) */
+export type AccordionGroupRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Accordion (accordion) */
+export type AccordionRecord = RecordInterface & {
+  __typename?: 'AccordionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  content?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  summary?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Accordion (accordion) */
+export type AccordionRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Accordion (accordion) */
+export type AccordionRecordContentArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 /** Block of type Banner (banner) */
 export type BannerRecord = RecordInterface & {
   __typename?: 'BannerRecord';
@@ -420,7 +481,40 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']['output']>;
 };
 
-export type HomepageModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+/** Block of type Header (header) */
+export type HeaderRecord = RecordInterface & {
+  __typename?: 'HeaderRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Header (header) */
+export type HeaderRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Block of type Header (header) */
+export type HeaderRecordDescriptionArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type HomepageModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -439,12 +533,14 @@ export type HomepageRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   content: Array<HomepageModelContentField>;
+  header?: Maybe<HeaderRecord>;
   id: Scalars['ItemId']['output'];
   location?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   navigation?: Maybe<NavigationRecord>;
   seo?: Maybe<SeoField>;
-  sidebar?: Maybe<SidebarRecord>;
+  sidebarLeft?: Maybe<SidebarRecord>;
+  sidebarRight?: Maybe<SidebarRecord>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2067,7 +2163,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type ProjectModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
@@ -2133,6 +2229,7 @@ export type ProjectRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   children?: Maybe<Array<Maybe<ProjectRecord>>>;
   content: Array<ProjectModelContentField>;
+  header?: Maybe<HeaderRecord>;
   id: Scalars['ItemId']['output'];
   location?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -2140,7 +2237,8 @@ export type ProjectRecord = RecordInterface & {
   parent?: Maybe<ProjectRecord>;
   position?: Maybe<Scalars['IntType']['output']>;
   seo?: Maybe<SeoField>;
-  sidebar?: Maybe<SidebarRecord>;
+  sidebarLeft?: Maybe<SidebarRecord>;
+  sidebarRight?: Maybe<SidebarRecord>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2399,7 +2497,7 @@ export type SeoFilter = {
   exists?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-export type SidebarModelContentField = ButtonGroupRecord | TextRecord;
+export type SidebarModelContentField = ButtonGroupRecord | PromoCardRecord | TextRecord;
 
 /** Block of type Sidebar (sidebar) */
 export type SidebarRecord = RecordInterface & {
@@ -2418,7 +2516,6 @@ export type SidebarRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   content: Array<SidebarModelContentField>;
-  displayOnRight?: Maybe<Scalars['BooleanType']['output']>;
   id: Scalars['ItemId']['output'];
   sticky?: Maybe<Scalars['BooleanType']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -2869,13 +2966,34 @@ export type UploadUpdatedAtFilter = {
 
 export type UploadVideoField = {
   __typename?: 'UploadVideoField';
+  alt?: Maybe<Scalars['String']['output']>;
+  blurUpThumb?: Maybe<Scalars['String']['output']>;
+  blurhash?: Maybe<Scalars['String']['output']>;
   duration?: Maybe<Scalars['Int']['output']>;
   framerate?: Maybe<Scalars['Int']['output']>;
+  height: Scalars['IntType']['output'];
   mp4Url?: Maybe<Scalars['String']['output']>;
   muxAssetId: Scalars['String']['output'];
   muxPlaybackId: Scalars['String']['output'];
   streamingUrl: Scalars['String']['output'];
+  thumbhash?: Maybe<Scalars['String']['output']>;
   thumbnailUrl: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  width: Scalars['IntType']['output'];
+};
+
+
+export type UploadVideoFieldAltArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+export type UploadVideoFieldBlurUpThumbArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
+  punch?: Scalars['Float']['input'];
+  quality?: Scalars['Int']['input'];
+  size?: Scalars['Int']['input'];
 };
 
 
@@ -2887,6 +3005,12 @@ export type UploadVideoFieldMp4UrlArgs = {
 
 export type UploadVideoFieldThumbnailUrlArgs = {
   format?: InputMaybe<MuxThumbnailFormatType>;
+};
+
+
+export type UploadVideoFieldTitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by width */

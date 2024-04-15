@@ -1,0 +1,81 @@
+.card {
+  overflow: hidden;
+  justify-content: center;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.cardLink {
+  font-size: 21px;
+  line-height: 24px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cardCopy {
+  padding-top: 1em;
+}
+
+.cardDescription {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.cardLink:hover .cardTitle {
+  text-decoration: underline;
+}
+
+.cardDescription p {
+  text-decoration: none;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-blurred-img {
+  width: auto;
+  height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card-blurred-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: pulse 2.5s infinite;
+  background-color: var(--text-color);
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.card-blurred-img.loaded::before {
+  animation: none;
+  content: none;
+}
+
+.card-blurred-img img {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.card-blurred-img.loaded img {
+  opacity: 1;
+}

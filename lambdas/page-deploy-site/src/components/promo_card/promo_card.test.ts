@@ -298,7 +298,7 @@ describe('component-promo_card', () => {
   it('renders the correct number of cards', () => {
     renderTestComponent(PromoCardsComponent, PromoCardData)
 
-    expect(screen.queryAllByTestId('promoCard')).toHaveLength(2)
+    expect(screen.queryAllByTestId('card')).toHaveLength(2)
   })
 
   it('renders a card with the correct title and description', () => {

@@ -4,8 +4,19 @@
 
 .sidebar #textComponent {
   background-color: #f6f6f6;
-  border-top: darkorange solid 4px;
-  padding: 16px;
+  padding: 8px 0;
+}
+
+.sidebar #textComponent li {
+  padding: 8px 0;
+}
+
+.sidebar .promoCardCardGrid {
+  grid-template-columns: 1fr;
+}
+
+.sidebar .promoCardDivider {
+  display: none;
 }
 
 @media screen and (max-width: 725px) {

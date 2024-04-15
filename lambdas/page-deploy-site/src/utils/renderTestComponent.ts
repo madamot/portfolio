@@ -1,6 +1,7 @@
-import { ProjectModelContentField, SidebarRecord } from '../generated/graphql'
+import { HeaderRecord, SidebarRecord } from '../generated/graphql'
+import { Component } from '../types/components'
 
-export const renderTestComponent = <ComponentData extends ProjectModelContentField | SidebarRecord>(
+export const renderTestComponent = <ComponentData extends Component | SidebarRecord | HeaderRecord>(
   component: (data: ComponentData) => string,
   data: ComponentData
 ) => {

@@ -1,4 +1,6 @@
-import { HomepageRecord, ProjectModelContentField, ProjectRecord } from '../generated/graphql'
+import { Maybe } from 'graphql/jsutils/Maybe'
+import { HomepageRecord, ProjectRecord } from '../generated/graphql'
+import { Component, Components, Env } from '../types/components'
 
 const fs = require('fs')
 const path = require('path')
@@ -9,9 +11,10 @@ const componentsFolder = path.join(__dirname, '..', 'components')
 
 export const render = async (
   data: ProjectRecord | HomepageRecord,
-  isPreview: boolean
+  isPreview: boolean,
+  env: Maybe<string>
 ): Promise<File> => {
-  return loadTemplate('page-standard').render(data, isPreview)
+  return loadTemplate('page-standard').render(data, isPreview, env)
 }
 
 const loadTemplate = (template: string) => {
@@ -26,7 +29,7 @@ export const loadComponent = (template: string) => {
   }
 }
 
-export const loadComponents = (components: ProjectModelContentField[]) => {
+export const loadComponents = (components: Components) => {
   return components
     .map(component => loadComponent(component._modelApiKey)?.render(component))
     .join('')
@@ -44,7 +47,7 @@ export const renderTemplate = (data: any) => {
   return Mustache.render(openTemplate('page-standard'), data)
 }
 
-export const renderComponent = <T extends ProjectModelContentField>(data: T): string => {
+export const renderComponent = <T extends Component>(data: T): string => {
   return Mustache.render(openComponent(data._modelApiKey), data)
 }
 

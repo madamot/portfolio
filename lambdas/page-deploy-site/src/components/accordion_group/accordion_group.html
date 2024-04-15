@@ -1,0 +1,43 @@
+<div data-testid="accordionGroupComponent" id="accordionGroup{{id}}" class="accordionGroup">
+  <div class="accordion__controls">
+      <button class="btn btn--medium btn--{{role}}" onclick="openAllAccordions{{id}}()">
+        Open all
+      </button>
+      <button class="btn btn--medium btn--{{role}}" onclick="closeAllAccordions{{id}}()">
+        Close all
+      </button>
+  </div>
+  {{#accordions}}
+  <details data-testid="accordionComponent" class="accordion__details" {{#displayAllAsOpen}}open{{/displayAllAsOpen}}>
+    <summary class="accordion__summary">{{summary}}</summary>
+    <main class="accordion__main">
+      <p>{{{content}}}</p>
+    </main>
+  </details>
+  {{/accordions}}
+</div>
+<script type="text/javascript">
+  function openFirstAccordion{{id}}() {
+    const firstAccordion = document.getElementById("accordionGroup{{id}}").getElementsByClassName("accordion__details")[0].open = true
+  }
+
+  function openAllAccordions{{id}}() {
+    const allAccordions = document.getElementById("accordionGroup{{id}}").querySelectorAll("details");
+
+      allAccordions.forEach(accordion => {
+        accordion.setAttribute('open',true);
+      });
+  }
+
+  function closeAllAccordions{{id}}() {
+    const allAccordions = document.getElementById("accordionGroup{{id}}").querySelectorAll("details");
+
+      allAccordions.forEach(accordion => {
+        accordion.removeAttribute('open');
+      });
+  }
+
+if ({{openInitial}}) {
+  openFirstAccordion{{id}}()
+}
+</script>

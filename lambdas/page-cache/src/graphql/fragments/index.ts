@@ -5,8 +5,11 @@ import { TEXT_FRAGMENT } from './text'
 import { PROMOCARD_FRAGMENT } from './promo_card'
 import { IMAGE_FRAGMENT } from './Image'
 import { SIDEBAR_FRAGMENT } from './sidebar'
+import { HEADER_FRAGMENT } from './header'
+import { ACCORDIONGROUP_FRAGMENT } from './accordion_group'
 
 export {
+  ACCORDIONGROUP_FRAGMENT,
   BANNER_FRAGMENT,
   BILLBOARD_FRAGMENT,
   BUTTONGROUP_FRAGMENT,
@@ -14,4 +17,5 @@ export {
   PROMOCARD_FRAGMENT,
   IMAGE_FRAGMENT,
   SIDEBAR_FRAGMENT,
+  HEADER_FRAGMENT,
 }

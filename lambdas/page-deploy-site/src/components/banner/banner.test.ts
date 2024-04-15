@@ -5,7 +5,7 @@ import { renderTestComponent } from '../../utils/renderTestComponent'
 
 import { render as BannerComponent } from './banner'
 
-import { BannerRecord, ItemStatus } from '../../generated/graphql'
+import { ItemStatus } from '../../generated/graphql'
 
 describe('component-banner', () => {
   const bannerData = {
