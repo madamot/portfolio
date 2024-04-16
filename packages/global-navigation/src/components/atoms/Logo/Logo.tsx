@@ -3,7 +3,7 @@ import './Logo.css'
 const Logo: React.FC = () => {
   return (
     <div className="logo">
-      <a href="https://www.adamhorne.co.uk/">ADAM HORNE</a>
+      <a href="/">ADAM HORNE</a>
     </div>
   )
 }
