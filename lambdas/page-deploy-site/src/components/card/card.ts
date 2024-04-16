@@ -6,7 +6,7 @@ export interface CardStyleRecord extends CardRecord {
 }
 
 export const render = (data: CardRecord): string => {
-  data.id.replace(/-/g, '')
+  data.id = data.id.replace(/-/g, '')
 
   return renderComponent(data)
 }
