@@ -6096,6 +6096,18 @@
             "deprecationReason": null
           },
           {
+            "name": "skipDefaultOptimizations",
+            "description": "Bypasses any [DatoCMS Automatic Image Optimization](https://www.datocms.com/docs/cdn-settings/advanced-asset-settings) that might be set up for the project.\n\nExercise caution when using this parameter, as it could significantly increase your bandwidth costs.",
+            "type": {
+              "kind": "SCALAR",
+              "name": "BooleanType",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "transparency",
             "description": "Transparency\n\nAdds checkerboard behind images which support transparency.\n\n[Open Imgix reference »](https://docs.imgix.com/apis/url/fill/transparency)",
             "type": {

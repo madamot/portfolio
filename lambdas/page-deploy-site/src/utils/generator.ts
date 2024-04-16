@@ -1,6 +1,6 @@
 import { Maybe } from 'graphql/jsutils/Maybe'
 import { HomepageRecord, ProjectRecord } from '../generated/graphql'
-import { Component, Components, Env } from '../types/components'
+import { BuildComponent, CacheComponents, Env } from '../types/components'
 
 const fs = require('fs')
 const path = require('path')
@@ -29,7 +29,7 @@ export const loadComponent = (template: string) => {
   }
 }
 
-export const loadComponents = (components: Components) => {
+export const loadComponents = (components: CacheComponents) => {
   return components
     .map(component => loadComponent(component._modelApiKey)?.render(component))
     .join('')
@@ -47,7 +47,7 @@ export const renderTemplate = (data: any) => {
   return Mustache.render(openTemplate('page-standard'), data)
 }
 
-export const renderComponent = <T extends Component>(data: T): string => {
+export const renderComponent = <T extends BuildComponent>(data: T): string => {
   return Mustache.render(openComponent(data._modelApiKey), data)
 }
 

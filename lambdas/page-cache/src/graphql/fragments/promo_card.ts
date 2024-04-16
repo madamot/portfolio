@@ -3,6 +3,7 @@ export const PROMOCARD_FRAGMENT = `
         ... on PromoCardRecord {
             id
             _modelApiKey
+            style
             title
             description
             linkType
