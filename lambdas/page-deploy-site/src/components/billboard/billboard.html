@@ -50,12 +50,7 @@
    	const contrastWithWhite = contrast([255, 255, 255], dominantColour.split(',').slice(0, 3).map(Number))
    	const contrastWithBlack = contrast([0, 0, 0], dominantColour.split(',').slice(0, 3).map(Number))
 
-   	console.log(contrastWithBlack, 'contrastWithBlack')
-   	console.log(contrastWithWhite, 'contrastWithWhite')
-
    	const textColour = contrastWithWhite > 4.5 ? 'white' : 'black'
-
-     console.log("textColour", textColour);
 
    	document.getElementById('billboardComponent{{id}}').style.color = textColour
    	// document.getElementById('componentBillboardPromoLink{{id}}').style.color = textColour
@@ -93,7 +88,6 @@
   }
 
   if ({{automaticColour}}) {
-
     setDominantColour{{id}}()
   }
 </script>

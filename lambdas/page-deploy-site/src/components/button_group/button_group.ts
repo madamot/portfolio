@@ -1,19 +1,22 @@
 import { ButtonGroupRecord, ButtonRecord } from '../../generated/graphql'
 import { renderComponent } from '../../utils/generator'
 
-interface RenderButtonRecord extends ButtonRecord {
+interface ButtonBuildData extends ButtonRecord {
   _blank?: boolean
 }
 
-interface RenderButtonGroupRecord extends ButtonGroupRecord {
-  buttons: RenderButtonRecord[]
+export interface ButtonGroupBuildData extends ButtonGroupRecord {
+  buttons: ButtonBuildData[]
 }
 
-export const render = (data: RenderButtonGroupRecord): string => {
-  data.buttons.forEach(button => {
-    if (button.target == '_blank') button._blank = true
-    else button._blank = false
-  })
+export const render = (data: ButtonGroupRecord): string => {
+  const renderButtonGroupData: ButtonGroupBuildData = {
+    ...data,
+    buttons: data.buttons.map(button => ({
+      ...button,
+      _blank: button.target == '_blank' ? true : false,
+    })),
+  }
 
-  return renderComponent(data)
+  return renderComponent(renderButtonGroupData)
 }

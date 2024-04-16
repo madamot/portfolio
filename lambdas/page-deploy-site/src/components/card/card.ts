@@ -1,14 +1,16 @@
 import { renderComponent } from '../../utils/generator'
 import { CardRecord } from '../../generated/graphql'
 
-interface CardStyled extends CardRecord {
+export interface CardBuildData extends CardRecord {
   style: string
 }
 
-export const render = (data: CardStyled): string => {
-  data.id = data.id.replace(/-/g, '')
+export const render = (data: CardRecord): string => {
+  const renderCardData: CardBuildData = {
+    ...data,
+    id: data.id.replace(/-/g, ''),
+    style: 'standard',
+  }
 
-  data.style = 'square'
-
-  return renderComponent(data)
+  return renderComponent(renderCardData)
 }

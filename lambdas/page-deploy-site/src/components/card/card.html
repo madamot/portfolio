@@ -1,7 +1,7 @@
-<div class="cardContainer" data-testid="cardComponent">
+<div class="cardContainer cardContainer--{{style}}" data-testid="cardComponent">
   <a
     data-testid="card"
-    class="cardLink"
+    class="cardLink cardLink--{{style}}"
     href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
   >
     {{#image.responsiveImage.webpSrcSet}}
