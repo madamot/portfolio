@@ -9,7 +9,7 @@ export const render = (data: PromoCardRecord): string => {
   const renderPromoCardsData: PromoCardsBuildData = {
     ...data,
     id: data.id.replace(/-/g, ''),
-    renderedCards: loadComponents(data.cards),
+    renderedCards: loadComponents(data.cards.map(card => ({ ...card, style: data.style }))),
   }
 
   return renderComponent(renderPromoCardsData)
