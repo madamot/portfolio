@@ -17,6 +17,6 @@ describe('<Logo />', () => {
 
     // Assert
     expect(screen.getByText('ADAM HORNE')).toBeInTheDocument()
-    expect(screen.getByRole('link')).toHaveAttribute('href', 'https://www.adamhorne.co.uk/')
+    expect(screen.getByRole('link')).toHaveAttribute('href', '/')
   })
 })
