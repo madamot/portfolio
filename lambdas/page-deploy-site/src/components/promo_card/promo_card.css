@@ -18,8 +18,35 @@
 
 .promoCardCardGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 1em;
+}
+
+.promoCardCardGrid--standard {
+  grid-template-columns: repeat(var(--columns), 1fr);
+}
+
+.promoCardCardGrid--mosaic {
+  grid-template-columns: repeat(6, 1fr);
+  /* grid-template-rows: repeat(auto, 1fr); */
+
+  .cardContainer:nth-child(1 of .cardContainer) {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .cardContainer:nth-child(2 of .cardContainer) {
+    grid-column: span 2;
+  }
+
+  .cardContainer:nth-child(2 of .cardContainer),
+  .cardContainer:nth-child(3 of .cardContainer) {
+    grid-column: span 2;
+  }
+
+  .cardContainer:nth-child(4 of .cardContainer),
+  .cardContainer:nth-child(5 of .cardContainer) {
+    grid-column: span 3;
+  }
 }
 
 @media (max-width: 550px) {
