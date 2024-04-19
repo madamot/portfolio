@@ -3,8 +3,8 @@ export const PROMOCARD_FRAGMENT = `
         ... on PromoCardRecord {
             id
             _modelApiKey
-            grid_style
-            grid_columns
+            gridStyle
+            gridColumns
             style
             title
             description
