@@ -27,7 +27,7 @@
 
 .promoCardCardGrid--mosaic {
   grid-template-columns: repeat(6, 1fr);
-  /* grid-template-rows: repeat(auto, 1fr); */
+  grid-auto-rows: minmax(100px, 300px);
 
   .cardContainer:nth-child(1 of .cardContainer) {
     grid-column: span 4;
