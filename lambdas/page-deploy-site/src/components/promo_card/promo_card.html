@@ -8,7 +8,11 @@
     <span class="promoCardDivider"></span>
   </a>
   {{/title}} {{{description}}}
-  <div class="promoCardCardGrid" id="cardContainer{{id}}">
+  <div
+    class="promoCardCardGrid promoCardCardGrid--{{gridStyle}}"
+    id="cardContainer{{id}}"
+    style="--columns: {{gridColumns}};"
+  >
     {{#renderedCards}} {{{renderedCards}}} {{/renderedCards}}
   </div>
 </div>
