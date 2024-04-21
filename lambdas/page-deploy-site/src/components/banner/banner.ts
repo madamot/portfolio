@@ -1,32 +1,34 @@
 import { renderComponent } from '../../utils/generator'
 import { BannerRecord } from '../../generated/graphql'
 
-interface RenderBannerRecord extends BannerRecord {
+export interface BannerBuildData extends BannerRecord {
   icon: string
 }
 
-export const render = (data: RenderBannerRecord): string => {
-  switch (data.displayType) {
-    case 'info':
-      data.icon = '&#9432;'
-      break
+export const render = (data: BannerRecord): string => {
+  const getBannerIcon = (): string => {
+    switch (data.displayType) {
+      case 'info':
+        return '&#9432;'
 
-    case 'success':
-      data.icon = '&#10003;'
-      break
+      case 'success':
+        return '&#10003;'
 
-    case 'danger':
-      data.icon = '&#10006;'
-      break
+      case 'danger':
+        return '&#10006;'
 
-    case 'warning':
-      data.icon = '&#9888;'
-      break
+      case 'warning':
+        return '&#9888;'
 
-    default:
-      data.icon = '&#9432;'
-      break
+      default:
+        return '&#9432;'
+    }
   }
 
-  return renderComponent(data)
+  const renderBannerData: BannerBuildData = {
+    ...data,
+    icon: getBannerIcon(),
+  }
+
+  return renderComponent(renderBannerData)
 }

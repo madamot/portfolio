@@ -2,6 +2,7 @@
   display: flex;
   flex-flow: row wrap;
   gap: 10px;
+  padding: 1em 0;
 }
 
 .btn {
@@ -12,6 +13,9 @@
   display: inline-block;
   line-height: 1;
   text-decoration: none;
+  min-width: 80px;
+  max-width: 200px;
+  text-align: center;
 }
 
 .btn--primary {

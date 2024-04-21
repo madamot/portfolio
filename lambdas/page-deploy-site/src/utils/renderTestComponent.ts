@@ -1,9 +1,9 @@
 import { HeaderRecord, SidebarRecord } from '../generated/graphql'
-import { Component } from '../types/components'
+import { CacheComponent } from '../types/components'
 
-export const renderTestComponent = <ComponentData extends Component | SidebarRecord | HeaderRecord>(
-  component: (data: ComponentData) => string,
-  data: ComponentData
+export const renderTestComponent = <T extends CacheComponent | SidebarRecord | HeaderRecord>(
+  component: (data: T) => string,
+  data: T
 ) => {
   document.body.innerHTML = component(data)
 }

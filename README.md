@@ -14,7 +14,7 @@ create page-madamot-live-cache bucket with sns
 - ~~Create a listing component~~
 - ~~Make non published items in the cms previewable at /preview~~
 - ~~Image component~~
-- Make images in listing component and billboard component fade in like the image component
+- ~~Make images in listing component and billboard component fade in like the image component~~
 - Create accordian component
 - ~~Side bar component~~
 - open search for all recipes
@@ -22,3 +22,4 @@ create page-madamot-live-cache bucket with sns
 - dynamoDB
 - ~~Add autoscaling group to jenkins slave~~
 - ~~Create stage env~~
+- Put lambdas in API Gateway
