@@ -23,7 +23,7 @@
 }
 
 .promoCardCardGrid--standard {
-  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-columns: repeat(var(--columns, 3), 1fr);
 }
 
 .promoCardCardGrid--mosaic {
