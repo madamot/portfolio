@@ -5,6 +5,8 @@ export const render = async (data: any, isPreview: boolean, env: string) => {
   data.noIndex = env !== 'live' || isPreview || data?.project?.seo?.noIndex
   data.isLive = env === 'live'
 
+  data.renderedGlobalNavigation = loadComponent('global_navigation').render()
+
   data.renderedNavbar = loadComponent('navigation').render(data.project?.navigation)
 
   if (data?.project?.sidebarLeft) {
