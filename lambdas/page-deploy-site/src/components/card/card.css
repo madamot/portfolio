@@ -1,9 +1,43 @@
+.cardContainer--standard {
+  padding-bottom: 1.5em;
+}
+
 .card {
   overflow: hidden;
   justify-content: center;
   display: flex;
   box-sizing: border-box;
   border-radius: 10px;
+  width: auto;
+  height: 200px;
+}
+
+.card--standard {
+  border-radius: 10px;
+}
+
+.card--compact {
+  border-radius: 10px;
+}
+
+.card--compact:after {
+  border-radius: 10px;
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 80%);
+}
+
+.card--square {
+  border-radius: 0px;
+}
+
+.card--mosaic {
+  max-height: 600px;
 }
 
 .cardLink {
@@ -11,10 +45,28 @@
   line-height: 24px;
   font-weight: 700;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
 }
 
-.cardCopy {
+.cardLink--compact {
+  position: relative;
+}
+
+.cardCopy--standard {
   padding-top: 1em;
+}
+
+.cardCopy--compact {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  color: white;
+}
+
+.cardCopy--square {
+  background-color: #f6f6f6;
+  padding: 1em;
 }
 
 .cardDescription {
@@ -38,8 +90,10 @@
 }
 
 .card-blurred-img {
-  width: auto;
-  height: 200px;
+  object-fit: cover;
+  /* width: auto;
+  max-height: 600px; */
+  /* height: auto; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,5 +1,6 @@
-const generator = require('../../utils/generator')
+import { renderComponent } from '../../utils/generator'
+import { TextRecord } from '../../generated/graphql'
 
-export const render = (data: any) => {
-  return generator.renderComponent(data)
+export const render = (data: TextRecord) => {
+  return renderComponent(data)
 }
