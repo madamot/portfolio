@@ -26,9 +26,6 @@ Resources:
           Protocol: lambda
         - Endpoint: !ImportValue stage-page-deploy-site
           Protocol: lambda
-          
-  CmsSqsQueue:
-    Type: AWS::SQS::Queue
 
   SNSTopicPolicy:
     Type: AWS::SNS::TopicPolicy
@@ -77,9 +74,3 @@ Outputs:
     Export:
       Name: SNSTopicName
     Value: !GetAtt SNSTopic.TopicName
-  CmsSqsQueueArn:
-    Description: CMS SQS Queue ARN
-    Export:
-      Name: CmsSqsQueueArn
-    Value:
-      Fn::GetAtt: CmsSqsQueue.Arn
