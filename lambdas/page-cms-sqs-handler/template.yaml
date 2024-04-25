@@ -3,7 +3,7 @@
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: The webhook DatoCMS hits on the build trigger to rebuild the whole site
+Description: Handles events received from DatoCMS
 
 Resources:
   ##########################################################################
@@ -12,15 +12,11 @@ Resources:
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
-      Description: Rebuild all pages in datoCMS
+      Description: Handles events received from DatoCMS
       CodeUri: dist/
       Handler: app.handler
       Runtime: nodejs18.x
       Timeout: 60
-      Environment:
-        Variables:
-          someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
-          TOPIC_NAME: !ImportValue SNSTopicArn
       Events:
         HttpApiEvent:
           Type: HttpApi
@@ -32,11 +28,3 @@ Resources:
           Properties:
             Queue: !ImportValue CmsSqsQueueArn
             BatchSize: 10
-
-##########################################################################
-#   Stack outputs                                                        #
-##########################################################################
-Outputs:
-  DatoCMSEndpoint:
-    Description: 'The site rebuild URl to provide to datoCMS build trigger webhook'
-    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
