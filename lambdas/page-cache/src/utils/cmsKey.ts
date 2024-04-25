@@ -2,7 +2,7 @@ const { DATOCMS_API_KEY } = process.env
 
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager'
 
-export const get = async () => {
+export const getCMSKey = async () => {
   if (DATOCMS_API_KEY) {
     return DATOCMS_API_KEY
   }

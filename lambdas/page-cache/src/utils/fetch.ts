@@ -1,9 +1,9 @@
-const axios = require('axios')
-const cmsKey = require('./cmsKey')
-const queries = require('../graphql/queries')
+import axios from 'axios'
+import { getCMSKey } from './cmsKey'
+import { GET_PAGE, GET_HOMEPAGE } from '../graphql/queries'
 
 export const getPageData = async (preview: boolean, id?: number) => {
-  const key = await cmsKey.get()
+  const key = await getCMSKey()
   const pageData = await graphqlRequest(preview, key, id)
 
   return pageData
@@ -22,13 +22,13 @@ const graphqlRequest = async (preview: boolean, key: string, id?: number) => {
   if (id) {
     graphqlQuery = {
       operationName: 'fetchPage',
-      query: queries.GET_PAGE,
+      query: GET_PAGE,
       variables: { id },
     }
   } else {
     graphqlQuery = {
       operationName: 'fetchHomepage',
-      query: queries.GET_HOMEPAGE,
+      query: GET_HOMEPAGE,
     }
   }
 
