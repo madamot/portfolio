@@ -26,8 +26,8 @@ Resources:
           Protocol: lambda
         - Endpoint: !ImportValue stage-page-deploy-site
           Protocol: lambda
-
-
+          
+          
 
   SNSTopicPolicy:
     Type: AWS::SNS::TopicPolicy
