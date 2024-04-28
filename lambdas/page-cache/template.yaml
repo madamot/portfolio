@@ -24,7 +24,7 @@ Resources:
       Description: A DatoCMS webhook handler
       CodeUri: dist/
       Handler: app.handler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Policies:
         - S3FullAccessPolicy:
             BucketName: page-madamot-live-cache # bucket name without arn
