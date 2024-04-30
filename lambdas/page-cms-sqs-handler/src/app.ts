@@ -1,4 +1,4 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { SQSEvent } from 'aws-lambda'
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import axios from 'axios'
@@ -13,7 +13,7 @@ import axios from 'axios'
  *
  */
 
-export const handler = async (event: APIGatewayProxyEvent) => {
+export const handler = async (event: SQSEvent) => {
   console.log('event', event)
 
   // try {

@@ -18,13 +18,8 @@ Resources:
       Runtime: nodejs18.x
       Timeout: 60
       Events:
-        HttpApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: POST
         MySQSEvent:
           Type: SQS
           Properties:
-            Queue: !ImportValue CmsSqsQueueArn
+            Queue: !ImportValue CmsSqsQueue
             BatchSize: 10
