@@ -4,7 +4,8 @@
   "description": "The webhook DatoCMS hits on the build trigger to rebuild the whole site",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:watch": "yarn run test --watch",
+    "test": "jest --coverage",
     "build": "yarn tsc && yarn run copy-packages",
     "copy-packages": "cp package.json dist/package.json"
   },
