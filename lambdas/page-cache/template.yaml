@@ -45,6 +45,11 @@ Resources:
           Properties:
             Path: /
             Method: POST
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !ImportValue CmsSqsQueue
+            BatchSize: 10
 
 ##########################################################################
 #   Stack outputs                                                        #
