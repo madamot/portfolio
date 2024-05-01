@@ -39,25 +39,11 @@ Resources:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
           TOPIC_NAME: !ImportValue SNSTopicArn
-      Events:
-        HttpApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: POST
-        MySQSEvent:
-          Type: SQS
-          Properties:
-            Queue: !ImportValue CmsSqsQueue
-            BatchSize: 10
 
 ##########################################################################
 #   Stack outputs                                                        #
 ##########################################################################
 Outputs:
-  GitHubEndpoint:
-    Description: 'The build invocation URl to provide to DatoCMS webhook'
-    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
   webhookHandler:
     Description: The subnet ID to use for public web servers
     Value:

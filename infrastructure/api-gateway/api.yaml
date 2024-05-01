@@ -31,12 +31,8 @@ paths:
           {
             'Fn::Sub':
               [
-                'arn:aws:apigateway:${Region}:sqs:path/${Account}/${QueueName}',
-                {
-                  'Region': { 'Ref': 'AWS::Region' },
-                  'Account': { 'Ref': 'AWS::AccountId' },
-                  'QueueName': { 'Fn::GetAtt': ['CmsSqsQueue', 'QueueName'] },
-                },
+                'arn:aws:apigateway:${Region}:sqs:path/${Account}/${Environment}-page-cms-sqs',
+                { 'Region': { 'Ref': 'AWS::Region' }, 'Account': { 'Ref': 'AWS::AccountId' } },
               ],
           }
         responses:
@@ -79,12 +75,8 @@ paths:
           {
             'Fn::Sub':
               [
-                'arn:aws:apigateway:${Region}:sqs:path/${Account}/${QueueName}',
-                {
-                  'Region': { 'Ref': 'AWS::Region' },
-                  'Account': { 'Ref': 'AWS::AccountId' },
-                  'QueueName': { 'Fn::GetAtt': ['CmsSqsQueue', 'QueueName'] },
-                },
+                'arn:aws:apigateway:${Region}:sqs:path/${Account}/${Environment}-page-cms-sqs',
+                { 'Region': { 'Ref': 'AWS::Region' }, 'Account': { 'Ref': 'AWS::AccountId' } },
               ],
           }
         responses:
@@ -126,12 +118,8 @@ paths:
           {
             'Fn::Sub':
               [
-                'arn:aws:apigateway:${Region}:sqs:path/${Account}/${QueueName}',
-                {
-                  'Region': { 'Ref': 'AWS::Region' },
-                  'Account': { 'Ref': 'AWS::AccountId' },
-                  'QueueName': { 'Fn::GetAtt': ['CmsSqsQueue', 'QueueName'] },
-                },
+                'arn:aws:apigateway:${Region}:sqs:path/${Account}/${Environment}-page-cms-sqs',
+                { 'Region': { 'Ref': 'AWS::Region' }, 'Account': { 'Ref': 'AWS::AccountId' } },
               ],
           }
         responses:
