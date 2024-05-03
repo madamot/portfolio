@@ -1,6 +1,10 @@
 # Portfolio Monorepo
 https://adamhorne.co.uk/
 
+## Architecture
+
+![architecture drawio](https://github.com/madamot/portfolio/assets/36903785/cc4e9241-a3f7-4fcf-a3fd-cc3c0d139179)
+
 ## Todos
 
 Recreate both s3 buckets via SAM templates
