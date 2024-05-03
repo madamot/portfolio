@@ -1,8 +1,8 @@
 version = 0.1
 [live.deploy.parameters]
-stack_name = "live-page-deploy-site"
+stack_name = "live-page-deployment-state-machine"
 resolve_s3 = true
-s3_prefix = "live-page-deploy-site"
+s3_prefix = "live-page-deployment-state-machine"
 region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
@@ -10,9 +10,9 @@ disable_rollback = false
 image_repositories = []
 
 [stage.deploy.parameters]
-stack_name = "stage-page-deploy-site"
+stack_name = "stage-page-deployment-state-machine"
 resolve_s3 = true
-s3_prefix = "stage-page-deploy-site"
+s3_prefix = "stage-page-deployment-state-machine"
 region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"

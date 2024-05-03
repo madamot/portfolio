@@ -1,7 +1,7 @@
 import { SQSEvent } from 'aws-lambda'
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
-import axios from 'axios'
+import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn'
 
 /**
  *
@@ -13,12 +13,34 @@ import axios from 'axios'
  *
  */
 
+const stepFunctionClient = new SFNClient({ region: 'eu-west-1' })
+
 export const handler = async (event: SQSEvent) => {
   console.log('event', event)
 
-  // try {
+  console.time('Execute deployment journey')
+  try {
+    if (!event.Records || !event.Records.length) return
+    console.info('Records:', event.Records)
 
-  // } catch (error) {
+    // iSite sometimes sends only one message with multiple publishes from different projects
+    for (let record of event.Records) {
+      const payLoad = JSON.parse(record.body)
+      const preview = payLoad.event_type !== 'publish'
 
-  // }
+      const stateMachineData = {
+        payLoad,
+        preview,
+      }
+
+      const stepFunctionExecutionCommand = new StartExecutionCommand({
+        stateMachineArn: process.env.PAGE_DEPLOYMENT_STATE_MACHINE,
+        input: JSON.stringify(stateMachineData),
+      })
+      await stepFunctionClient.send(stepFunctionExecutionCommand)
+    }
+  } catch (err) {
+    console.error(err)
+  }
+  console.timeEnd('Execute deployment journey')
 }

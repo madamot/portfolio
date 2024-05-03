@@ -1,8 +1,15 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  (uksb-1tthgi812) (tag:sfn-lambda)
-  A Step Functions Express Workflow triggered syncronously by an API Gatewat HTTP APIs integration
+Description: A Step funcitons for the deployment journey of pages
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
 
 Resources:
   ##########################################################################
@@ -12,9 +19,11 @@ Resources:
   DeploymentStateMachine:
     Type: AWS::Serverless::StateMachine # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
     Properties:
+      Name: !Sub '${Environment}-page-deployment-state-machine'
       DefinitionUri: StateMachine.asl.json
       DefinitionSubstitutions:
-        GenerateRefernceNumberArn: !GetAtt GenerateRefernceNumber.Arn
+        PageCacheArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-cache
+        PageDeploySiteArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-deploy-site
       Role:
         Fn::GetAtt: [StatesExecutionRole, Arn]
       Type: EXPRESS
@@ -26,25 +35,12 @@ Resources:
         Level: 'ALL'
 
   ##########################################################################
-  #  Lambda function                                                       #
-  ##########################################################################
-  GenerateRefernceNumber:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Properties:
-      CodeUri: src/
-      Handler: app.handler
-      Runtime: nodejs16.x
-      Timeout: 3
-      Policies:
-        - CloudWatchPutMetricPolicy: {}
-
-  ##########################################################################
   #  STEP FUNCTION LOG GROUP                                               #
   ##########################################################################
   StateMachineLogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
-      LogGroupName: !Join ['/', ['stepfunctions', StateMachineExpressSynctoLambda]]
+      LogGroupName: !Sub '${Environment}-page-deployment-state-machine'
 
   ##########################################################################
   #   Roles                                                               #
@@ -62,18 +58,24 @@ Resources:
             Action: 'sts:AssumeRole'
       Path: '/'
       Policies:
-        - PolicyName: LambdaExecute
+        - PolicyName: StatesExecutionPolicy
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
               - Effect: Allow
                 Action:
                   - 'lambda:InvokeFunction'
-                Resource: !GetAtt GenerateRefernceNumber.Arn
+                  - 'cloudwatch:*'
+                  - 'logs:*'
+                Resource: '*'
+
 ##########################################################################
-#   Outputs                                                              #
+#   Stack outputs                                                        #
 ##########################################################################
 Outputs:
-  StateMachineExpressSynctoLambda:
-    Value: !Ref StateMachineExpressSynctoLambda
-    Description: StateMachineExpressSynctoLambda Arn
+  DeploymentStateMachineArn:
+    Description: Deployment state machine arn
+    Export:
+      Name: !Sub '${Environment}-page-deployment-state-machine'
+    Value:
+      Fn::GetAtt: DeploymentStateMachine.Arn

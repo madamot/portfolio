@@ -14,14 +14,15 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.438.0",
     "@aws-sdk/client-secrets-manager": "^3.438.0",
+    "@aws-sdk/client-sfn": "^3.568.0",
     "@aws-sdk/client-sns": "^3.465.0",
     "axios": "^1.6.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.125",
     "@types/node": "^20.8.9",
+    "jest": "^29.3.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.2.2",
-    "jest": "^29.3.1"
+    "typescript": "^5.2.2"
   }
 }

@@ -13,7 +13,7 @@ import { getPageData } from './utils/fetch'
  *
  */
 
-export const handler = async (event: APIGatewayProxyEvent) => {
+export const handler = async (event: any) => {
   let response: APIGatewayProxyResult
 
   console.log('event', event)
@@ -21,7 +21,9 @@ export const handler = async (event: APIGatewayProxyEvent) => {
   console.time('Overall')
 
   console.time('Get page')
-  const parsePayload = JSON.parse(event?.body!)
+  const parsePayload = event?.Payload?.payLoad
+  console.log('parsePayload', parsePayload)
+
   const preview = parsePayload.event_type !== 'publish'
   const page = await getPageData(
     preview,
@@ -44,16 +46,24 @@ export const handler = async (event: APIGatewayProxyEvent) => {
   await s3.putObject(params)
   console.timeEnd('Put json in S3 cache')
 
-  const snsClient = new SNSClient({})
-  await snsClient.send(
-    new PublishCommand({
-      Message: JSON.stringify({
-        key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
-        preview: preview,
-      }),
-      TopicArn: process.env.TOPIC_NAME,
-    })
-  )
-
+  // const snsClient = new SNSClient({})
+  // await snsClient.send(
+  //   new PublishCommand({
+  //     Message: JSON.stringify({
+  //       key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
+  //       preview: preview,
+  //     }),
+  //     TopicArn: process.env.TOPIC_NAME,
+  //   })
+  // )
   console.timeEnd('Overall')
+
+  const returnData = {
+    key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
+    preview: preview,
+  }
+
+  console.log('returnData', returnData)
+
+  return returnData
 }

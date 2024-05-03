@@ -16,14 +16,14 @@ import { putFile } from './utils/s3'
 
 const { AWS_ENV } = process.env
 
-export const handler = async (event: SNSEvent) => {
+export const handler = async (event: any) => {
   let response: APIGatewayProxyResult
 
   console.log('event', event)
 
   console.time('Overall')
 
-  const snsMessage = JSON.parse(event.Records[0].Sns.Message)
+  const snsMessage = event.pageCacheOutput
 
   const isPreview: boolean = snsMessage.preview
   const bucket = snsMessage.preview ? `page-madamot-${AWS_ENV}-preview` : `page-madamot-${AWS_ENV}`

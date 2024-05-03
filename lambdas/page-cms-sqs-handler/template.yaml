@@ -27,6 +27,13 @@ Resources:
       Handler: app.handler
       Runtime: nodejs18.x
       Timeout: 10
+      Policies:
+        - StepFunctionsExecutionPolicy:
+            StateMachineName: !Sub '${Environment}-page-deployment-state-machine'
+      Environment:
+        Variables:
+          PAGE_DEPLOYMENT_STATE_MACHINE: !ImportValue
+            'Fn::Sub': '${Environment}-page-deployment-state-machine'
       Events:
         MySQSEvent:
           Type: SQS

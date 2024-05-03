@@ -21,6 +21,7 @@ Resources:
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: !Sub '${Environment}-page-cache'
       Description: A DatoCMS webhook handler
       CodeUri: dist/
       Handler: app.handler
@@ -46,5 +47,7 @@ Resources:
 Outputs:
   webhookHandler:
     Description: The subnet ID to use for public web servers
+    Export:
+      Name: !Sub '${Environment}-cache'
     Value:
       Fn::GetAtt: webhookHandler.Arn
