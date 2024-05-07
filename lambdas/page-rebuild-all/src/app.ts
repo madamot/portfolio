@@ -2,7 +2,6 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import axios from 'axios'
-import { log } from 'console'
 
 /**
  *
@@ -13,6 +12,8 @@ import { log } from 'console'
  * @returns {Object} object - API Gateway Lambda Proxy Output Format
  *
  */
+
+const { AWS_ENV } = process.env
 
 export const handler = async (event: APIGatewayProxyEvent) => {
   let response: APIGatewayProxyResult
@@ -26,7 +27,7 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Get all cache')
   const command = new ListObjectsV2Command({
-    Bucket: 'page-madamot-live-cache',
+    Bucket: `page-madamot-${AWS_ENV}-cache`,
   })
 
   console.log('topic name', process.env.TOPIC_NAME)
@@ -40,14 +41,14 @@ export const handler = async (event: APIGatewayProxyEvent) => {
     if (cache?.Contents!.length > 0) {
       cache?.Contents?.forEach(async cacheItem => {
         try {
-          await snsClient.send(
-            new PublishCommand({
-              Message: JSON.stringify({
-                key: cacheItem.Key,
-              }),
-              TopicArn: process.env.TOPIC_NAME,
-            })
-          )
+          // await snsClient.send(
+          //   new PublishCommand({
+          //     Message: JSON.stringify({
+          //       key: cacheItem.Key,
+          //     }),
+          //     TopicArn: process.env.TOPIC_NAME,
+          //   })
+          // )
         } catch (error) {
           console.error('failed to notify', error)
         }

@@ -19,15 +19,14 @@ Resources:
       Policies:
         - S3FullAccessPolicy:
             BucketName: page-madamot-live-cache # bucket name without arn
-        - SNSPublishMessagePolicy:
-            TopicName: !ImportValue SNSTopicName
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
       Timeout: 60
       Environment:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
-          TOPIC_NAME: !ImportValue SNSTopicArn
+          AWS_ENV: !Ref Environment
+
       Events:
         HttpApiEvent:
           Type: HttpApi

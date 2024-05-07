@@ -13,6 +13,8 @@ import { getPageData } from './utils/fetch'
  *
  */
 
+const { AWS_ENV } = process.env
+
 export const handler = async (event: any) => {
   let response: APIGatewayProxyResult
 
@@ -34,10 +36,12 @@ export const handler = async (event: any) => {
   console.timeEnd('Get page')
 
   console.time('Put json in S3 cache')
-  console.log(`Bucket ${preview ? 'page-madamot-live-preview-cache' : 'page-madamot-live-cache'}`)
+  console.log(
+    `Bucket ${preview ? `page-madamot-${AWS_ENV}-preview-cache` : `page-madamot-${AWS_ENV}-cache`}`
+  )
 
   const params = {
-    Bucket: preview ? 'page-madamot-live-preview-cache' : 'page-madamot-live-cache',
+    Bucket: preview ? `page-madamot-${AWS_ENV}-preview-cache` : `page-madamot-${AWS_ENV}-cache`,
     Key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     Body: JSON.stringify(page),
     ContentType: 'application/json',
@@ -45,17 +49,6 @@ export const handler = async (event: any) => {
   const s3 = new S3()
   await s3.putObject(params)
   console.timeEnd('Put json in S3 cache')
-
-  // const snsClient = new SNSClient({})
-  // await snsClient.send(
-  //   new PublishCommand({
-  //     Message: JSON.stringify({
-  //       key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
-  //       preview: preview,
-  //     }),
-  //     TopicArn: process.env.TOPIC_NAME,
-  //   })
-  // )
   console.timeEnd('Overall')
 
   const returnData = {
