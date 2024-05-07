@@ -23,3 +23,8 @@ create page-madamot-live-cache bucket with sns
 - ~~Add autoscaling group to jenkins slave~~
 - ~~Create stage env~~
 - Put lambdas in API Gateway
+- Global nav dark mode switch?
+- recipe meta data?
+- unpublish page lambda
+- site map lambda
+- rebuild page lambda on api gateway
