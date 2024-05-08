@@ -3,7 +3,7 @@
 
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: The webhook DatoCMS hits on publish in order to make a request back to DatoCMS order to get the page data and save it as a json file in s3
+Description: Handles events received from DatoCMS
 
 Parameters:
   Environment:
@@ -21,35 +21,33 @@ Resources:
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub '${Environment}-page-cache'
-      Description: A DatoCMS webhook handler
+      FunctionName: !Sub '${Environment}-page-cms-sqs-handler'
+      Description: Handles events received from DatoCMS
       CodeUri: dist/
       Handler: app.handler
       Runtime: nodejs18.x
-      Policies:
-        - S3FullAccessPolicy:
-            BucketName: page-live-cache
-        - S3FullAccessPolicy:
-            BucketName: page-live-preview-cache
-        - S3FullAccessPolicy:
-            BucketName: page-stage-cache
-        - S3FullAccessPolicy:
-            BucketName: page-stage-preview-cache
-        - AWSSecretsManagerGetSecretValuePolicy:
-            SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
       Timeout: 10
+      Policies:
+        - StepFunctionsExecutionPolicy:
+            StateMachineName: !Sub '${Environment}-page-deployment-state-machine'
       Environment:
         Variables:
-          someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
-          AWS_ENV: !Ref Environment
+          PAGE_DEPLOYMENT_STATE_MACHINE: !ImportValue
+            'Fn::Sub': '${Environment}-page-deployment-state-machine'
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !Sub arn:aws:sqs:${AWS::Region}:${AWS::AccountId}:${Environment}-page-cms-sqs
+            BatchSize: 10
 
 ##########################################################################
 #   Stack outputs                                                        #
 ##########################################################################
 Outputs:
   webhookHandler:
-    Description: The subnet ID to use for public web servers
+    Description: Lambda arn
     Export:
-      Name: !Sub '${Environment}-cache'
+      Name: !Sub '${Environment}-page-cms-sqs-handler'
     Value:
       Fn::GetAtt: webhookHandler.Arn

@@ -1,78 +1,25 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Sends notifications from S3 to SNS when site data has been inserted into page-madamot-live-cache
+Description: Cache buckets for stage and live
 
 Resources:
   ## S3 bucket
   SourceBucket:
     Type: AWS::S3::Bucket
-    DependsOn:
-      - SNSTopicPolicy
     Properties:
-      BucketName: page-madamot-live-cache
+      BucketName: page-live-cache
 
   PreviewSourceBucket:
     Type: AWS::S3::Bucket
-    DependsOn:
-      - SNSTopicPolicy
     Properties:
-      BucketName: page-madamot-live-preview-cache
+      BucketName: page-live-preview-cache
 
-  SNSTopic:
-    Type: AWS::SNS::Topic
+  StageSourceBucket:
+    Type: AWS::S3::Bucket
     Properties:
-      Subscription:
-        - Endpoint: !ImportValue live-page-deploy-site
-          Protocol: lambda
-        - Endpoint: !ImportValue stage-page-deploy-site
-          Protocol: lambda
-          
-          
+      BucketName: page-stage-cache
 
-  SNSTopicPolicy:
-    Type: AWS::SNS::TopicPolicy
+  StagePreviewSourceBucket:
+    Type: AWS::S3::Bucket
     Properties:
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: 's3.amazonaws.com'
-            Action: sns:Publish
-            Resource: !Ref SNSTopic
-            Condition:
-              ArnEquals:
-                aws:SourceArn: !Join ['', ['arn:aws:s3:::', page-madamot-live-cache]]
-                aws:SourceArn: !Join ['', ['arn:aws:s3:::', page-madamot-live-preview-cache]]
-              StringEquals:
-                aws:SourceAccount: !Ref 'AWS::AccountId'
-      Topics:
-        - !Ref SNSTopic
-
-  # Provide permission for SNS to invoke the Lambda function
-  TopicConsumerLivePageDeploySitePermission:
-    Type: 'AWS::Lambda::Permission'
-    Properties:
-      Action: 'lambda:InvokeFunction'
-      FunctionName: !ImportValue live-page-deploy-site
-      Principal: sns.amazonaws.com
-
-  # Provide permission for SNS to invoke the Lambda function
-  TopicConsumerStagePageDeploySitePermission:
-    Type: 'AWS::Lambda::Permission'
-    Properties:
-      Action: 'lambda:InvokeFunction'
-      FunctionName: !ImportValue stage-page-deploy-site
-      Principal: sns.amazonaws.com
-
-Outputs:
-  SNSTopicArn:
-    Description: The arn of the page-deploy-site sns topic
-    Export:
-      Name: SNSTopicArn
-    Value: !Ref SNSTopic
-  SNSTopicName:
-    Description: The name of the page-deploy-site sns topic
-    Export:
-      Name: SNSTopicName
-    Value: !GetAtt SNSTopic.TopicName
+      BucketName: page-stage-preview-cache

@@ -25,10 +25,8 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Get all cache')
   const command = new ListObjectsV2Command({
-    Bucket: 'page-madamot-live-cache',
+    Bucket: `page-live-cache`,
   })
-
-  console.log('topic name', process.env.TOPIC_NAME)
 
   try {
     const cache = await client.send(command)
@@ -39,14 +37,14 @@ export const handler = async (event: APIGatewayProxyEvent) => {
     if (cache?.Contents!.length > 0) {
       cache?.Contents?.forEach(async cacheItem => {
         try {
-          await snsClient.send(
-            new PublishCommand({
-              Message: JSON.stringify({
-                key: cacheItem.Key,
-              }),
-              TopicArn: process.env.TOPIC_NAME,
-            })
-          )
+          // await snsClient.send(
+          //   new PublishCommand({
+          //     Message: JSON.stringify({
+          //       key: cacheItem.Key,
+          //     }),
+          //     TopicArn: process.env.TOPIC_NAME,
+          //   })
+          // )
         } catch (error) {
           console.error('failed to notify', error)
         }

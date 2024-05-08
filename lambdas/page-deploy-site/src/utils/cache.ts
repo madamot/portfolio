@@ -1,11 +1,13 @@
 import { HomepageRecord, ProjectRecord } from '../generated/graphql'
 import { getFile } from './s3'
 
+const { AWS_ENV } = process.env
+
 export const getCache = async (
   page: string,
   isPreview: boolean
 ): Promise<ProjectRecord | HomepageRecord | undefined> => {
-  const bucket = isPreview ? 'page-madamot-live-preview-cache' : 'page-madamot-live-cache'
+  const bucket = isPreview ? `page-${AWS_ENV}-preview-cache` : `page-${AWS_ENV}-cache`
 
   console.log(`About to get page ${page} from bucket ${bucket}`)
 

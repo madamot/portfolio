@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A Step funcitons for the deployment journey of pages
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+Resources:
+  ##########################################################################
+  #   STEP FUNCTION                                                        #
+  ##########################################################################
+
+  DeploymentStateMachine:
+    Type: AWS::Serverless::StateMachine # More info about State Machine Resource: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html
+    Properties:
+      Name: !Sub '${Environment}-page-deployment-state-machine'
+      DefinitionUri: StateMachine.asl.json
+      DefinitionSubstitutions:
+        PageCacheArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-cache
+        PageDeploySiteArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-deploy-site
+      Role:
+        Fn::GetAtt: [StatesExecutionRole, Arn]
+      Type: EXPRESS
+      Logging:
+        Destinations:
+          - CloudWatchLogsLogGroup:
+              LogGroupArn: !GetAtt StateMachineLogGroup.Arn
+        IncludeExecutionData: false
+        Level: 'ALL'
+
+  ##########################################################################
+  #  STEP FUNCTION LOG GROUP                                               #
+  ##########################################################################
+  StateMachineLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '${Environment}-page-deployment-state-machine'
+
+  ##########################################################################
+  #   Roles                                                               #
+  ##########################################################################
+  StatesExecutionRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+            Action: 'sts:AssumeRole'
+      Path: '/'
+      Policies:
+        - PolicyName: StatesExecutionPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'lambda:InvokeFunction'
+                  - 'cloudwatch:*'
+                  - 'logs:*'
+                Resource: '*'
+
+##########################################################################
+#   Stack outputs                                                        #
+##########################################################################
+Outputs:
+  DeploymentStateMachineArn:
+    Description: Deployment state machine arn
+    Export:
+      Name: !Sub '${Environment}-page-deployment-state-machine'
+    Value:
+      Fn::GetAtt: DeploymentStateMachine.Arn
