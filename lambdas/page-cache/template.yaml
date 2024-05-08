@@ -28,9 +28,13 @@ Resources:
       Runtime: nodejs16.x
       Policies:
         - S3FullAccessPolicy:
-            BucketName: page-madamot-live-cache # bucket name without arn
+            BucketName: page-live-cache
         - S3FullAccessPolicy:
-            BucketName: page-madamot-live-preview-cache
+            BucketName: page-live-preview-cache
+        - S3FullAccessPolicy:
+            BucketName: page-stage-cache
+        - S3FullAccessPolicy:
+            BucketName: page-stage-preview-cache
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
       Timeout: 10

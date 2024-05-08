@@ -18,14 +18,13 @@ Resources:
       Runtime: nodejs16.x
       Policies:
         - S3FullAccessPolicy:
-            BucketName: page-madamot-live-cache # bucket name without arn
+            BucketName: page-live-cache # bucket name without arn
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
       Timeout: 60
       Environment:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
-          AWS_ENV: !Ref Environment
 
       Events:
         HttpApiEvent:

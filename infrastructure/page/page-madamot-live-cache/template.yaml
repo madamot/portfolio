@@ -1,26 +1,25 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Sends notifications from S3 to SNS when site data has been inserted into page-madamot-live-cache
+Description: Cache buckets for stage and live
 
 Resources:
   ## S3 bucket
   SourceBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: page-madamot-live-cache
+      BucketName: page-live-cache
 
   PreviewSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: page-madamot-live-preview-cache
+      BucketName: page-live-preview-cache
 
-  SourceBucket:
+  StageSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: page-madamot-stage-cache
+      BucketName: page-stage-cache
 
-  PreviewSourceBucket:
+  StagePreviewSourceBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: page-madamot-stage-preview-cache
-
+      BucketName: page-stage-preview-cache

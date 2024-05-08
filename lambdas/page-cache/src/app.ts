@@ -1,6 +1,4 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { S3 } from '@aws-sdk/client-s3'
-import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
 import { getPageData } from './utils/fetch'
 
 /**
@@ -16,8 +14,6 @@ import { getPageData } from './utils/fetch'
 const { AWS_ENV } = process.env
 
 export const handler = async (event: any) => {
-  let response: APIGatewayProxyResult
-
   console.log('event', event)
 
   console.time('Overall')
@@ -36,12 +32,10 @@ export const handler = async (event: any) => {
   console.timeEnd('Get page')
 
   console.time('Put json in S3 cache')
-  console.log(
-    `Bucket ${preview ? `page-madamot-${AWS_ENV}-preview-cache` : `page-madamot-${AWS_ENV}-cache`}`
-  )
+  console.log(`Bucket ${preview ? `page-${AWS_ENV}-preview-cache` : `page-${AWS_ENV}-cache`}`)
 
   const params = {
-    Bucket: preview ? `page-madamot-${AWS_ENV}-preview-cache` : `page-madamot-${AWS_ENV}-cache`,
+    Bucket: preview ? `page-${AWS_ENV}-preview-cache` : `page-${AWS_ENV}-cache`,
     Key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     Body: JSON.stringify(page),
     ContentType: 'application/json',

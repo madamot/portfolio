@@ -13,8 +13,6 @@ import axios from 'axios'
  *
  */
 
-const { AWS_ENV } = process.env
-
 export const handler = async (event: APIGatewayProxyEvent) => {
   let response: APIGatewayProxyResult
 
@@ -27,10 +25,8 @@ export const handler = async (event: APIGatewayProxyEvent) => {
 
   console.time('Get all cache')
   const command = new ListObjectsV2Command({
-    Bucket: `page-madamot-${AWS_ENV}-cache`,
+    Bucket: `page-live-cache`,
   })
-
-  console.log('topic name', process.env.TOPIC_NAME)
 
   try {
     const cache = await client.send(command)

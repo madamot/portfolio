@@ -1,4 +1,3 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult, SNSEvent } from 'aws-lambda'
 import { savePage } from './utils/savePage'
 import { render, generateMasterCSSFile } from './utils/generator'
 import { getCache } from './utils/cache'
@@ -17,19 +16,19 @@ import { putFile } from './utils/s3'
 const { AWS_ENV } = process.env
 
 export const handler = async (event: any) => {
-  let response: APIGatewayProxyResult
-
   console.log('event', event)
 
   console.time('Overall')
 
-  const snsMessage = event.pageCacheOutput
+  const pageCacheResult = event.pageCacheOutput
 
-  const isPreview: boolean = snsMessage.preview
-  const bucket = snsMessage.preview ? `page-madamot-${AWS_ENV}-preview` : `page-madamot-${AWS_ENV}`
+  const isPreview: boolean = pageCacheResult.preview
+  const bucket = pageCacheResult.preview
+    ? `page-madamot-${AWS_ENV}-preview`
+    : `page-madamot-${AWS_ENV}`
 
   console.time('Get page cache')
-  const pageCache = await getCache(snsMessage.key, isPreview)
+  const pageCache = await getCache(pageCacheResult.key, isPreview)
 
   console.log('page cache', pageCache)
   console.timeEnd('Get page cache')

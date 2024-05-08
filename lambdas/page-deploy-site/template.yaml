@@ -30,33 +30,26 @@ Resources:
         - S3FullAccessPolicy:
             BucketName: page-madamot-live # bucket name without arn
         - S3FullAccessPolicy:
-            BucketName: page-madamot-live-cache # bucket name without arn
+            BucketName: page-live-cache # bucket name without arn
+        - S3FullAccessPolicy:
+            BucketName: page-stage-cache # bucket name without arn
         - S3FullAccessPolicy:
             BucketName: page-madamot-live-preview
         - S3FullAccessPolicy:
-            BucketName: page-madamot-live-preview-cache
+            BucketName: page-live-preview-cache
+        - S3FullAccessPolicy:
+            BucketName: page-stage-preview-cache
         - S3FullAccessPolicy:
             BucketName: page-madamot-stage
         - S3FullAccessPolicy:
             BucketName: page-madamot-stage-preview
         - AWSSecretsManagerGetSecretValuePolicy:
             SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
-        - Statement:
-            - Effect: Allow
-              Action:
-                - sns:Publish
-              Resource: '*'
       Timeout: 20
       Environment:
         Variables:
           someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
           AWS_ENV: !Ref Environment
-      Events:
-        HttpApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: POST
 
 ##########################################################################
 #   Stack outputs                                                        #

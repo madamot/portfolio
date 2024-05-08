@@ -1,6 +1,4 @@
 import { SQSEvent } from 'aws-lambda'
-import { SNSClient, PublishCommand } from '@aws-sdk/client-sns'
-import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn'
 
 /**
