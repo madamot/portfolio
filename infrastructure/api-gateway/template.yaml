@@ -69,9 +69,3 @@ Outputs:
       Name: !Sub '${Environment}-page-cms-sqs'
     Value:
       Fn::GetAtt: CmsSqsQueue.Arn
-
-  CmsSqsQueueURL:
-    Description: SQS queue URL
-    Export:
-      Name: CmsSqsQueueURL
-    Value: !Ref CmsSqsQueue
