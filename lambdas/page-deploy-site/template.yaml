@@ -55,9 +55,6 @@ Resources:
 #   Stack outputs                                                        #
 ##########################################################################
 Outputs:
-  DatoCmsEndpoint:
-    Description: 'The build invocation URl to provide to DatoCMS webhook'
-    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
   webhookHandler:
     Description: The subnet ID to use for public web servers
     Export:
