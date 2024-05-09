@@ -1,8 +1,8 @@
 <div data-testid="listComponent" class="list">
-  <ol>
+  <ol class="orderedList">
     {{#items}}
-    <li>
-      <div>{{{renderedComponents}}}</div>
+    <li class="orderedList-item">
+      <div class="orderedList-item-container">{{{renderedComponents}}}</div>
     </li>
     {{/items}}
   </ol>
