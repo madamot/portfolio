@@ -1,7 +1,7 @@
 {
-  "name": "page-rebuild-all",
+  "name": "page-cms-sqs-handler",
   "version": "1.0.0",
-  "description": "The webhook DatoCMS hits on the build trigger to rebuild the whole site",
+  "description": "Handling events sent to SQS via DatoCMS",
   "main": "app.js",
   "scripts": {
     "test:watch": "yarn run test --watch",

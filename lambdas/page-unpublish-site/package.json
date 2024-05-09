@@ -1,0 +1,7 @@
+{
+  "name": "page-unpublish-site",
+  "version": "1.0.0",
+  "description": "Unpublish pages",
+  "main": "app.js",
+  "license": "MIT"
+}
