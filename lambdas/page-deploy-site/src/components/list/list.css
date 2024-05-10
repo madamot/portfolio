@@ -9,6 +9,7 @@
       content: '#' counter(list-item) ' ';
       font-weight: bold;
       font-size: 24px;
+      padding-bottom: 10px;
     }
 
     .orderedList__item__container {

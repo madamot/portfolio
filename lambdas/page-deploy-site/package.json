@@ -11,7 +11,7 @@
     "build": "yarn tsc && yarn run copy-packages && yarn run copy-files",
     "copy-packages": "cp package.json dist/package.json",
     "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css dist/",
-    "serve": "live-server local-dist",
+    "serve": "live-server local-dist --no-browser",
     "start": "yarn run serve & yarn run build-html:watch",
     "download": "aws s3 sync s3://page-live-preview-cache/ local-data",
     "generate": "graphql-codegen --config codegen.ts"

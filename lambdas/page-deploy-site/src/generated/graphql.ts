@@ -291,6 +291,34 @@ export type ColorField = {
   red: Scalars['IntType']['output'];
 };
 
+export type ContentBoxModelContentField = AccordionGroupRecord | BannerRecord | ButtonGroupRecord | ImageRecord | TextRecord;
+
+/** Block of type 🔲 Content box (content_box) */
+export type ContentBoxRecord = RecordInterface & {
+  __typename?: 'ContentBoxRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  content: Array<ContentBoxModelContentField>;
+  id: Scalars['ItemId']['output'];
+};
+
+
+/** Block of type 🔲 Content box (content_box) */
+export type ContentBoxRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by creation datetime */
 export type CreatedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
@@ -514,7 +542,7 @@ export type HeaderRecordDescriptionArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type HomepageModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type HomepageModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ContentBoxRecord | ImageRecord | ListRecord | PromoCardRecord | TextRecord;
 
 /** Record of type Homepage (homepage) */
 export type HomepageRecord = RecordInterface & {
@@ -2066,6 +2094,33 @@ export type LinkRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+/** Block of type List (list) */
+export type ListRecord = RecordInterface & {
+  __typename?: 'ListRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  items: Array<ContentBoxRecord>;
+  showListNumbers?: Maybe<Scalars['BooleanType']['output']>;
+};
+
+
+/** Block of type List (list) */
+export type ListRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export enum MuxThumbnailFormatType {
   Gif = 'gif',
   Jpg = 'jpg',
@@ -2169,7 +2224,7 @@ export type PositionFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
-export type ProjectModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ImageRecord | PromoCardRecord | TextRecord;
+export type ProjectModelContentField = AccordionGroupRecord | BannerRecord | BillboardRecord | ButtonGroupRecord | ContentBoxRecord | ImageRecord | ListRecord | PromoCardRecord | TextRecord;
 
 export type ProjectModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
@@ -2272,6 +2327,8 @@ export type PromoCardRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   cards: Array<CardRecord>;
   description?: Maybe<Scalars['String']['output']>;
+  gridColumns?: Maybe<Scalars['IntType']['output']>;
+  gridStyle?: Maybe<Scalars['String']['output']>;
   href?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   link?: Maybe<ProjectRecord>;
