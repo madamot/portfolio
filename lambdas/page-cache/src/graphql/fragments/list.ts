@@ -10,6 +10,7 @@ export const LIST_FRAGMENT = `
             }
             _status
             _updatedAt
+            showListNumbers
             items {
                 ...ContentBox
             }
