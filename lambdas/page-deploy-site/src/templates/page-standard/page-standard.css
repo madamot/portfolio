@@ -38,7 +38,4 @@ body {
 .content > .main-content {
   flex: 1 1 400px;
   /* min-width: 10rem; */
-  max-width: -webkit-fit-content;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
 }
