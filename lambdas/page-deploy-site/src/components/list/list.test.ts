@@ -43,7 +43,7 @@ describe('component-list', () => {
     ],
   }
 
-  it('renders the banner component', () => {
+  it('renders the list component', () => {
     renderTestComponent(ListComponent, listData)
 
     expect(screen.getByTestId('listComponent')).toBeDefined()
