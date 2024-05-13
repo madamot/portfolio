@@ -13,6 +13,7 @@ body {
 
 .content {
   display: flex;
+  flex-wrap: wrap;
   gap: 1em;
 }
 
@@ -30,6 +31,25 @@ body {
   }
 }
 
+@media screen and (min-width: 550px) and (max-width: 1051px) {
+  #sidebar2 {
+    flex: 1;
+
+    .sidebar {
+      width: 100%;
+    }
+
+    .sidebar .promoCardCardGrid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
 .content > section {
   flex-grow: 1;
+}
+
+.content > .main-content {
+  flex: 1 1 400px;
+  /* min-width: 10rem; */
 }

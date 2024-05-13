@@ -8,6 +8,8 @@ import {
   IMAGE_FRAGMENT,
   SIDEBAR_FRAGMENT,
   HEADER_FRAGMENT,
+  LIST_FRAGMENT,
+  CONTENTBOX_FRAGMENT,
 } from './fragments'
 
 const page = `
@@ -68,6 +70,8 @@ const page = `
     ...Text
     ...PromoCard
     ...Image
+    ...ContentBox
+    ...List
   }
   sidebarLeft {
     ...Sidebar
@@ -87,6 +91,8 @@ export const GET_PAGE = `
   ${IMAGE_FRAGMENT}
   ${SIDEBAR_FRAGMENT}
   ${HEADER_FRAGMENT}
+  ${CONTENTBOX_FRAGMENT}
+  ${LIST_FRAGMENT}
 
   query fetchPage($id: ItemId) {
     project(filter: {id: {eq: $id}}) {
@@ -105,6 +111,8 @@ export const GET_HOMEPAGE = `
   ${IMAGE_FRAGMENT}
   ${SIDEBAR_FRAGMENT}
   ${HEADER_FRAGMENT}
+  ${CONTENTBOX_FRAGMENT}
+  ${LIST_FRAGMENT}
 
   query fetchHomepage {
     project: homepage {

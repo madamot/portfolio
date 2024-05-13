@@ -1,0 +1,21 @@
+.list {
+  .orderedList {
+    list-style-type: none;
+    list-style-position: inside;
+    padding: 0;
+
+    .item__marker::marker {
+      display: list-item;
+      content: '#' counter(list-item) ' ';
+      font-weight: bold;
+      font-size: 24px;
+      padding-bottom: 10px;
+    }
+
+    .orderedList__item__container {
+      background-color: #f6f6f6;
+      padding: 24px 16px;
+      margin: 16px 0;
+    }
+  }
+}
