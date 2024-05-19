@@ -24,6 +24,7 @@ Resources:
       DefinitionSubstitutions:
         PageCacheArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-cache
         PageDeploySiteArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-deploy-site
+        PageUnpublishSiteArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-unpublish-site
       Role:
         Fn::GetAtt: [StatesExecutionRole, Arn]
       Type: EXPRESS
