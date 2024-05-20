@@ -1,4 +1,3 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { S3 } from '@aws-sdk/client-s3'
 
 const { AWS_ENV } = process.env
