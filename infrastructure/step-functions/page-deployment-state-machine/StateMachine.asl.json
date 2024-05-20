@@ -12,7 +12,7 @@
         },
         {
           "Not": {
-            "Variable": "$.event_type",
+            "Variable": "$.eventType",
             "StringEquals": "unpublish"
           },
           "Next": "PageCache"
