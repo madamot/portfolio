@@ -11,6 +11,19 @@ import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn'
  *
  */
 
+enum eventType {
+  create,
+  update,
+  delete,
+  publish,
+  unpublish,
+}
+
+interface stateMachineDataType {
+  payLoad: any
+  eventType: eventType
+}
+
 const stepFunctionClient = new SFNClient({ region: 'eu-west-1' })
 
 export const handler = async (event: SQSEvent) => {
@@ -26,9 +39,9 @@ export const handler = async (event: SQSEvent) => {
       const payLoad = JSON.parse(record.body)
       const preview = payLoad.event_type !== 'publish'
 
-      const stateMachineData = {
+      const stateMachineData: stateMachineDataType = {
         payLoad,
-        preview,
+        eventType: payLoad.event_type,
       }
 
       const stepFunctionExecutionCommand = new StartExecutionCommand({
