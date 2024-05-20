@@ -1,0 +1,38 @@
+<figure data-testid="imageComponent" class="imageComponentContainer">
+  {{#image}}
+  <div
+    class="blurred-img"
+    style="
+        background-image: url({{blurUpThumb}});
+      "
+  >
+    <img
+      srcset="{{image.responsiveImage.webpSrcSet}}"
+      src="{{image.responsiveImage.src}}"
+      loading="lazy"
+      alt="{{image.responsiveImage.alt}}"
+      class="imageComponentImage"
+      width="900"
+      height="675"
+    />
+  </div>
+  {{/image}} {{#image.responsiveImage.title}}
+  <figcaption data-testid="componentImageCaption" class="componentImageCaption">
+    {{image.responsiveImage.title}}
+  </figcaption>
+  {{/image.responsiveImage.title}}
+</figure>
+
+<script type="text/javascript">
+  const blurredImageDiv = document.querySelector('.blurred-img')
+  const img = blurredImageDiv.querySelector('img')
+  function loaded() {
+    blurredImageDiv.classList.add('loaded')
+  }
+
+  if (img.complete) {
+    loaded()
+  } else {
+    img.addEventListener('load', loaded)
+  }
+</script>

@@ -1,0 +1,53 @@
+## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+## SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Handles events received from DatoCMS
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+Resources:
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
+  webhookHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-page-cms-sqs-handler'
+      Description: Handles events received from DatoCMS
+      CodeUri: dist/
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Timeout: 10
+      Policies:
+        - StepFunctionsExecutionPolicy:
+            StateMachineName: !Sub '${Environment}-page-deployment-state-machine'
+      Environment:
+        Variables:
+          PAGE_DEPLOYMENT_STATE_MACHINE: !ImportValue
+            'Fn::Sub': '${Environment}-page-deployment-state-machine'
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: !Sub arn:aws:sqs:${AWS::Region}:${AWS::AccountId}:${Environment}-page-cms-sqs
+            BatchSize: 10
+
+##########################################################################
+#   Stack outputs                                                        #
+##########################################################################
+Outputs:
+  webhookHandler:
+    Description: Lambda arn
+    Export:
+      Name: !Sub '${Environment}-page-cms-sqs-handler'
+    Value:
+      Fn::GetAtt: webhookHandler.Arn

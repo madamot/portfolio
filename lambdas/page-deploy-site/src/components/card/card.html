@@ -1,0 +1,43 @@
+<div class="cardContainer cardContainer--{{style}}" data-testid="cardComponent">
+  <a
+    data-testid="card"
+    class="cardLink cardLink--{{style}}"
+    href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
+  >
+    {{#image.responsiveImage.webpSrcSet}}
+    <div
+      class="card card--{{style}} card-blurred-img"
+      id="card{{{id}}}"
+      style="background-image: url({{image.blurUpThumb}});"
+    >
+      <img
+        id="{{image.id}}"
+        srcset="{{image.responsiveImage.webpSrcSet}}"
+        src="{{image.responsiveImage.src}}"
+        loading="lazy"
+        alt="{{image.responsiveImage.alt}}"
+        class="cardImage"
+      />
+    </div>
+    {{/image.responsiveImage.webpSrcSet}}
+    <div class="cardCopy cardCopy--{{style}}">
+      <span class="cardTitle"> {{{title}}} </span>
+      <br />
+      <span class="cardDescription"> {{{excerpt}}} </span>
+    </div>
+  </a>
+</div>
+
+<script type="text/javascript">
+  const blurredImageDiv{{id}} = document.getElementById('card{{{id}}}')
+  const img{{id}} = blurredImageDiv{{id}}.querySelector('img')
+  function loaded{{id}}() {
+    blurredImageDiv{{id}}.classList.add('loaded')
+  }
+
+  if (img{{id}}.complete) {
+    loaded{{id}}()
+  } else {
+    img{{id}}.addEventListener('load', loaded{{id}})
+  }
+</script>

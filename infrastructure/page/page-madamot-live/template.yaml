@@ -1,0 +1,57 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Store live website
+
+Resources:
+  ## S3 bucket
+  LiveSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-madamot-live
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+
+  LivePreviewSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-madamot-live-preview
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+
+  StageSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-madamot-stage
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html
+
+  StagePreviewSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-madamot-stage-preview
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: 404.html

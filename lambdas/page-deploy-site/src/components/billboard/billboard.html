@@ -1,0 +1,93 @@
+<a
+  href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
+  class="billboardLink"
+>
+  <div id="billboardComponent{{id}}" data-testid="billboardComponent" class="billboard">
+    <div
+      class="billboardContent"
+      style="color: {{textColour}}; background-color: {{backgroundColour.hex}};"
+    >
+      <div class="billboardText">
+        <p>{{subtitle}}</p>
+        <h1>{{title}}</h1>
+        <p>{{excerpt}}</p>
+      </div>
+      <div class="billboardImageContainer">
+        <div
+          class="billboardImage"
+          style="background-image: image-set('{{image.responsiveImage.webpSrcSet}}');"
+        ></div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+</a>
+<script type="text/javascript">
+    function setDominantColour{{id}}() {
+      const image = new Image()
+      image.onload = () => {
+        const dominantColour = calculateDominantColour(image)
+        console.log("dom col", dominantColour);
+        document.getElementById('billboardComponent{{id}}').style.backgroundColor = `rgba(${dominantColour})`
+        setTextColour{{id}}(dominantColour)
+      }
+      image.crossOrigin = "Anonymous"
+      image.src = '{{{image.responsiveImage.webpSrcSet}}}'
+   }
+
+   function calculateDominantColour(image) {
+   	const canvas = document.createElement('canvas')
+   	const context = canvas.getContext('2d')
+
+   	canvas.width = image.width
+   	canvas.height = image.height
+   	context.drawImage(image, 0, 0, 1, 1)
+
+   	return context.getImageData(0, 0, 1, 1).data.join(',')
+   }
+
+   function setTextColour{{id}}(dominantColour) {
+   	const contrastWithWhite = contrast([255, 255, 255], dominantColour.split(',').slice(0, 3).map(Number))
+   	const contrastWithBlack = contrast([0, 0, 0], dominantColour.split(',').slice(0, 3).map(Number))
+
+   	const textColour = contrastWithWhite > 4.5 ? 'white' : 'black'
+
+   	document.getElementById('billboardComponent{{id}}').style.color = textColour
+   	// document.getElementById('componentBillboardPromoLink{{id}}').style.color = textColour
+   	// document.getElementById('componentBillboardFooter{{id}}')?.style.setProperty('--before-background-color', textColour);
+   }
+
+   function calculateRelativeLuminance(r, g, b) {
+     const LUMINANCE_RED = 0.2126
+     const LUMINANCE_GREEN = 0.7152
+     const LUMINANCE_BLUE = 0.0722
+     const GAMMA = 2.4
+
+     const normalizedColours = [r, g, b].map((colour) => {
+       const normalizedColour = colour / 255
+       return normalizedColour <= 0.03928
+         ? normalizedColour / 12.92
+         : Math.pow((normalizedColour + 0.055) / 1.055, GAMMA)
+     })
+
+     const relativeLuminance = (
+       normalizedColours[0] * LUMINANCE_RED +
+       normalizedColours[1] * LUMINANCE_GREEN +
+       normalizedColours[2] * LUMINANCE_BLUE
+     )
+
+     return relativeLuminance
+   }
+
+   function contrast(rgb1, rgb2) {
+    const lum1 = calculateRelativeLuminance(...rgb1)
+    const lum2 = calculateRelativeLuminance(...rgb2)
+    const brightest = Math.max(lum1, lum2)
+    const darkest = Math.min(lum1, lum2)
+    return (brightest + 0.05) / (darkest + 0.05)
+  }
+
+  if ({{automaticColour}}) {
+    setDominantColour{{id}}()
+  }
+</script>

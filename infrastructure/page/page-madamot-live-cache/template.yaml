@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Cache buckets for stage and live
+
+Resources:
+  ## S3 bucket
+  SourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-live-cache
+
+  PreviewSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-live-preview-cache
+
+  StageSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-stage-cache
+
+  StagePreviewSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: page-stage-preview-cache

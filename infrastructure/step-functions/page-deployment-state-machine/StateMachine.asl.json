@@ -1,0 +1,80 @@
+{
+  "Comment": "A Retry example of the Amazon States Language using an AWS Lambda Function",
+  "StartAt": "PublishOrUnpublish",
+  "States": {
+    "PublishOrUnpublish": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.eventType",
+          "StringEquals": "unpublish",
+          "Next": "UnpublishSite"
+        },
+        {
+          "Not": {
+            "Variable": "$.eventType",
+            "StringEquals": "unpublish"
+          },
+          "Next": "PageCache"
+        }
+      ],
+      "Default": "DefaultState"
+    },
+    "PageCache": {
+      "Type": "Task",
+      "Resource": "${PageCacheArn}",
+      "ResultPath": "$",
+      "Parameters": {
+        "Payload.$": "$"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 20,
+          "MaxAttempts": 5,
+          "BackoffRate": 10
+        }
+      ],
+      "Next": "PageDeploySite"
+    },
+    "PageDeploySite": {
+      "Type": "Task",
+      "Resource": "${PageDeploySiteArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "pageCacheOutput.$": "$"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 20,
+          "MaxAttempts": 5,
+          "BackoffRate": 10
+        }
+      ],
+      "End": true
+    },
+    "UnpublishSite": {
+      "Type": "Task",
+      "Resource": "${PageUnpublishSiteArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "Payload.$": "$"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 20,
+          "MaxAttempts": 5,
+          "BackoffRate": 10
+        }
+      ],
+      "End": true
+    },
+    "DefaultState": {
+      "Type": "Pass",
+      "Result": "This is the DEFAULT State",
+      "End": true
+    }
+  }
+}

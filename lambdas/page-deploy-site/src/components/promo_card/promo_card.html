@@ -1,0 +1,18 @@
+<div class="promoCardContainer" data-testid="promoCardComponent">
+  {{#title}}
+  <a
+    href="{{#linkType}}/{{{link.location}}}{{/linkType}}{{^linkType}}{{{href}}}{{/linkType}}"
+    class="promoCardSectionLink"
+  >
+    <h2 class="promoCardListingTitle">{{{title}}}</h2>
+    <span class="promoCardDivider"></span>
+  </a>
+  {{/title}} {{{description}}}
+  <div
+    class="promoCardCardGrid promoCardCardGrid--{{gridStyle}}"
+    id="cardContainer{{id}}"
+    style="--columns: {{gridColumns}};"
+  >
+    {{#renderedCards}} {{{renderedCards}}} {{/renderedCards}}
+  </div>
+</div>

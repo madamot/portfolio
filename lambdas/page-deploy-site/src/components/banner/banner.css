@@ -1,0 +1,63 @@
+.banner {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  padding-right: 1.5rem;
+  background-color: #f6f6f6;
+  box-sizing: border-box;
+  border-left: 0.5rem solid #38475c;
+  color: #38475c;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.banner--info {
+  background-color: #e3f2fd;
+  color: #004da5;
+  border-color: #0071f1;
+}
+
+.banner--success {
+  background-color: #e8f5e9;
+  color: #148a00;
+  border-color: #1fd700;
+}
+
+.banner--danger {
+  background-color: #ffebee;
+  color: #c40208;
+  border-color: #fd161d;
+}
+
+.banner--warning {
+  background-color: #fff3e0;
+  color: #784d00;
+  border-color: #c47e00;
+}
+
+.bannerMessage {
+  padding-right: 40px;
+  display: flex;
+  gap: 0.5em;
+}
+
+.bannerTitle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  /* color: #38475c; */
+  font-size: 1.3em;
+  margin-top: 0;
+}
+
+.bannerText > p {
+  display: inline;
+  margin: 0;
+  line-height: 22px;
+}
+
+.bannerIcon {
+  font-size: 1.2em;
+}

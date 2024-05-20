@@ -1,0 +1,55 @@
+body {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.container {
+  width: 1280px;
+  margin: 20px auto;
+  max-width: calc(100% - 20px);
+  padding: 10px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.main-content {
+  width: 100%;
+}
+
+.content--inverse {
+  flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 725px) {
+  .content {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 550px) and (max-width: 1051px) {
+  #sidebar2 {
+    flex: 1;
+
+    .sidebar {
+      width: 100%;
+    }
+
+    .sidebar .promoCardCardGrid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+.content > section {
+  flex-grow: 1;
+}
+
+.content > .main-content {
+  flex: 1 1 400px;
+  /* min-width: 10rem; */
+}

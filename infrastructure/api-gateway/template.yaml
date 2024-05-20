@@ -1,0 +1,71 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless patterns - API Gateway REST -> SQS
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+# Comment each resource section to explain usage
+Resources:
+  CmsSqsQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub '${Environment}-page-cms-sqs'
+
+  SiteAPI:
+    Type: AWS::Serverless::Api
+    DependsOn:
+      - CmsSqsQueue
+      - MyApiRole
+    Properties:
+      Name: !Sub '${Environment}.adamhorne.co.uk-services'
+      StageName: Prod
+      EndpointConfiguration: REGIONAL
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location: './api.yaml'
+
+  MyApiRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service: 'apigateway.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: ApiDirectToSQS
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              Action:
+                - sqs:SendMessage
+                - sqs:ReceiveMessage
+                - sqs:DeleteMessage
+              Effect: Allow
+              Resource:
+                - !GetAtt CmsSqsQueue.Arn
+
+# List all common outputs for usage
+Outputs:
+  ApiEndpoint:
+    Description: 'HTTP API endpoint URL'
+    Value: !Sub 'https://${SiteAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod'
+
+  CmsSqsQueue:
+    Description: CMS SQS Queue ARN
+    Export:
+      Name: !Sub '${Environment}-page-cms-sqs'
+    Value:
+      Fn::GetAtt: CmsSqsQueue.Arn

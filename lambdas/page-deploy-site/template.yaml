@@ -1,0 +1,63 @@
+## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+## SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Build pages from DatoCMS and store in S3
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+Resources:
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
+  webhookHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-page-deploy-site'
+      Description: A DatoCMS webhook handler
+      CodeUri: dist/
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Policies:
+        - S3FullAccessPolicy:
+            BucketName: page-madamot-live # bucket name without arn
+        - S3FullAccessPolicy:
+            BucketName: page-live-cache # bucket name without arn
+        - S3FullAccessPolicy:
+            BucketName: page-stage-cache # bucket name without arn
+        - S3FullAccessPolicy:
+            BucketName: page-madamot-live-preview
+        - S3FullAccessPolicy:
+            BucketName: page-live-preview-cache
+        - S3FullAccessPolicy:
+            BucketName: page-stage-preview-cache
+        - S3FullAccessPolicy:
+            BucketName: page-madamot-stage
+        - S3FullAccessPolicy:
+            BucketName: page-madamot-stage-preview
+        - AWSSecretsManagerGetSecretValuePolicy:
+            SecretArn: 'arn:aws:secretsmanager:eu-west-1:745413044589:secret:DatoCMS/page-deploy-site/API_KEY-uNpJBp'
+      Timeout: 20
+      Environment:
+        Variables:
+          someSecret: '{{resolve:secretsmanager:DatoCMS/page-deploy-site/API_KEY}}'
+          AWS_ENV: !Ref Environment
+
+##########################################################################
+#   Stack outputs                                                        #
+##########################################################################
+Outputs:
+  webhookHandler:
+    Description: The subnet ID to use for public web servers
+    Export:
+      Name: !Sub '${Environment}-page-deploy-site'
+    Value:
+      Fn::GetAtt: webhookHandler.Arn
