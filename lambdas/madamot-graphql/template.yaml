@@ -5,6 +5,15 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: GraphQL Lambda
 
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
 Resources:
   ##########################################################################
   #   Lambda Function                                                      #
@@ -12,20 +21,9 @@ Resources:
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: !Sub '${Environment}-madamot-graphql'
       Description: GraphQL server
-      CodeUri: src/
+      CodeUri: dist/
       Handler: index.graphqlHandler
-      Runtime: nodejs16.x
+      Runtime: nodejs18.x
       Timeout: 10
-      Events:
-        HttpApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: POST
-      Events:
-        HttpApiEvent:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: GET
