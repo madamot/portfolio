@@ -1,11 +1,20 @@
 version = 0.1
-[default.deploy.parameters]
-stack_name = "madamot-graphql"
+[stage.deploy.parameters]
+stack_name = "stage-madamot-graphql"
 resolve_s3 = true
-s3_prefix = "madamot-graphql"
+s3_prefix = "stage-madamot-graphql"
 region = "eu-west-1"
-profile = "madamotadam-adminaccess"
-confirm_changeset = true
+confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
-disable_rollback = true
+disable_rollback = false
+image_repositories = []
+
+[live.deploy.parameters]
+stack_name = "live-madamot-graphql"
+resolve_s3 = true
+s3_prefix = "live-madamot-graphql"
+region = "eu-west-1"
+confirm_changeset = false
+capabilities = "CAPABILITY_IAM"
+disable_rollback = false
 image_repositories = []
