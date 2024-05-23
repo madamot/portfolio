@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless patterns - API Gateway REST -> SQS
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+Resources:
+  GraphQLAPI:
+    Type: AWS::Serverless::GraphQLApi
+    Properties:
+      SchemaUri: ./sam_graphql_api/schema.graphql
+      Auth:
+        Type: API_KEY
+      ApiKeys:
+        MyApiKey: {}
+      DataSources:
+        DynamoDb:
+          PostsDataSource:
+            TableName: !Ref DynamoDBPostsTable
+            TableArn: !GetAtt DynamoDBPostsTable.Arn
+      Functions:
+        formatPostItem:
+          Runtime:
+            Name: APPSYNC_JS
+            Version: '1.0.0'
+          DataSource: NONE
+          CodeUri: ./sam_graphql_api/formatPostItem.js
+        createPostItem:
+          Runtime:
+            Name: APPSYNC_JS
+            Version: '1.0.0'
+          DataSource: PostsDataSource
+          CodeUri: ./sam_graphql_api/createPostItem.js
+        getPostFromTable:
+          Runtime:
+            Name: APPSYNC_JS
+            Version: '1.0.0'
+          DataSource: PostsDataSource
+          CodeUri: ./sam_graphql_api/getPostFromTable.js
+      Resolvers:
+        Mutation:
+          addPost:
+            Runtime:
+              Name: APPSYNC_JS
+              Version: '1.0.0'
+            Pipeline:
+              - formatPostItem
+              - createPostItem
+        Query: # type name
+          allMyNotes: # field name
+            LambdaArn: !GetAtt AllMyNotes.Arn
+Outputs:
+  APIEndpoint:
+    Description: GraphQLPostsAPI API Endpoint
+    Value: !GetAtt GraphQLPostsAPI.GraphQLUrl
+  ApiKeyValue:
+    Description: GraphQLPostsAPI API Key
+    Value: !GetAtt GraphQLPostsAPIMyApiKey.ApiKey
