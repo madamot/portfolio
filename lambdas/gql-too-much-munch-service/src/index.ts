@@ -6,5 +6,5 @@ export const handler = async (event: any) => {
   console.time('Overall')
 
   console.timeEnd('Overall')
-  return 'Hello world!'
+  return { greeting: 'Hello world!', favouriteFood: 'Pizza' }
 }

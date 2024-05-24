@@ -15,7 +15,7 @@ Resources:
   GraphQLAPI:
     Type: AWS::Serverless::GraphQLApi
     Properties:
-      SchemaUri: ./src/schema.graphql
+      SchemaUri: ./src/schema/schema.graphql
       Auth:
         Type: API_KEY
       ApiKeys:
@@ -43,3 +43,7 @@ Outputs:
   APIEndpoint:
     Description: GraphQLAPI API Endpoint
     Value: !GetAtt GraphQLAPI.GraphQLUrl
+
+  ApiKey:
+    Description: API Key for authentication
+    Value: !GetAtt GraphQLAPIOnlyToRead.ApiKey

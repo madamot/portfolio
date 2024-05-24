@@ -1,0 +1,12 @@
+type TooMuchMunchQueries {
+  greeting: String!
+  favouriteFood: String!
+}
+
+type Query {
+  tooMuchMunch: TooMuchMunchQueries
+}
+
+schema {
+  query: Query
+}
