@@ -1,11 +1,13 @@
 {
-  "name": "madamot-graphql",
+  "name": "gql-too-much-munch-service",
   "version": "1.0.0",
   "description": "GraphQL server",
   "main": "index.js",
   "scripts": {
-    "build": "yarn tsc",
-    "prepare": "yarn build"
+    "test:watch": "yarn run test --watch",
+    "test": "jest --coverage",
+    "build": "yarn tsc && yarn run copy-packages",
+    "copy-packages": "cp package.json dist/package.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,6 +18,8 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.119",
     "@types/node": "^20.4.4",
+    "jest": "^29.7.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.1.6"
   }
 }

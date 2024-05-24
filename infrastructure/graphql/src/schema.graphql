@@ -1,0 +1,7 @@
+type Query {
+  tooMuchMunch: String!
+}
+
+schema {
+  query: Query
+}

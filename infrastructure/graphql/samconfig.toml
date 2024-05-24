@@ -1,8 +1,8 @@
 version = 0.1
 [live.deploy.parameters]
-stack_name = "live-graphql-handler"
+stack_name = "live-graphql-appsync"
 resolve_s3 = true
-s3_prefix = "live-graphql-handler"
+s3_prefix = "live-graphql-appsync"
 region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
@@ -10,9 +10,9 @@ disable_rollback = false
 image_repositories = []
 
 [stage.deploy.parameters]
-stack_name = "stage-graphql-handler"
+stack_name = "stage-graphql-appsync"
 resolve_s3 = true
-s3_prefix = "stage-graphql-handler"
+s3_prefix = "stage-graphql-appsync"
 region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"

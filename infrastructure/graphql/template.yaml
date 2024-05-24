@@ -15,51 +15,31 @@ Resources:
   GraphQLAPI:
     Type: AWS::Serverless::GraphQLApi
     Properties:
-      SchemaUri: ./sam_graphql_api/schema.graphql
+      SchemaUri: ./src/schema.graphql
       Auth:
         Type: API_KEY
       ApiKeys:
-        MyApiKey: {}
+        OnlyToRead: {}
       DataSources:
-        DynamoDb:
-          PostsDataSource:
-            TableName: !Ref DynamoDBPostsTable
-            TableArn: !GetAtt DynamoDBPostsTable.Arn
+        Lambda:
+          MyLambdaDataSource:
+            FunctionArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-gql-too-much-munch-service
       Functions:
-        formatPostItem:
+        lambdaInvoker:
           Runtime:
             Name: APPSYNC_JS
-            Version: '1.0.0'
-          DataSource: NONE
-          CodeUri: ./sam_graphql_api/formatPostItem.js
-        createPostItem:
-          Runtime:
-            Name: APPSYNC_JS
-            Version: '1.0.0'
-          DataSource: PostsDataSource
-          CodeUri: ./sam_graphql_api/createPostItem.js
-        getPostFromTable:
-          Runtime:
-            Name: APPSYNC_JS
-            Version: '1.0.0'
-          DataSource: PostsDataSource
-          CodeUri: ./sam_graphql_api/getPostFromTable.js
+            Version: 1.0.0
+          DataSource: MyLambdaDataSource
+          CodeUri: ./src/invoker.js
       Resolvers:
-        Mutation:
-          addPost:
+        Query:
+          tooMuchMunch:
             Runtime:
               Name: APPSYNC_JS
               Version: '1.0.0'
             Pipeline:
-              - formatPostItem
-              - createPostItem
-        Query: # type name
-          allMyNotes: # field name
-            LambdaArn: !GetAtt AllMyNotes.Arn
+              - lambdaInvoker
 Outputs:
   APIEndpoint:
-    Description: GraphQLPostsAPI API Endpoint
-    Value: !GetAtt GraphQLPostsAPI.GraphQLUrl
-  ApiKeyValue:
-    Description: GraphQLPostsAPI API Key
-    Value: !GetAtt GraphQLPostsAPIMyApiKey.ApiKey
+    Description: GraphQLAPI API Endpoint
+    Value: !GetAtt GraphQLAPI.GraphQLUrl

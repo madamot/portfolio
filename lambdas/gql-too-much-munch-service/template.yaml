@@ -21,9 +21,9 @@ Resources:
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub '${Environment}-madamot-graphql'
+      FunctionName: !Sub '${Environment}-gql-too-much-munch-service'
       Description: GraphQL server
       CodeUri: dist/
-      Handler: index.graphqlHandler
+      Handler: index.handler
       Runtime: nodejs18.x
       Timeout: 10
