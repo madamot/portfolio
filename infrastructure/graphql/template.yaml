@@ -23,7 +23,7 @@ Resources:
       DataSources:
         Lambda:
           MyLambdaDataSource:
-            FunctionArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-gql-too-much-munch-service
+            FunctionArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-graphql-page-service
       Functions:
         lambdaInvoker:
           Runtime:
@@ -33,7 +33,7 @@ Resources:
           CodeUri: ./src/invoker.js
       Resolvers:
         Query:
-          tooMuchMunch:
+          page:
             Runtime:
               Name: APPSYNC_JS
               Version: '1.0.0'

@@ -1,10 +1,10 @@
-type PagesQueries {
+type PageQueries {
   greeting: String!
   favouriteFood: String!
 }
 
 type Query {
-  pages: PagesQueries
+  page: PageQueries
 }
 
 schema {
