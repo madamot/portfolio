@@ -1,6 +1,24 @@
+type Pagination {
+  currentPage: Int!
+  perPage: Int!
+  totalPages: Int!
+  totalItems: Int!
+}
+
+type SearchPage {
+  id: Int!
+  title: String
+  url: String
+}
+
+type PaginatedPages {
+  results: [SearchPage]
+  pagination: Pagination
+}
+
 type PageQueries {
-  greeting: String!
-  favouriteFood: String!
+  search(q: String!): [SearchPage]
+  all: String!
 }
 
 type Query {
