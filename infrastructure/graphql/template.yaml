@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Serverless patterns - API Gateway REST -> SQS
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+Resources:
+  GraphQLAPI:
+    Type: AWS::Serverless::GraphQLApi
+    Properties:
+      SchemaUri: ./src/schema/schema.graphql
+      Auth:
+        Type: API_KEY
+      ApiKeys:
+        OnlyToRead: {}
+      DataSources:
+        Lambda:
+          MyLambdaDataSource:
+            FunctionArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-graphql-page-service
+      Functions:
+        lambdaInvoker:
+          Runtime:
+            Name: APPSYNC_JS
+            Version: 1.0.0
+          DataSource: MyLambdaDataSource
+          CodeUri: ./src/invoker.js
+      Resolvers:
+        Query:
+          page:
+            Runtime:
+              Name: APPSYNC_JS
+              Version: '1.0.0'
+            Pipeline:
+              - lambdaInvoker
+Outputs:
+  APIEndpoint:
+    Description: GraphQLAPI API Endpoint
+    Value: !GetAtt GraphQLAPI.GraphQLUrl
+
+  ApiKey:
+    Description: API Key for authentication
+    Value: !GetAtt GraphQLAPIOnlyToRead.ApiKey

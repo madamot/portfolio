@@ -1,0 +1,12 @@
+type PageQueries {
+  greeting: String!
+  favouriteFood: String!
+}
+
+type Query {
+  page: PageQueries
+}
+
+schema {
+  query: Query
+}
