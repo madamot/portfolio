@@ -1,5 +1,5 @@
 {
-  "name": "gql-too-much-munch-service",
+  "name": "graphql-page-service",
   "version": "1.0.0",
   "description": "GraphQL server",
   "main": "index.js",

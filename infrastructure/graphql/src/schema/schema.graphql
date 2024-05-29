@@ -1,10 +1,10 @@
-type TooMuchMunchQueries {
+type PagesQueries {
   greeting: String!
   favouriteFood: String!
 }
 
 type Query {
-  tooMuchMunch: TooMuchMunchQueries
+  pages: PagesQueries
 }
 
 schema {

@@ -1,5 +1,3 @@
-const { AWS_ENV } = process.env
-
 export const handler = async (event: any) => {
   console.log('event', event)
 

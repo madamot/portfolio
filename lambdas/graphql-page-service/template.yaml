@@ -21,7 +21,7 @@ Resources:
   webhookHandler:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub '${Environment}-gql-too-much-munch-service'
+      FunctionName: !Sub '${Environment}-graphql-page-service'
       Description: GraphQL server
       CodeUri: dist/
       Handler: index.handler

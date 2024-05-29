@@ -1,8 +1,8 @@
 version = 0.1
 [stage.deploy.parameters]
-stack_name = "stage-gql-too-much-munch-service"
+stack_name = "stage-graphql-page-service"
 resolve_s3 = true
-s3_prefix = "stage-gql-too-much-munch-service"
+s3_prefix = "stage-graphql-page-service"
 region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
@@ -10,9 +10,9 @@ disable_rollback = false
 image_repositories = []
 
 [live.deploy.parameters]
-stack_name = "live-gql-too-much-munch-service"
+stack_name = "live-graphql-page-service"
 resolve_s3 = true
-s3_prefix = "live-gql-too-much-munch-service"
+s3_prefix = "live-graphql-page-service"
 region = "eu-west-1"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
