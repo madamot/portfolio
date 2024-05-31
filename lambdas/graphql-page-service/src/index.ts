@@ -19,5 +19,4 @@ export const handler = async (event: any) => {
   }
 
   console.timeEnd('Overall')
-  return { greeting: 'Hello world!', favouriteFood: 'Pizza' }
 }
