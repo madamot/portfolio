@@ -15,7 +15,7 @@ export const handler = async (event: any) => {
     case 'all':
       return 'You are searching for all'
     default:
-      throw new Error('Unknown field, unable to resolve ' + event.field)
+      return {}
   }
 
   console.timeEnd('Overall')
