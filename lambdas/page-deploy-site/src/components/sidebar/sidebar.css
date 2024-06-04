@@ -4,7 +4,11 @@
 
 .sidebar #textComponent {
   background-color: #f6f6f6;
-  padding: 8px 0;
+  padding: 24px 16px;
+}
+
+.sidebar #textComponent:first-child {
+  padding-top: 0px;
 }
 
 .sidebar #textComponent li {
