@@ -8,7 +8,7 @@
 }
 
 .sidebar #textComponent:first-child {
-  padding-top: 0px;
+  margin-top: 0px;
 }
 
 .sidebar #textComponent li {
