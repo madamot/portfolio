@@ -5,10 +5,15 @@
 .sidebar #textComponent {
   background-color: #f6f6f6;
   padding: 24px 16px;
-}
 
-.sidebar #textComponent:first-child {
-  margin-top: 0px;
+  .h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6:first-child {
+    margin-top: 0px;
+  }
 }
 
 .sidebar #textComponent li {
