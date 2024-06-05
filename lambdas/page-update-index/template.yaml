@@ -1,0 +1,68 @@
+## Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+## SPDX-License-Identifier: MIT-0
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Build pages from DatoCMS and store in S3
+
+Parameters:
+  Environment:
+    Description: Which environment to deploy the lambda to.
+    Type: String
+    AllowedValues:
+      - stage
+      - live
+    Default: stage
+
+Resources:
+  ##########################################################################
+  #   DynamoDB                                                            #
+  ##########################################################################
+  IndexTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: Key
+          AttributeType: S
+        - AttributeName: Type
+          AttributeType: S
+      KeySchema:
+        - AttributeName: Type
+          KeyType: HASH
+        - AttributeName: Key
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+
+  ##########################################################################
+  #   Lambda Function                                                      #
+  ##########################################################################
+  webhookHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-page-update-index'
+      Description: A DatoCMS webhook handler
+      CodeUri: dist/
+      Handler: app.handler
+      Runtime: nodejs18.x
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref IndexTable
+      Timeout: 3
+      Environment:
+        Variables:
+          INDEX_TABLE: !Ref IndexTable
+
+##########################################################################
+#   Stack outputs                                                        #
+##########################################################################
+Outputs:
+  webhookHandler:
+    Description: Lambda arn
+    Export:
+      Name: !Sub '${Environment}-page-update-index'
+    Value:
+      Fn::GetAtt: webhookHandler.Arn
+
+  DynamoDbTable:
+    Value: !Ref IndexTable
+    Description: DynamoDb Table

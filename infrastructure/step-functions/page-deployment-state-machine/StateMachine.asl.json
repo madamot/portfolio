@@ -52,6 +52,23 @@
           "BackoffRate": 10
         }
       ],
+      "Next": "PageUpdateIndex"
+    },
+    "PageUpdateIndex": {
+      "Type": "Task",
+      "Resource": "${PageDeploySiteArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "pageCacheOutput.$": "$"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 20,
+          "MaxAttempts": 5,
+          "BackoffRate": 10
+        }
+      ],
       "End": true
     },
     "UnpublishSite": {

@@ -1,0 +1,22 @@
+{
+  "name": "page-update-index",
+  "version": "1.0.0",
+  "description": "Update the page index dynamodb table",
+  "main": "app.js",
+  "scripts": {
+    "test:watch": "yarn run test --watch",
+    "test": "jest --coverage",
+    "build": "yarn tsc && yarn run copy-packages",
+    "copy-packages": "cp package.json dist/package.json"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.577.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.138",
+    "jest": "^29.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "license": "MIT"
+}
