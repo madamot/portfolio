@@ -64,5 +64,7 @@ Outputs:
       Fn::GetAtt: webhookHandler.Arn
 
   DynamoDbTable:
+    Export:
+      Name: !Sub '${Environment}-page-index-table'
     Value: !Ref IndexTable
     Description: DynamoDb Table

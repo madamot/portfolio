@@ -48,6 +48,7 @@ export const handler = async (event: any) => {
   const returnData = {
     key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     preview: preview,
+    urlPath: `${parsePayload.entity.attributes.location}/`,
   }
 
   console.log('returnData', returnData)

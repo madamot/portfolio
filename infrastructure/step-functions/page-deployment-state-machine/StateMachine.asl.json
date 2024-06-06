@@ -56,7 +56,7 @@
     },
     "PageUpdateIndex": {
       "Type": "Task",
-      "Resource": "${PageDeploySiteArn}",
+      "Resource": "${PageUpdateIndexArn}",
       "ResultPath": null,
       "Parameters": {
         "pageCacheOutput.$": "$"

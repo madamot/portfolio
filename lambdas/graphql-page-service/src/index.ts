@@ -1,3 +1,9 @@
+import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb'
+
+const { INDEX_TABLE } = process.env
+
+const client = new DynamoDBClient({})
+
 export const handler = async (event: any) => {
   console.log('event', event)
 
@@ -5,15 +11,22 @@ export const handler = async (event: any) => {
 
   switch (event.field) {
     case 'search':
-      return [
-        {
-          id: 1,
-          title: 'Hello world',
-          url: 'www.adamhorne.co.uk',
-        },
-      ]
+      const params = {
+        TableName: INDEX_TABLE,
+      }
+
+      const command = new ScanCommand(params)
+      const response = await client.send(command)
+
+      console.log('response', response)
+
+      return response.Items?.map(item => ({
+        url: item.Key,
+      }))
     case 'all':
       return 'You are searching for all'
+    case 'page':
+      return {}
     default:
       return {}
   }

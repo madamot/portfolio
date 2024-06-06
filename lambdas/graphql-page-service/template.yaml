@@ -26,7 +26,13 @@ Resources:
       CodeUri: dist/
       Handler: index.handler
       Runtime: nodejs18.x
+      Policies:
+        - AmazonDynamoDBFullAccess
       Timeout: 10
+      Environment:
+        Variables:
+          INDEX_TABLE: !ImportValue
+            'Fn::Sub': '${Environment}-page-index-table'
 
   GraphqlPageServiceInvoker:
     Type: AWS::AppSync::FunctionConfiguration
