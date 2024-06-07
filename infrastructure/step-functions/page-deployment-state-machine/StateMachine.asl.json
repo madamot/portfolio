@@ -44,6 +44,7 @@
       "Parameters": {
         "pageCacheOutput.$": "$"
       },
+      "OutputPath": "$",
       "Retry": [
         {
           "ErrorEquals": ["States.TaskFailed"],
@@ -52,7 +53,18 @@
           "BackoffRate": 10
         }
       ],
-      "Next": "PageUpdateIndex"
+      "Next": "UpdatePageIndexIfPublish"
+    },
+    "UpdatePageIndexIfPublish": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.preview",
+          "BooleanEquals": false,
+          "Next": "PageUpdateIndex"
+        }
+      ],
+      "Default": "DefaultState"
     },
     "PageUpdateIndex": {
       "Type": "Task",

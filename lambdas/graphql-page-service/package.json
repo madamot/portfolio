@@ -14,6 +14,7 @@
     "@apollo/server": "^4.7.5",
     "@as-integrations/aws-lambda": "^2.0.1",
     "@aws-sdk/client-dynamodb": "^3.590.0",
+    "@aws-sdk/util-dynamodb": "^3.592.0",
     "graphql": "^16.7.1"
   },
   "devDependencies": {

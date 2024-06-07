@@ -5,10 +5,19 @@ type Pagination {
   totalItems: Int!
 }
 
+enum IndexType {
+  PAGE
+  APP
+  PATTERN
+}
+
 type SearchPage {
-  id: Int!
-  title: String
-  url: String
+  type: IndexType!
+  name: String!
+  searchName: String!
+  url: String!
+  updatedAt: AWSDateTime!
+  createdAt: AWSDateTime!
 }
 
 type PaginatedPages {

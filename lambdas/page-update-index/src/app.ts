@@ -1,8 +1,13 @@
 import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
 
-const { INDEX_TABLE } = process.env
+const { INDEX_TABLE, AWS_ENV } = process.env
 
 const client = new DynamoDBClient({})
+
+enum IndexType {
+  Page = 'PAGE',
+  App = 'APP',
+}
 
 export const handler = async (event: any) => {
   console.log('event', event)
@@ -13,11 +18,23 @@ export const handler = async (event: any) => {
 
   const input = {
     Item: {
-      Type: {
-        S: 'Page',
+      type: {
+        S: IndexType.Page,
       },
-      Key: {
-        S: pageCacheResult.urlPath,
+      createdAt: {
+        S: pageCacheResult.createdAt,
+      },
+      url: {
+        S: `https://${AWS_ENV}.adamhorne.co.uk/${pageCacheResult.urlPath}`,
+      },
+      name: {
+        S: pageCacheResult.name,
+      },
+      searchName: {
+        S: pageCacheResult.name.toLowerCase(),
+      },
+      updatedAt: {
+        S: new Date().toJSON(),
       },
     },
     TableName: INDEX_TABLE,

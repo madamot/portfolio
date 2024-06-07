@@ -22,14 +22,14 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: Key
+        - AttributeName: type
           AttributeType: S
-        - AttributeName: Type
+        - AttributeName: createdAt
           AttributeType: S
       KeySchema:
-        - AttributeName: Type
+        - AttributeName: type
           KeyType: HASH
-        - AttributeName: Key
+        - AttributeName: createdAt
           KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
 
@@ -51,6 +51,7 @@ Resources:
       Environment:
         Variables:
           INDEX_TABLE: !Ref IndexTable
+          AWS_ENV: !Ref Environment
 
 ##########################################################################
 #   Stack outputs                                                        #
