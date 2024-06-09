@@ -17,13 +17,14 @@ export const handler = async (event: any) => {
         ExpressionAttributeNames: {
           '#type': 'type',
           '#name': 'searchName',
+          '#keywords': 'keywords',
         },
         ExpressionAttributeValues: {
           ':type': { S: 'PAGE' },
-          ':name': { S: event.arguments.q },
+          ':searchTerm': { S: event.arguments.q },
         },
         KeyConditionExpression: '#type = :type',
-        FilterExpression: 'contains(#name, :name)',
+        FilterExpression: 'contains(#name, :searchTerm) OR contains(#keywords, :searchTerm)',
       }
 
       const command = new QueryCommand(params)
