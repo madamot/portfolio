@@ -12,7 +12,7 @@ const Header: React.FC = () => {
 
   const { data, loading } = useQuery(SEARCH_PAGES, {
     variables: {
-      q: pageSearchTerm,
+      q: pageSearchTerm.toLowerCase(),
     },
     skip: pageSearchTerm.length < 3,
     onError(error) {
