@@ -51,7 +51,9 @@ export const handler = async (event: any) => {
     urlPath: `${parsePayload.entity.attributes.location}/`,
     name: parsePayload.entity.attributes.title,
     createdAt: parsePayload.entity.meta.created_at,
-    keywords: parsePayload.entity.attributes.keywords,
+    keywords: parsePayload.entity.attributes.keywords.map(
+      (keyword: { keyword: any }) => keyword.keyword
+    ),
   }
 
   console.log('returnData', returnData)
