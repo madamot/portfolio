@@ -45,6 +45,8 @@ export const handler = async (event: any) => {
   console.timeEnd('Put json in S3 cache')
   console.timeEnd('Overall')
 
+  console.log('keywords', parsePayload.entity.attributes.keywords)
+
   const returnData = {
     key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     preview: preview,
