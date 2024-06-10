@@ -45,15 +45,13 @@ export const handler = async (event: any) => {
   console.timeEnd('Put json in S3 cache')
   console.timeEnd('Overall')
 
-  console.log('keywords', parsePayload.entity.attributes.keywords)
-
   const returnData = {
     key: `${parsePayload.entity.attributes.name}/${parsePayload.entity.attributes.name}.json`,
     preview: preview,
     urlPath: `${parsePayload.entity.attributes.location}/`,
     name: parsePayload.entity.attributes.title,
     createdAt: parsePayload.entity.meta.created_at,
-    keywords: page.project.keywords,
+    keywords: page.project.keywords.map((keyword: { keyword: string }) => keyword.keyword),
   }
 
   console.log('returnData', returnData)
