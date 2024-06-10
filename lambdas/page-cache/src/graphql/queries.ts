@@ -39,6 +39,9 @@ const page = `
     }
     description
   }
+  keywords {
+    keyword
+  }
   navigation {
     id
     title

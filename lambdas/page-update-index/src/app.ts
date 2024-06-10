@@ -33,6 +33,9 @@ export const handler = async (event: any) => {
       searchName: {
         S: pageCacheResult.name.toLowerCase(),
       },
+      keywords: {
+        S: pageCacheResult.keywords.join(', '),
+      },
       updatedAt: {
         S: new Date().toJSON(),
       },
