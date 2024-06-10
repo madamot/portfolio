@@ -1,6 +1,8 @@
 import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useState } from 'react'
 import { useQuery } from '@apollo/client'
 
+import { Icon } from '@madamot/components'
+
 import Logo from '../../atoms/Logo'
 
 import { SEARCH_PAGES } from '../../../graphql/queries'
@@ -38,6 +40,7 @@ const Header: React.FC = () => {
             }}
           >
             {loading && <p>Loading</p>}
+            <Icon type="search" size="large" /> search
             <input type="text" onChange={e => setPageSearchTerm(e.target.value)} />
           </div>
         </div>

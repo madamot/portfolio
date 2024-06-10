@@ -17,7 +17,8 @@
     "aws-appsync-auth-link": "^3.0.7",
     "graphql": "^16.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@madamot/components": "file:../madamot-components"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

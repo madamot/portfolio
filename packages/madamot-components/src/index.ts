@@ -1,5 +1,5 @@
 import Button from './components/Button'
 import Header from './components/Header'
-import Page from './components/Page'
+import Icon from './components/Icon'
 
-export { Button, Header, Page }
+export { Button, Icon, Header }
