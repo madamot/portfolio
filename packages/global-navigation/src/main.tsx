@@ -15,6 +15,17 @@ import Footer from './components/organisms/Footer'
 
 import appSyncConfig from './aws-exports'
 
+const cache = new InMemoryCache({
+  typePolicies: {
+    PageQueries: {
+      merge: true,
+    },
+    SearchPage: {
+      merge: true,
+    },
+  },
+})
+
 const url = 'https://qmv3jp3rezd5pauit6bsah2hay.appsync-api.eu-west-1.amazonaws.com/graphql'
 const region = 'eu-west-1'
 
@@ -27,7 +38,7 @@ const auth: AuthOptions = {
 const link = ApolloLink.from([createAuthLink({ url, region, auth }), createHttpLink({ uri: url })])
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache,
 })
 
 ReactDOM.createRoot(document.getElementById('global-navigation')!).render(
