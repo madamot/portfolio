@@ -10,10 +10,6 @@
   border-bottom-width: 1px;
   --tw-border-opacity: 1;
   border-color: rgb(229 229 229 / var(--tw-border-opacity));
-  /* --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)); */
-  /* padding-top: 3rem;
-  padding-bottom: 3rem; */
   max-height: calc(100vh - 80px);
   transform: translateY(calc(-100% - 8px));
   transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1);
