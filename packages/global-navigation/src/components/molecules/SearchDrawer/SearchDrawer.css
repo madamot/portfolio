@@ -1,5 +1,5 @@
 .search-panel {
-  background-color: #f6f6f6;
+  background-color: #fff;
 
   pointer-events: none;
   position: absolute;
@@ -43,4 +43,5 @@
 .search-panel--open {
   pointer-events: auto;
   transform: translateY(0);
+  box-shadow: 0 0.0625rem #00000026;
 }
