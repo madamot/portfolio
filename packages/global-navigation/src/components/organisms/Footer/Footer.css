@@ -5,8 +5,8 @@
   display: flex;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: whitesmoke;
-  background-color: #4682b4;
+  color: black;
+  background-color: #f6f6f6;
 
   .global-footer-container {
     width: 1280px;
