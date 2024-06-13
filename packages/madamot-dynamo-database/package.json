@@ -1,0 +1,13 @@
+{
+  "name": "madamot-dynamo-database",
+  "version": "1.0.0",
+  "description": "DynamoDB ORM",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn tsc"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.596.0"
+  }
+}
