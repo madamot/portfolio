@@ -4,10 +4,10 @@ export enum IndexType {
 
 export type Index = {
   type: IndexType
-  name: string
-  searchName: string
-  url: string
-  keywords?: string
+  name: String
+  searchName: String
+  url: String
+  keywords?: String
   updatedAt: Date
   createdAt: Date
 }

@@ -1,9 +1,15 @@
 import { DynamoDBClient, QueryCommand } from '@aws-sdk/client-dynamodb'
 import { unmarshall } from '@aws-sdk/util-dynamodb'
 
+import { ORM } from '@madamot/madamot-dynamo-database'
+
+import { IndexService } from './services/IndexService.js'
+
 const { INDEX_TABLE } = process.env
 
-const client = new DynamoDBClient({})
+const pageIndexTableORM = new ORM(INDEX_TABLE as string)
+
+const indexService = new IndexService(pageIndexTableORM)
 
 export const handler = async (event: any) => {
   console.log('event', event)
@@ -12,27 +18,7 @@ export const handler = async (event: any) => {
 
   switch (event.field) {
     case 'search':
-      const params = {
-        TableName: INDEX_TABLE,
-        ExpressionAttributeNames: {
-          '#type': 'type',
-          '#name': 'searchName',
-          '#keywords': 'keywords',
-        },
-        ExpressionAttributeValues: {
-          ':type': { S: 'PAGE' },
-          ':searchTerm': { S: event.arguments.q },
-        },
-        KeyConditionExpression: '#type = :type',
-        FilterExpression: 'contains(#name, :searchTerm) OR contains(#keywords, :searchTerm)',
-      }
-
-      const command = new QueryCommand(params)
-      const response = await client.send(command)
-
-      console.log('response', response)
-
-      return response.Items?.map(item => unmarshall(item))
+      return await indexService.pageService.all(event.arguments.q)
     case 'all':
       return 'You are searching for all'
     case 'page':

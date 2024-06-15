@@ -1,22 +1,21 @@
+import { ORM } from '@madamot/madamot-dynamo-database'
+import { Index, IndexType } from '../types/graphql.js'
+import { Index as IndexTable } from '../types/tables.js'
+
 export interface IPagesService {
-  all(
-    pageLength: number | undefined,
-    pageNumber: number | undefined,
-    filter: FormFilter
-  ): Promise<PaginatedResults<Form>>
+  all(argument: string): Promise<Index[]>
 }
 
 export class PageService implements IPagesService {
   // Public declarations
-  public readonly pageService: IPagesService
 
-  constructor() {}
+  constructor(private readonly indexTable: Readonly<ORM<IndexTable>>) {}
 
-  async all(
-    pageLength: number | undefined,
-    pageNumber: number | undefined,
-    filter: FormFilter
-  ): Promise<PaginatedResults<Form>> {
-    throw new Error('Method not implemented.')
+  async all(argument: string): Promise<Index[]> {
+    const searchResult = this.indexTable.findMany({
+      key: IndexType.Page,
+      where: argument,
+    }) as unknown as Index[]
+    return searchResult
   }
 }
