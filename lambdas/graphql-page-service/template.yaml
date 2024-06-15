@@ -26,4 +26,113 @@ Resources:
       CodeUri: dist/
       Handler: index.handler
       Runtime: nodejs18.x
+      Policies:
+        - AmazonDynamoDBFullAccess
       Timeout: 10
+      Environment:
+        Variables:
+          INDEX_TABLE: !ImportValue
+            'Fn::Sub': '${Environment}-page-index-table'
+
+  GraphqlPageServiceInvoker:
+    Type: AWS::AppSync::FunctionConfiguration
+    Properties:
+      ApiId: !ImportValue
+        'Fn::Sub': '${Environment}-graphql-api'
+      Name: GraphqlPageServiceInvoker
+      DataSourceName: !GetAtt PageServiceDataSource.Name
+      Code: |
+        export function request(ctx) {
+          const { source, args } = ctx
+          console.log('invoker deets', ctx)
+          return {
+            operation: 'Invoke',
+            payload: { field: ctx.info.fieldName, arguments: args, source, info: ctx.info, selectionSetList: ctx.info.selectionSetList },
+          }
+        }
+
+        export function response(ctx) {
+          return ctx.result
+        }
+      Runtime:
+        Name: APPSYNC_JS
+        RuntimeVersion: '1.0.0'
+
+  PageServiceResolver:
+    Type: AWS::AppSync::Resolver
+    Properties:
+      ApiId: !ImportValue
+        'Fn::Sub': '${Environment}-graphql-api'
+      TypeName: Query
+      FieldName: page
+      Kind: PIPELINE
+      PipelineConfig:
+        Functions:
+          - !GetAtt GraphqlPageServiceInvoker.FunctionId
+      RequestMappingTemplate: '{}'
+      ResponseMappingTemplate: |
+        $util.toJson($ctx.result)
+
+  PageServiceAllResolver:
+    Type: AWS::AppSync::Resolver
+    Properties:
+      ApiId: !ImportValue
+        'Fn::Sub': '${Environment}-graphql-api'
+      TypeName: PageQueries
+      FieldName: all
+      Kind: PIPELINE
+      PipelineConfig:
+        Functions:
+          - !GetAtt GraphqlPageServiceInvoker.FunctionId
+      RequestMappingTemplate: '{}'
+      ResponseMappingTemplate: |
+        $util.toJson($ctx.result)
+
+  PageServiceSearchResolver:
+    Type: AWS::AppSync::Resolver
+    Properties:
+      ApiId: !ImportValue
+        'Fn::Sub': '${Environment}-graphql-api'
+      TypeName: PageQueries
+      FieldName: search
+      Kind: PIPELINE
+      PipelineConfig:
+        Functions:
+          - !GetAtt GraphqlPageServiceInvoker.FunctionId
+      RequestMappingTemplate: '{}'
+      ResponseMappingTemplate: |
+        $util.toJson($ctx.result)
+
+  PageServiceDataSource:
+    Type: AWS::AppSync::DataSource
+    Properties:
+      ApiId: !ImportValue
+        'Fn::Sub': '${Environment}-graphql-api'
+      Name: 'graphql_page_service'
+      ServiceRoleArn: !GetAtt AppSyncLambdaServiceRole.Arn
+      Type: 'AWS_LAMBDA'
+      LambdaConfig:
+        LambdaFunctionArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-graphql-page-service
+
+  AppSyncLambdaServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - appsync.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: root
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action: 'lambda:invokeFunction'
+                Resource:
+                  - !GetAtt webhookHandler.Arn

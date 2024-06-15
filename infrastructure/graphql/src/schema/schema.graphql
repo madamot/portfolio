@@ -1,6 +1,33 @@
+type Pagination {
+  currentPage: Int!
+  perPage: Int!
+  totalPages: Int!
+  totalItems: Int!
+}
+
+enum IndexType {
+  PAGE
+  APP
+  PATTERN
+}
+
+type SearchPage {
+  type: IndexType!
+  name: String!
+  searchName: String!
+  url: String!
+  updatedAt: AWSDateTime!
+  createdAt: AWSDateTime!
+}
+
+type PaginatedPages {
+  results: [SearchPage]
+  pagination: Pagination
+}
+
 type PageQueries {
-  greeting: String!
-  favouriteFood: String!
+  search(q: String!): [SearchPage]
+  all: String!
 }
 
 type Query {
