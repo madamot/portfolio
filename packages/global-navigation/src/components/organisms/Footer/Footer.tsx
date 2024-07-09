@@ -112,8 +112,8 @@ const Footer: React.FC = () => {
         <div className="footer-sections">
           <div className="footer-section">
             <ul>
-              {colOne.map(row => (
-                <li>
+              {colOne.map((row, index) => (
+                <li key={index}>
                   <a href={row.href}>{row.bold ? <strong>{row.label}</strong> : row.label}</a>
                 </li>
               ))}
@@ -121,8 +121,8 @@ const Footer: React.FC = () => {
           </div>
           <div className="footer-section">
             <ul>
-              {colTwo.map(row => (
-                <li>
+              {colTwo.map((row, index) => (
+                <li key={index}>
                   <a href={row.href}>{row.bold ? <strong>{row.label}</strong> : row.label}</a>
                 </li>
               ))}
@@ -130,8 +130,8 @@ const Footer: React.FC = () => {
           </div>
           <div className="footer-section">
             <ul>
-              {colThree.map(row => (
-                <li>
+              {colThree.map((row, index) => (
+                <li key={index}>
                   <a href={row.href}>{row.bold ? <strong>{row.label}</strong> : row.label}</a>
                 </li>
               ))}
@@ -141,8 +141,8 @@ const Footer: React.FC = () => {
         <hr />
         <div className="horizontal-footer-section">
           <ul>
-            {horizontalRow.map(row => (
-              <li>
+            {horizontalRow.map((row, index) => (
+              <li key={index}>
                 <a href={row.href}>{row.bold ? <strong>{row.label}</strong> : row.label}</a>
               </li>
             ))}

@@ -5,8 +5,9 @@
   display: flex;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: whitesmoke;
-  background-color: seagreen;
+  color: black;
+  background-color: #fff;
+  border-top: 0 0.0625rem #00000026;
 
   .global-footer-container {
     width: 1280px;
