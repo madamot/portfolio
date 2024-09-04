@@ -1,0 +1,9 @@
+.contentBox {
+  background-color: #f6f6f6;
+  padding: 24px 16px;
+  margin: 16px 0;
+
+  .imageComponentContainer {
+    padding: 0;
+  }
+}
