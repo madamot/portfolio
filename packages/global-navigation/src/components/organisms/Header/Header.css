@@ -13,5 +13,11 @@
   .global-header-container {
     width: 1280px;
     padding: 1em 16px;
+
+    .global-header-container__search-icon {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
   }
 }

@@ -37,7 +37,9 @@ const Header: React.FC = () => {
             }}
           >
             <Logo />
-            <button onClick={searchDrawerHandler}>&#128269;</button>
+            <button className="global-header-container__search-icon" onClick={searchDrawerHandler}>
+              &#128269;
+            </button>
           </div>
         </header>
       </div>

@@ -27,6 +27,7 @@ const SearchDrawer: React.FC<SearchDrawerProps> = ({
         <Search
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          isOpen={isOpen}
           loading={loading}
           results={results}
         />
