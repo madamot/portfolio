@@ -4,6 +4,10 @@ body {
   margin: 0;
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 .container {
   width: 1280px;
   margin: 20px auto;
@@ -19,6 +23,10 @@ body {
 
 .main-content {
   width: 100%;
+
+  .list > .orderedList > div:first-child {
+    view-transition-name: var(--projectId);
+  }
 }
 
 .content--inverse {

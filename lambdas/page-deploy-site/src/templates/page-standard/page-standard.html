@@ -84,7 +84,9 @@
         <aside>{{{renderedSidebarLeft}}}</aside>
         {{/renderedSidebarLeft}}
 
-        <main class="main-content">{{{renderedComponents}}}</main>
+        <main class="main-content" style="--projectId: project-{{project.id}}">
+          {{{renderedComponents}}}
+        </main>
 
         {{#renderedSidebarRight}}
         <aside id="sidebar2">{{{renderedSidebarRight}}}</aside>
