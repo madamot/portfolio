@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Store live website
+
+Resources:
+  ## S3 bucket
+  LiveAppSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: apps-madamot-live
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+
+  StageAppSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: apps-madamot-stage
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
