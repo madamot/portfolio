@@ -54,14 +54,15 @@ pipeline {
         
         stage('Deploy') {
             steps {
+                echo "Deploying ${APP_NAME} to ${ENVIRONMENT}"
                 script {
                     withCredentials([aws(credentialsId: "9190845d-626f-4330-88a2-da3508581995")]) {
                         sh """
                             cd ${FILES_PATH}
-                            aws s3 cp ./storybook-static s3://app-madamot-storybook --recursive
+                            aws s3 cp ./dist s3://apps-madamot-${ENVIRONMENT}/${APP_NAME} --recursive
                         """
                     }
-                    echo "App successfully deployed to https://storybook.adamhorne.co.uk"
+                    echo "App successfully deployed to https://${ENVIRONMENT}.adamhorne.co.uk/${APP_NAME}"
                 }
             }
         }
