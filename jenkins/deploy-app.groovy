@@ -60,9 +60,9 @@ pipeline {
                     withCredentials([aws(credentialsId: "9190845d-626f-4330-88a2-da3508581995")]) {
                         sh """
                             ls
-                            cd ${FILES_PATH}/dist
+                            cd ${FILES_PATH}
                             ls
-                            aws s3 cp "./index.html" "s3://apps-madamot-${ENVIRONMENT}/${APP_NAME}/index.html" --recursive
+                            aws s3 cp "./dist/index.html" "s3://apps-madamot-${ENVIRONMENT}/${APP_NAME}/index.html"
                             aws s3 sync "./dist" "s3://apps-internal-madamot-${ENVIRONMENT}/${APP_NAME}/${ASSETS_PATH}" --delete --exclude "index.html"
 
                         """
