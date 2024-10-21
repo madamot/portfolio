@@ -19,3 +19,19 @@ Resources:
       OwnershipControls:
         Rules:
           - ObjectOwnership: ObjectWriter
+
+  LiveAppInternalSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: apps-internal-madamot-live
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
+
+  StageAppInternalSourceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: apps-internal-madamot-stage
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
