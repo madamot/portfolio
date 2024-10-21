@@ -61,7 +61,7 @@ pipeline {
                         sh """
                             cd ${FILES_PATH}
                             aws s3 cp "./dist/index.html" "s3://apps-madamot-${ENVIRONMENT}/${APP_NAME}/index.html"
-                            aws s3 sync "./dist/assets" "s3://apps-internal-madamot-${ENVIRONMENT}/${APP_NAME}/${ASSETS_PATH}" --delete --exclude "index.html"
+                            aws s3 sync "./dist/assets" "s3://apps-internal-madamot-${ENVIRONMENT}/${ASSETS_PATH}/${APP_NAME}" --delete --exclude "index.html"
 
                         """
                     }
