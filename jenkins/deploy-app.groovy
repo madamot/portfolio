@@ -62,7 +62,7 @@ pipeline {
                             ls
                             cd ${FILES_PATH}
                             ls
-                            aws s3 cp ./dist/index.html s3://apps-madamot-${ENVIRONMENT}/${APP_NAME}/index.html --recursive
+                            aws s3 cp "./dist/index.html" "s3://apps-madamot-${ENVIRONMENT}/${APP_NAME}/index.html" --recursive
                             aws s3 sync "./dist" "s3://apps-internal-madamot-${ENVIRONMENT}/${APP_NAME}/${ASSETS_PATH}" --delete --exclude "index.html"
 
                         """
