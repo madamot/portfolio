@@ -47,7 +47,7 @@ pipeline {
                     sh """
                         cd ${FILES_PATH}
                         rm -rf dist www
-                        yarn build
+                        yarn build --base=/internal/
                     """
                 }
             }
