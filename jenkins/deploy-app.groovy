@@ -19,7 +19,7 @@ pipeline {
     environment {
         DATE = sh(returnStdout: true, script: 'date +%Y-%m-%d_%H.%M.%S').trim()
         FILES_PATH = "${"apps/" + env.APP_NAME}"
-        ASSETS_PATH = "${"internal/assets/" + env.APP_NAME}"
+        ASSETS_PATH = "${env.APP_NAME + "/internal/assets"}"
     }
 
     options {
@@ -47,7 +47,7 @@ pipeline {
                     sh """
                         cd ${FILES_PATH}
                         rm -rf dist www
-                        yarn build --base=/internal/
+                        yarn build --base=/${APP_NAME}/internal/
                     """
                 }
             }
