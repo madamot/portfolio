@@ -8,7 +8,9 @@ import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
-import houseModel from '../../../assets/house-transformed.glb?url'
+// import houseModel from '../../../assets/house-transformed.glb?url'
+
+const imgUrl = new URL('../../../assets/house-transformed.glb', import.meta.url).href
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -24,7 +26,7 @@ type GLTFResult = GLTF & {
 }
 
 export function House(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF(houseModel) as GLTFResult
+  const { nodes, materials } = useGLTF(imgUrl) as GLTFResult
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -50,4 +52,4 @@ export function House(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload(houseModel)
+useGLTF.preload(imgUrl)
