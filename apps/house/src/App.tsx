@@ -8,7 +8,7 @@ import './App.css'
 function App() {
   return (
     <div className="wrapper">
-      <Canvas>
+      <Canvas camera={{ fov: 15, position: [75, 40, 20] }}>
         {/* <Environment files="/images/round_platform_4k.jpg" /> */}
         <directionalLight position={[10, 7, -3.5]} intensity={0.5} />
         <OrbitControls makeDefault />
