@@ -1,0 +1,35 @@
+.icon {
+  position: relative;
+  top: -0.1em;
+  width: 0.9em;
+  height: 0.9em;
+}
+.icon--large {
+  width: 1.7em;
+  height: 1.7em;
+}
+.icon--medium {
+  width: 1.3em;
+  height: 1.3em;
+}
+.icon--small {
+  width: 0.8em;
+  height: 0.8em;
+}
+
+.icon--spin {
+  animation-name: gel-spin;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes gel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
