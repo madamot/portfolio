@@ -47,6 +47,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           ❌
         </button>
       )}
+      {loading && 'loading'}
     </div>
   )
 }
