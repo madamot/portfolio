@@ -5,12 +5,13 @@
   display: flex;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  color: whitesmoke;
-  background-color: seagreen;
+  color: black;
+  background-color: #fff;
 
   .global-footer-container {
     width: 1280px;
     padding: 1em 16px;
+    border-top: solid 0.0625rem #00000026;
 
     .footer-logo-container {
       padding: 0.5em 0;
