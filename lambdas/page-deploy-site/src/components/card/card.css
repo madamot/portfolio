@@ -101,7 +101,6 @@
 
 .card-blurred-img::before {
   content: '';
-  position: absolute;
   inset: 0;
   opacity: 0;
   animation: pulse 2.5s infinite;
