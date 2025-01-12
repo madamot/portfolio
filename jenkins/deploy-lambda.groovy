@@ -57,7 +57,7 @@ pipeline {
                     sh """
                         cd ${LAMBDA_PATH}
                         yarn build
-                        /home/ec2-user/workspace/deploy-lambda/venv/bin/sam build
+                        /home/ec2-user/workspace/deploy-lambda/venv/bin/sam build --build-in-source
                     """
                 }
             }
