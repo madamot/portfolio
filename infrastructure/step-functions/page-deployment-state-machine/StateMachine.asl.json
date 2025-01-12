@@ -44,6 +44,35 @@
       "Parameters": {
         "pageCacheOutput.$": "$"
       },
+      "OutputPath": "$",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 20,
+          "MaxAttempts": 5,
+          "BackoffRate": 10
+        }
+      ],
+      "Next": "UpdatePageIndexIfPublish"
+    },
+    "UpdatePageIndexIfPublish": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.preview",
+          "BooleanEquals": false,
+          "Next": "PageUpdateIndex"
+        }
+      ],
+      "Default": "DefaultState"
+    },
+    "PageUpdateIndex": {
+      "Type": "Task",
+      "Resource": "${PageUpdateIndexArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "pageCacheOutput.$": "$"
+      },
       "Retry": [
         {
           "ErrorEquals": ["States.TaskFailed"],

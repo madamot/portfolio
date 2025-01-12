@@ -20,25 +20,7 @@ Resources:
         Type: API_KEY
       ApiKeys:
         OnlyToRead: {}
-      DataSources:
-        Lambda:
-          MyLambdaDataSource:
-            FunctionArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-graphql-page-service
-      Functions:
-        lambdaInvoker:
-          Runtime:
-            Name: APPSYNC_JS
-            Version: 1.0.0
-          DataSource: MyLambdaDataSource
-          CodeUri: ./src/invoker.js
-      Resolvers:
-        Query:
-          page:
-            Runtime:
-              Name: APPSYNC_JS
-              Version: '1.0.0'
-            Pipeline:
-              - lambdaInvoker
+
 Outputs:
   APIEndpoint:
     Description: GraphQLAPI API Endpoint
@@ -47,3 +29,10 @@ Outputs:
   ApiKey:
     Description: API Key for authentication
     Value: !GetAtt GraphQLAPIOnlyToRead.ApiKey
+
+  ApiId:
+    Description: GraphQLAPI ID
+    Export:
+      Name: !Sub '${Environment}-graphql-api'
+    Value:
+      Fn::GetAtt: GraphQLAPI.ApiId

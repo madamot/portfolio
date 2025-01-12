@@ -25,6 +25,7 @@ Resources:
         PageCacheArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-cache
         PageDeploySiteArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-deploy-site
         PageUnpublishSiteArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-unpublish-site
+        PageUpdateIndexArn: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${Environment}-page-update-index
       Role:
         Fn::GetAtt: [StatesExecutionRole, Arn]
       Type: EXPRESS
