@@ -7,6 +7,8 @@ export const HEADER_FRAGMENT = `
             image {
                 id
                 _modelApiKey
+                width
+                height
                 image {
                     _createdAt
                     _updatedAt

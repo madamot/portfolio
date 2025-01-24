@@ -3,6 +3,8 @@ export const IMAGE_FRAGMENT = `
         ... on ImageRecord {
           id
           _modelApiKey
+          width
+          height
           image {
             _createdAt
             _updatedAt
