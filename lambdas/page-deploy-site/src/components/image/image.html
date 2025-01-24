@@ -2,6 +2,7 @@
   {{#image}}
   <div
     class="blurred-img"
+    id="image{{{id}}}"
     style="
         background-image: url({{blurUpThumb}});
       "
@@ -24,15 +25,15 @@
 </figure>
 
 <script type="text/javascript">
-  const blurredImageDiv = document.querySelector('.blurred-img')
-  const img = blurredImageDiv.querySelector('img')
-  function loaded() {
-    blurredImageDiv.classList.add('loaded')
+  const blurredImageDiv{{id}} = document.getElementById('image{{{id}}}')
+  const img = blurredImageDiv{{id}}.querySelector('img')
+  function loaded{{id}}() {
+    blurredImageDiv{{id}}.classList.add('loaded')
   }
 
-  if (img.complete) {
-    loaded()
+  if (img{{id}}.complete) {
+    loaded{{id}}()
   } else {
-    img.addEventListener('load', loaded)
+    img{{id}}.addEventListener('load', loaded{{id}})
   }
 </script>
