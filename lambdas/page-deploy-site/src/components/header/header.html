@@ -1,6 +1,12 @@
 <div data-testid="headerComponent" id="headerComponent" class="headerComponent">
   <h1>{{title}}</h1>
-  {{#description}}
-  <p data-testid="headerDescription">{{description}}</p>
-  {{/description}}
+  {{#renderedImage}}
+  <div class="image-container">
+    {{{renderedImage}}} {{#description}}
+    <div data-testid="headerDescription">{{{description}}}</div>
+    {{/description}}
+  </div>
+  {{/renderedImage}} {{^renderedImage}} {{#description}}
+  <p data-testid="headerDescription">{{{description}}}</p>
+  {{/description}} {{/renderedImage}}
 </div>
