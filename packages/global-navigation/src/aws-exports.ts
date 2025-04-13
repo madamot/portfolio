@@ -1,5 +1,7 @@
 const hostname = window.location.hostname
 
+console.log('host', hostname)
+
 const isStage = /^((stage)\.)adamhorne\.co.uk/.test(hostname)
 
 const aws = {
