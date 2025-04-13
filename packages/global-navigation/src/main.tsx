@@ -26,7 +26,6 @@ const cache = new InMemoryCache({
   },
 })
 
-const url = 'https://qmv3jp3rezd5pauit6bsah2hay.appsync-api.eu-west-1.amazonaws.com/graphql'
 const region = 'eu-west-1'
 
 const auth: AuthOptions = {
@@ -35,7 +34,10 @@ const auth: AuthOptions = {
   // jwtToken: async () => token, // Required when you use Cognito UserPools OR OpenID Connect. token object is obtained previously
   // credentials: async () => credentials, // Required when you use IAM-based auth.
 }
-const link = ApolloLink.from([createAuthLink({ url, region, auth }), createHttpLink({ uri: url })])
+const link = ApolloLink.from([
+  createAuthLink({ url: appSyncConfig.aws_appsync_graphqlEndpoint, region, auth }),
+  createHttpLink({ uri: appSyncConfig.aws_appsync_graphqlEndpoint }),
+])
 const client = new ApolloClient({
   link,
   cache,
