@@ -6,7 +6,7 @@ const client = new DynamoDBClient({})
 
 enum IndexType {
   Page = 'PAGE',
-  Recipe = 'Recipe',
+  Recipe = 'RECIPE',
   App = 'APP',
 }
 
