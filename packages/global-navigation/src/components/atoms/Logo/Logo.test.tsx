@@ -16,7 +16,7 @@ describe('<Logo />', () => {
     render(<Logo />)
 
     // Assert
-    expect(screen.getByText('ADAM HORNE')).toBeInTheDocument()
+    expect(screen.getByText('ADAM HORNE - test')).toBeInTheDocument()
     expect(screen.getByRole('link')).toHaveAttribute('href', '/')
   })
 })
