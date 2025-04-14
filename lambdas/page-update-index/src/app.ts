@@ -6,6 +6,7 @@ const client = new DynamoDBClient({})
 
 enum IndexType {
   Page = 'PAGE',
+  Recipe = 'Recipe',
   App = 'APP',
 }
 
@@ -14,12 +15,14 @@ export const handler = async (event: any) => {
 
   const pageCacheResult = event.pageCacheOutput
 
+  const isRecipe = /.*\brecipes\b.*/g.test(pageCacheResult.urlPath)
+
   console.time('Overall')
 
   const input = {
     Item: {
       type: {
-        S: IndexType.Page,
+        S: isRecipe ? IndexType.Recipe : IndexType.Page,
       },
       createdAt: {
         S: pageCacheResult.createdAt,
