@@ -3,6 +3,7 @@
   /* color: white; */
   margin: 1em 0;
   box-sizing: border-box;
+  height: 405px;
   min-height: 405px;
   display: flex;
   justify-content: center;
