@@ -32,7 +32,7 @@ describe('component-header', () => {
     _updatedAt: '2024-02-18T12:58:41+00:00',
     title: 'A Mexican twist!',
     description:
-      'Rather than add the teaspoon of sugar, you can stir in a small piece of chocolate (about the size of your thumbnail) when you add the beans. Any plain dark chocolate will do. Be careful not to add too much &ndash; you don&rsquo;t want to be able to identify the flavour of the chocolate.',
+      "Rather than add the teaspoon of sugar, you can stir in a small piece of chocolate (about the size of your thumbnail) when you add the beans. Any plain dark chocolate will do. Be careful not to add too much - you don't want to be able to identify the flavour of the chocolate.",
   }
 
   it('renders the header component', () => {
@@ -52,7 +52,7 @@ describe('component-header', () => {
 
     expect(
       screen.getByText(
-        'Rather than add the teaspoon of sugar, you can stir in a small piece of chocolate (about the size of your thumbnail) when you add the beans. Any plain dark chocolate will do. Be careful not to add too much &ndash; you don&rsquo;t want to be able to identify the flavour of the chocolate.'
+        "Rather than add the teaspoon of sugar, you can stir in a small piece of chocolate (about the size of your thumbnail) when you add the beans. Any plain dark chocolate will do. Be careful not to add too much - you don't want to be able to identify the flavour of the chocolate."
       )
     ).toBeInTheDocument()
   })

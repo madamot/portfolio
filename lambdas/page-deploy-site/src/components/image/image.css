@@ -1,5 +1,7 @@
 .imageComponentContainer {
   padding: 1em 0;
+  margin: 0;
+  /* max-height: 400px; */
 }
 
 .imageComponentImage {
@@ -21,7 +23,7 @@
 .blurred-img {
   background-repeat: no-repeat;
   background-size: cover;
-  width: fit-content;
+  /* width: fit-content; */
   height: fit-content;
 }
 
