@@ -53,3 +53,49 @@ body {
   flex: 1 1 400px;
   min-width: 10rem;
 }
+
+table {
+  text-align: left;
+  border-collapse: collapse;
+  --color: #59c4f5;
+  caption-side: bottom;
+}
+
+tr {
+  border-bottom: 1px solid;
+}
+
+th,
+caption {
+  text-align: start;
+}
+
+thead th:not(:first-child),
+td {
+  text-align: end;
+}
+
+thead {
+  border-block-end: 2px solid;
+  background: whitesmoke;
+}
+
+tfoot {
+  border-block: 2px solid;
+  background: whitesmoke;
+}
+
+th,
+td {
+  border: 1px solid lightgrey;
+  padding: 0.25rem 0.75rem;
+}
+
+thead,
+tfoot {
+  background: var(--color);
+}
+
+tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--color), transparent 60%);
+}
