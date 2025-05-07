@@ -1,4 +1,4 @@
-import { ORM } from '@madamot/madamot-dynamo-database'
+// import { ORM } from '@madamot/madamot-dynamo-database'
 import { PageService, IPagesService } from './PageService.js'
 import { Index as IndexTable } from '../types/tables.js'
 
@@ -10,10 +10,11 @@ export class IndexService implements IIndexService {
   // Public declarations
   public readonly pageService: IPagesService
 
-  constructor(table: Readonly<ORM<IndexTable>>) {
+  constructor() // table: Readonly<ORM<IndexTable>>
+  {
     // Private Services
 
     // Public Services
-    this.pageService = new PageService(table)
+    this.pageService = new PageService()
   }
 }
