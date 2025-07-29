@@ -13,9 +13,10 @@
 
     @media (max-width: 900px) {
       flex-wrap: wrap;
+      flex-direction: column;
     }
     .imageComponentImage {
-      flex: 0 1 60vh;
+      flex: 1;
     }
 
     .headerDescription {
