@@ -1,7 +1,7 @@
 import { gql } from '../generated'
 
 export const SEARCH_PAGES = gql(`
-    query Page($q: String!) {
+    query GetAllRecipes($q: String!) {
       page {
           search(q: $q) {
             type

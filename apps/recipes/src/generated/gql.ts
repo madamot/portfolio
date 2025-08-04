@@ -14,10 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n    query Page($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  ": typeof types.PageDocument,
+    "\n    query GetAllRecipes($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  ": typeof types.GetAllRecipesDocument,
 };
 const documents: Documents = {
-    "\n    query Page($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  ": types.PageDocument,
+    "\n    query GetAllRecipes($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  ": types.GetAllRecipesDocument,
 };
 
 /**
@@ -37,7 +37,7 @@ export function gql(source: string): unknown;
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n    query Page($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  "): (typeof documents)["\n    query Page($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  "];
+export function gql(source: "\n    query GetAllRecipes($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  "): (typeof documents)["\n    query GetAllRecipes($q: String!) {\n      page {\n          search(q: $q) {\n            type\n            name\n            searchName\n            url\n            updatedAt\n            createdAt\n          }\n      }\n    }\n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

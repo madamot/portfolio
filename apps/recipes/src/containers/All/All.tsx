@@ -12,7 +12,7 @@ const All: React.FC = () => {
   })
 
   return (
-    <div>
+    <div data-testid="all-recipes-container">
       <h1>All Recipes</h1>
       {loading ? <p>Loading...</p> : null}
       {data?.page?.search?.map(item => (
