@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "test": "echo no-tests",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate": "graphql-codegen",
+    "generate-watch": "graphql-codegen -w"
   },
   "dependencies": {
     "@apollo/client": "^3.13.7",
