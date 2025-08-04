@@ -1,18 +1,7 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
-import 'dotenv/config'
-
-// const { DATOCMS_API_KEY } = process.env
 
 const config: CodegenConfig = {
-  schema: [
-    {
-      'https://qmv3jp3rezd5pauit6bsah2hay.appsync-api.eu-west-1.amazonaws.com/graphql': {
-        headers: {
-          'x-api-key': `da2-ffm6wgk3izclncsxiqouldge2u`,
-        },
-      },
-    },
-  ],
+  schema: `https://services.stage.adamhorne.co.uk/graphql`,
   generates: {
     'src/generated/': {
       preset: 'client',
