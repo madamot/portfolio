@@ -18,10 +18,11 @@ const cache = new InMemoryCache({
 })
 
 const hostname = window.location.hostname
+const isLocal = location.hostname === 'localhost'
 const isStage = /^((stage)\.)adamhorne\.co.uk/.test(hostname)
 
 const client = new ApolloClient({
-  uri: `https://services.${isStage && 'stage.'}adamhorne.co.uk/graphql`,
+  uri: `https://services.${isStage || isLocal ? 'stage.' : ''}adamhorne.co.uk/graphql`,
   cache,
 })
 

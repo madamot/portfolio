@@ -13,6 +13,7 @@ const All: React.FC = () => {
 
   return (
     <div>
+      <h1>All Recipes</h1>
       {loading ? <p>Loading...</p> : null}
       {data?.page?.search?.map(item => (
         <div key={item?.name}>{item?.name}</div>
