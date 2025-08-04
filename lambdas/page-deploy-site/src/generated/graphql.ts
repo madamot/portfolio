@@ -527,6 +527,7 @@ export type HeaderRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
+  image?: Maybe<ImageRecord>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -2529,7 +2530,7 @@ export type ProjectRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  children?: Maybe<Array<Maybe<ProjectRecord>>>;
+  children: Array<ProjectRecord>;
   content: Array<ProjectModelContentField>;
   header?: Maybe<HeaderRecord>;
   id: Scalars['ItemId']['output'];
