@@ -1,10 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
-import Header from './components/organisms/Header'
-import Footer from './components/organisms/Footer'
+import App from './App.tsx'
+
+import './index.css'
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -26,16 +26,10 @@ const client = new ApolloClient({
   cache,
 })
 
-ReactDOM.createRoot(document.getElementById('global-navigation')!).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
     <ApolloProvider client={client}>
-      <Header />
+      <App />
     </ApolloProvider>
-  </React.StrictMode>
-)
-
-ReactDOM.createRoot(document.getElementById('global-footer')!).render(
-  <React.StrictMode>
-    <Footer />
-  </React.StrictMode>
+  </StrictMode>
 )
